@@ -78,7 +78,7 @@ const handleSubmit = async(e) => {
              setImg(data)
             // setImg(data.response.image)
             // setImg(fil.response.image)
-            console.log(img)
+            console.log(data)
            
         }
       }catch(error){
@@ -126,7 +126,7 @@ const handleSubmit = async(e) => {
              {
              
                 img !== null && (                                          
-              <Image src={`/${img}`} width={300} height={300} alt="image" />        
+              <Image src={img.data} width={300} height={300} alt="image" />        
                 )
             }
         </div>    

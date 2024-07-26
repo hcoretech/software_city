@@ -2,12 +2,11 @@
 import { Post } from "../../../lib/postModel";
 import { NextRequest, NextResponse } from "next/server";
 import { GridFSBucket, Int32, ReadPreference, WriteConcern } from "mongodb";
-import { upload } from "../../../lib/storage";
 import { GridFSFile } from "mongodb";
 import fs from "node:fs/promises"
-const stream= require('node:stream/promises')
+// const stream= require('node:stream/promises')
  import { MongoClient } from 'mongodb';
- import { createReadStream } from "node:fs";
+ import { createReadStream, unlink } from "node:fs";
 import { Blob } from "node:buffer";
 import { open } from "node:fs";
 import { write } from "node:fs";
@@ -89,7 +88,7 @@ export async function POST(req:NextRequest){
     // const title = form.get('title');
    
     // const text = await blob.text();
-   const file = await fs.writeFile(`./public/${image.name}`,New,null)
+    await fs.writeFile(`./public/${image.name}`,New,null)
 
     createReadStream(`./public/${image.name}`)
     .pipe(bucket.openUploadStream(image.name,
@@ -101,7 +100,23 @@ export async function POST(req:NextRequest){
         }
     ))
     .closed
-  
+    const Unlink =()=>{
+     const interval = setInterval(()=>{
+            fs.unlink(`./public/${image.name}`)
+            .then((file)=>{
+                console.log("file deleted succesfully")
+            }).catch((error)=>{
+                console.log('failed to delete')
+            })
+     },100)
+      setTimeout(()=>{
+        clearInterval(interval) 
+      },
+      160
+    )
+    }
+    
+    Unlink();
     // const interVal = setInterval(()=>{
     //    fs.unlink(`./public/${image.name}`)
     //    .then((value)=>{

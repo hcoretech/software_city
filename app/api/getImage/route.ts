@@ -54,20 +54,22 @@ const GridFSBucketOptions = {
 export async function POST(req:Request,res:NextResponse){
     // dbConnection();
 const body = await req.formData();
-const title = body.get('title');
+const title = body.get('title').toString();
 // console.log(title)
 
 try{
+
  const cursor = bucket.find({
    filename:title
  })
+
  const array = await cursor.toArray()
  const arrays =array[0].filename
- const data =  bucket.openDownloadStreamByName(arrays)
- .pipe(createWriteStream(`${arrays}`))
+ const buck = bucket.openDownloadStreamByName(arrays)
+ const data= buck.pipe(createWriteStream(`./public/${arrays}`)).path.slice(8)
    
    
-
+console.log(data)
 //  }).catch((error)=>{
 //     throw error
 //  })
