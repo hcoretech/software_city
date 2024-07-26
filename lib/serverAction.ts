@@ -12,17 +12,7 @@ export default async function sessionClient (){
 
             return null
         }
-            //  throw error ('no session found')
-            //  redirect('/sign-in')
-            // NextResponse.json({
-            //     message:'no cookies found',
-            // },{status:400})
-            // }
-            // NextResponse.json({
-            //     // message:''
-            //     session
-            // },{status:200})
-            // console.log(session) ;
+   
             return session ;
 
     }catch(error){

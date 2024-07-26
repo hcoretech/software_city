@@ -88,7 +88,7 @@ export async function POST(req:NextRequest){
     // const title = form.get('title');
    
     // const text = await blob.text();
-    await fs.writeFile(`./public/${image.name}`,New,null)
+   await fs.writeFile(`./public/${image.name}`,New,null)
 
     createReadStream(`./public/${image.name}`)
     .pipe(bucket.openUploadStream(image.name,
