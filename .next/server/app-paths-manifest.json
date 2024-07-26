@@ -1,0 +1,5 @@
+{
+  "/api/postRoute/route": "app/api/postRoute/route.js",
+  "/(root)/Home/page": "app/(root)/Home/page.js",
+  "/(root)/downloads/page": "app/(root)/downloads/page.js"
+}
