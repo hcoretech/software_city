@@ -1,7 +1,15 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/api/authenticate/route": "app/api/authenticate/route.js",
+  "/api/getImage/route": "app/api/getImage/route.js",
+  "/api/loginRoute/route": "app/api/loginRoute/route.js",
+  "/api/signUpRoute/route": "app/api/signUpRoute/route.js",
+  "/api/postRoute/route": "app/api/postRoute/route.js",
+  "/(auth)/sign-up/page": "app/(auth)/sign-up/page.js",
+  "/(root)/settings/page": "app/(root)/settings/page.js",
+  "/(root)/Home/page": "app/(root)/Home/page.js",
   "/(root)/downloads/page": "app/(root)/downloads/page.js",
   "/(auth)/sign-in/page": "app/(auth)/sign-in/page.js",
-  "/(auth)/sign-up/page": "app/(auth)/sign-up/page.js",
-  "/(root)/Home/page": "app/(root)/Home/page.js"
+  "/(root)/search/page": "app/(root)/search/page.js",
+  "/(root)/page": "app/(root)/page.js"
 }
