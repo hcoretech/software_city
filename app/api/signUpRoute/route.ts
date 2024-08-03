@@ -1,8 +1,8 @@
 'use server'
 import  {type NextApiRequest,NextApiResponse } from "next";
-import dbConnection from "../../../../lib/mongodb";
-import { User } from "../../../../lib/userModel";
+// import { User } from "../../../lib/userModel";
 import { NextResponse } from "next/server";
+const {User} =require ('../../../lib/userModel.js')
 // const jwt = require('jsonwebtoken');
 
 
@@ -12,7 +12,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req:Request){
   
-         await  dbConnection();        
+      
          const body = await req.json()
           const {firstName,lastName,userName,email,password} = body
           

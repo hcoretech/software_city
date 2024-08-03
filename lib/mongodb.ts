@@ -50,4 +50,4 @@ async function dbConnection() {
 
   return cached.conn
 }
-export default dbConnection;
+module.exports = dbConnection;
