@@ -1,15 +1,24 @@
 'use server'
-import { error } from "console";
+
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { jwtVerify } from "jose";
+import { jwtCheck } from "./constant";
 
+interface UserJwtPayload {
+    jti: string
+    iat: number
+  }
+  
+const jwtSecret :string |undefined = process.env.my_SECRET 
 
-export default async function sessionClient (){
+export  async function sessionClient (){
     const session =  cookies().get('authSession');
     try{
         if (!session){
-
+ 
             return null
         }
    
@@ -21,5 +30,23 @@ export default async function sessionClient (){
     
 
 }
+export async function verifyAuth(req: NextRequest) {
+    const token = req.cookies.get("authSession")?.value
+  
+    if (!token) throw new Error('Missing user token')
+  
+    try {
+      const verified = await jwtVerify(
+        token,
+        new TextEncoder().encode(jwtCheck())
+      )
+      return verified.payload as UserJwtPayload
+    } catch (err) {
+      throw new Error('Your token has expired.')
+    }
+  }
 
+export function route(req:NextRequest,next){
+
+}
 

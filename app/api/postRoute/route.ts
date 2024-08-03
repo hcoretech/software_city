@@ -1,5 +1,5 @@
 'use server'
-import { Post } from "../../../lib/postModel";
+
 import { NextRequest, NextResponse } from "next/server";
 import { GridFSBucket, Int32, ReadPreference, WriteConcern } from "mongodb";
 import { GridFSFile } from "mongodb";
@@ -7,6 +7,7 @@ import fs from "node:fs/promises"
 // const stream= require('node:stream/promises')
  import { MongoClient } from 'mongodb';
  import { createReadStream, unlink } from "node:fs";
+ import { Post } from "../../../lib/postModel";
 import { Blob } from "node:buffer";
 import { open } from "node:fs";
 import { write } from "node:fs";
@@ -67,14 +68,16 @@ export async function POST(req:NextRequest){
    const form = await req.formData();
 
    const image = form.get('file') as File;
-   const title=form.get('title');
-   const buffer =await image.arrayBuffer()
+   const title=form.get('title') as string;
+   const buffer = await image.arrayBuffer()
    const New = new Uint8Array(buffer)
-    
+   const fileFormat = image.name.slice(-4)
+  
     try{    
-         if(!image){
+         if(!image ||  !title){
            return NextResponse.json({messsage:'no valid file'},{status:400})
          }
+  
         //  await writeFile(`./public/${image.name}`,New)
     //      const bufer = await image.
 
@@ -88,10 +91,19 @@ export async function POST(req:NextRequest){
     // const title = form.get('title');
    
     // const text = await blob.text();
-   await fs.writeFile(`./public/${image.name}`,New,null)
+//    const  callback = (error)=>{
+//    return error
+//     }
+   await fs.writeFile(`./public/images/${title}${fileFormat}`,New,)
+   .then((file)=>{
+     console.log('file written succesfully')
+   }).catch((error)=>{
+    // throw error
+ console.log('fail to write the file')
+   })
 
-    createReadStream(`./public/${image.name}`)
-    .pipe(bucket.openUploadStream(image.name,
+  const createStream =  createReadStream(`./public/images/${title}${fileFormat}`)
+   const uploadStream = createStream.pipe(bucket.openUploadStream(`${title}${fileFormat}`,
         {
             metadata:{
                 name:title,
@@ -99,10 +111,24 @@ export async function POST(req:NextRequest){
             }
         }
     ))
-    .closed
-    const Unlink =()=>{
+   const itemId = uploadStream.id;
+   const filename = uploadStream.filename;
+   const path = createStream.path.slice(8);
+
+    // const slice = title.slice(-4,1)
+    // console.log(slice)
+    const post = await Post.create({
+        name:title,
+        Filename:filename,
+        path:path,
+        id : itemId,
+        ContentType:image.type,       
+    })
+    console.log(post)
+
+    const Unlink = ()=>{
      const interval = setInterval(()=>{
-            fs.unlink(`./public/${image.name}`)
+            fs.unlink(`./public/images/${title}${fileFormat}`)
             .then((file)=>{
                 console.log("file deleted succesfully")
             }).catch((error)=>{
@@ -112,7 +138,7 @@ export async function POST(req:NextRequest){
       setTimeout(()=>{
         clearInterval(interval) 
       },
-      160
+      200
     )
     }
     

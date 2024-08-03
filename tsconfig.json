@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "lib/userModel.ts", "constants/icon.js", "lib/serverAction.ts"  ],
+    , "lib/userModel.ts", "constants/icon.js", "lib/serverAction.ts"  ],
   "exclude": [
     "node_modules"
   ]

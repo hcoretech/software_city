@@ -1,7 +1,7 @@
 'use server'
 import  {type NextApiRequest,NextApiResponse } from "next";
-import dbConnection from "../../../lib/mongodb";
-import { User } from "../../../lib/userModel";
+import dbConnection from "../../../../lib/mongodb";
+import { User } from "../../../../lib/userModel";
 import { NextResponse } from "next/server";
 // const jwt = require('jsonwebtoken');
 

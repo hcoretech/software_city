@@ -6,18 +6,12 @@ mongoose.Promise = global.Promise;
  const Schema = mongoose.Schema
 
  const postModel = new Schema({
-//    file_id:{
-//     type:ObjectId,
-//    },
-  title:{
-    type:String,
-    required:true
-
-  },
-  image:{
-    type:String
-  }
-
+  name:String,
+  Filename:String,
+  path:String,
+  itemId:ObjectId,
+  ContentType:String,
+//   timeString:date.now()
  }
  ,{
     timestamps:

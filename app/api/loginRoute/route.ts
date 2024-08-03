@@ -1,14 +1,17 @@
 import { NextResponse } from "next/server";
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 import { User } from "../../../lib/userModel";
 import { cookies } from "next/headers";
 import dbConnection from "../../../lib/mongodb";
+import { nanoid } from "nanoid";
+import { SignJWT } from "jose";
+import { jwtCheck } from "../../../lib/constant";
 
-const createToken = (_id) => {
-    return jwt.sign({_id}, process.env.my_SECRET, { expiresIn: "1d" })
-  }
+// const createToken = (_id) => {
+//     return jwt.sign({_id}, process.env.my_SECRET, { expiresIn: "1d" })
+//   }
   
-export async function POST(req:Request){
+export async function POST(req:Request,res:NextResponse){
     await dbConnection();
 
     const body = await req.json();
@@ -25,20 +28,24 @@ export async function POST(req:Request){
              {status:400}
             )
         }
-     const session = createToken(finds._id);
+        const token = await new SignJWT({})
+         .setProtectedHeader({ alg: 'HS256' })
+          .setJti(nanoid())
+          .setIssuedAt()
+          .setExpirationTime('1day')
+          .sign(new TextEncoder().encode(jwtCheck()))
 
-     cookies().set('authSession',session,{
-        path:'/',
-        httpOnly:true,
-        sameSite:'strict',
-        secure:true,
-        
+         cookies().set('authSession', token, {
+         httpOnly: true,
+         sameSite:'strict',
+         secure:true,
+         maxAge: 60 * 60 * 24, // 2 hours in seconds
       })
+          return NextResponse.json({message:'logged succesfull'},{status:200})            
 
-      return NextResponse.json({message:'logged succesfull'},{status:200})        
-
-    }catch(error){
-        return NextResponse.json({Message:'error in connection '},{status:400})
     }
+      catch(error){
+        return NextResponse.json({Message:'error in connection '},{status:400})
+     }
 
-}
+    }

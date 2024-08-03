@@ -1,12 +1,12 @@
 'use server'
 import { NextResponse } from "next/server";
-import dbConnection from "../../../lib/mongodb";
-import { Post } from "../../../lib/postModel";
 import { GridFSBucket } from "mongodb";
-import mongoose from "mongoose";
 import { MongoClient } from 'mongodb';
 import { createReadStream, createWriteStream } from "fs";
 import fs from "node:fs/promises"
+import { Post } from "../../../lib/postModel";
+// import { useSearchParams } from 'next/navigation'
+
 
 
 // mongoose.createConnection(process.env.MONGODB_URL)
@@ -51,25 +51,49 @@ const GridFSBucketOptions = {
     // disableMD5:false
   }
  )
-export async function POST(req:Request,res:NextResponse){
+export async function GET(req:Request,res:NextResponse){
     // dbConnection();
-const body = await req.formData();
-const title = body.get('title').toString();
+    const { searchParams } = new URL(req.url)
+  
+    const name = searchParams.get('name');
+    const id = searchParams.get('id');
+    console.log(id);
+// const searchParams = params.get('name')
+// const title = body.get('search').toString();
 // console.log(title)
 
 try{
 
+  const findUser = await Post.findOne({
+    'name':name
+  })
+  const bucketFilename = await findUser.Filename
+
  const cursor = bucket.find({
-   filename:title
+   filename:bucketFilename
  })
 
  const array = await cursor.toArray()
- const arrays =array[0].filename
- const buck = bucket.openDownloadStreamByName(arrays)
- const data= buck.pipe(createWriteStream(`./public/${arrays}`)).path.slice(8)
-   
-   
-console.log(data)
+ const uploadFilename = array[0].filename
+
+ const downloadStream = bucket.openDownloadStreamByName(uploadFilename)
+
+// const buffer = downloadStream.on('data',(chunck)=>{
+//   return chunck
+
+//  })
+// //  await fs.writeFile('./public/images',buffer)
+//  downloadStream.on('error',(error)=>{
+//  console.log(error)
+//  })
+//  downloadStream.on('end',()=>{
+//  })
+ const writeStream = downloadStream.pipe(createWriteStream(`./public/images/${uploadFilename}`))
+  const streamfile = writeStream.path.slice(8).toString()
+  // const createObject = URL.createObjectURL(streamFile)
+
+  // console.log(response)
+//  const senData = await data ;
 //  }).catch((error)=>{
 //     throw error
 //  })
@@ -90,9 +114,14 @@ console.log(data)
 //     return NextResponse.json({message:'no file gotten'},{status:200})
 //   }
 // console.log(download)
+       const response = findUser
 
-  return NextResponse.json({data},{status:200})
+  return NextResponse.json({response},{status:200})
+  // .headers.set(
+  //   Content-type:"multipart/form-data"
+  // )
 }catch(error){
     return NextResponse.json({message:'fail to connect to database'},{status:501})
+    
 }
 }
