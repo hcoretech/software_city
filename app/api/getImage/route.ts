@@ -8,6 +8,7 @@ import { existsSync } from "fs";
 import mongoose from "mongoose";
 import { createReadStream, createWriteStream } from "fs";
 import { Post } from "../../../lib/postModel";
+export const dynamic ='force-dynamic'
 // import { useSearchParams } from 'next/navigation'
 
 

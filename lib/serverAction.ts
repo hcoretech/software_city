@@ -1,18 +1,16 @@
 'use server'
 
 import { cookies } from "next/headers"
-import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
-import { jwtCheck } from "./constant";
+import { jwtSecret } from "./constant";
 
 interface UserJwtPayload {
     jti: string
     iat: number
   }
   
-const jwtSecret :string |undefined = process.env.my_SECRET 
+// const jwtSecret :string |undefined = process.env.my_SECRET 
 
 export  async function sessionClient (){
     const session =  cookies().get('authSession');
@@ -38,7 +36,7 @@ export async function verifyAuth(req: NextRequest) {
     try {
       const verified = await jwtVerify(
         token,
-        new TextEncoder().encode(jwtCheck())
+        new TextEncoder().encode(jwtSecret)
       )
       return verified.payload as UserJwtPayload
     } catch (err) {
@@ -46,7 +44,7 @@ export async function verifyAuth(req: NextRequest) {
     }
   }
 
-export function route(req:NextRequest,next){
+// export function route(req:NextRequest,next){
 
-}
+// }
 

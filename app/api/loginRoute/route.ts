@@ -5,13 +5,15 @@ import { cookies } from "next/headers";
 // import dbConnection from "../../../lib/mongodb";
 import { nanoid } from "nanoid";
 import { SignJWT } from "jose";
-import { jwtCheck } from "../../../lib/constant";
+// import { jwtCheck } from "../../../lib/constant";
+import { jwtSecret } from "../../../lib/constant";
+export const dynamic ='force-dynamic'
 
 // const createToken = (_id) => {
 //     return jwt.sign({_id}, process.env.my_SECRET, { expiresIn: "1d" })
 //   }
   
-export async function POST(req:Request,res:NextResponse){
+export async function POST(req:Request){
     // await dbConnection();
 
     const body = await req.json();
@@ -33,7 +35,7 @@ export async function POST(req:Request,res:NextResponse){
           .setJti(nanoid())
           .setIssuedAt()
           .setExpirationTime('2day')
-          .sign(new TextEncoder().encode(jwtCheck()))
+          .sign(new TextEncoder().encode(jwtSecret))
 
          cookies().set('authSession', token, {
          httpOnly: true,

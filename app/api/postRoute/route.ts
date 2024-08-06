@@ -7,6 +7,7 @@ import fs from "node:fs/promises"
 import { MongoClient } from 'mongodb';
 import { createReadStream,} from "node:fs";
 import { Post } from "../../../lib/postModel";
+export const dynamic ='force-dynamic'
 
 
 
