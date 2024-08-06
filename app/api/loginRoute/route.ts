@@ -18,12 +18,12 @@ export async function POST(req:Request){
     // await dbConnection();
     const clientd = client;
     const db =  clientd.db('software_city');
-    const user = await db.collection('User')
+    const user = db.collection('users')
     const body = await req.json();
     const {email,password} = body
 
     try{
-        const finds =  user.findOne({
+        const finds = await user.findOne({
           'email':email,
           'password':password         
         })

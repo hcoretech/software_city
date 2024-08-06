@@ -65,8 +65,8 @@ const db = client.db()
 
 export async function POST(req:Request){
     const clientd = client;
-    const db = clientd.db();
-    const post = await db.collection('Post')
+    const db = clientd.db("software_city");
+    const post = db.collection('posts')
 
     const form = await req.formData();
     const name = form.get('search') as String ;
