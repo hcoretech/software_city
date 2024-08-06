@@ -38,8 +38,8 @@ import client from "../../../lib/mongodb";
 
 
 // }
-
-const db = client.db()
+const clients = new MongoClient(process.env.MONGODB_URL);
+const db = clients.db()
   
 // let bucket ;
 //   async function run (){
@@ -62,11 +62,11 @@ const db = client.db()
  }
   
  const bucket = new GridFSBucket(db, GridFSBucketOptions)
-
+ 
 export async function POST(req:Request){
     const clientd = client;
-    const db = clientd.db("software_city");
-    const post = db.collection('posts')
+    const db = clientd.db();
+    const post = await db.collection('posts')
 
     const form = await req.formData();
     const name = form.get('search') as String ;
