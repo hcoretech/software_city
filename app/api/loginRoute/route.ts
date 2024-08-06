@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 // const jwt = require('jsonwebtoken');
 import { User } from "../../../lib/userModel";
 import { cookies } from "next/headers";
-// import dbConnection from "../../../lib/mongodb";
+import dbConnection from "../../../lib/mongodb";
 import { nanoid } from "nanoid";
 import { SignJWT } from "jose";
 import { jwtCheck } from "../../../lib/constant";
@@ -10,9 +10,9 @@ import { jwtCheck } from "../../../lib/constant";
 // const createToken = (_id) => {
 //     return jwt.sign({_id}, process.env.my_SECRET, { expiresIn: "1d" })
 //   }
-  
+dbConnection();
 export async function POST(req:Request,res:NextResponse){
-    // await dbConnection();
+ 
 
     const body = await req.json();
     const {email,password} = body
