@@ -1,4 +1,4 @@
-'use server'
+// 'use server'
 
 import { User } from "../../../lib/userModel";
 import { NextResponse } from "next/server";
