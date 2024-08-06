@@ -8,6 +8,7 @@ import { SignJWT } from "jose";
 // import { jwtCheck } from "../../../lib/constant";
 import { jwtSecret } from "../../../lib/constant";
 export const dynamic ='force-dynamic'
+import client from "../../../lib/mongodb";
 
 // const createToken = (_id) => {
 //     return jwt.sign({_id}, process.env.my_SECRET, { expiresIn: "1d" })
@@ -15,15 +16,17 @@ export const dynamic ='force-dynamic'
   
 export async function POST(req:Request){
     // await dbConnection();
-
+    const clientd = client;
+    const db =  clientd.db('software_city');
+    const user = await db.collection('User')
     const body = await req.json();
     const {email,password} = body
 
     try{
-        const finds = await User.findOne({
+        const finds =  user.findOne({
           'email':email,
           'password':password         
-        }).sort({createdAt: -1})
+        });
 
         if(!finds){
             return NextResponse.json({message:"no user found with such id try again"},

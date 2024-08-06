@@ -1,9 +1,10 @@
-'use server'
+// 'use server'
 import mongoose from 'mongoose'
-import { MongoClient } from 'mongodb';
+import { MongoClient,ServerApiVersion } from 'mongodb';
 
 
 const MONGODB_URI = process.env.MONGODB_URL
+
 
 if (!MONGODB_URI) {
   throw new Error(
@@ -11,17 +12,27 @@ if (!MONGODB_URI) {
   )
 }
 
+const options = {
+  serverApi: {
+    version:ServerApiVersion.v1,
+    strict:true,
+    deprecationErrors:true
+  }
+}
+
 let client:MongoClient;
+
 if(process.env.NODE_ENV === "development"){
+
   let globalWithMongo = global as typeof globalThis & {
     _mongoClient?:MongoClient
   };
   if(!globalWithMongo._mongoClient){
-    globalWithMongo._mongoClient = new MongoClient(MONGODB_URI);
+    globalWithMongo._mongoClient = new MongoClient(MONGODB_URI,options);
     }
     client = globalWithMongo._mongoClient
 }else{
-  client =  new MongoClient(MONGODB_URI);
+  client =  new MongoClient(MONGODB_URI,options);
 }
 export default client;
 

@@ -3,7 +3,7 @@ import './globals.css';
 import { Inter ,IBM_Plex_Serif } from "next/font/google";
 // // import dbConnection from "../lib/mongodb";
 // import { dbConnection } from "../lib/mongodb";
-import client from "../lib/mongodb";
+// import client from "../lib/mongodb";
 const inter = Inter({
     subsets: ["latin"],
     variable: "--font-sans",
