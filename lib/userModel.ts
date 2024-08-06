@@ -36,6 +36,6 @@ password:{
     true
 });
 
- const User = mongoose.models.user||mongoose.model('user', userSchema);
- module.exports=User;
+ export const User = mongoose.models.user||mongoose.model('user', userSchema);
+ 
 

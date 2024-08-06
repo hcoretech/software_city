@@ -27,15 +27,11 @@ import Link from "next/link";
 
 
 const AuthForm =  ({type}:{type:string}) => {
-//     const [firstName,setFirstName]=useState('');
-//     const [lastName,setLastName]=useState('');
-//     const [userName,setUserName]=useState('');
-//     const[email,setEmail]=useState('');
-//     const[password,setPassword]=useState('');
+
     const[datas,setData]=useState(null);
     const [message,setMessage]=useState('')
-// const {pending}=useFormStatus();
-const [loading,setLoading]= useState(false)
+    const [error,setError] = useState(null);
+    const [loading,setLoading]= useState(false)
     const router = useRouter();
     const formSchema = authFormSchema(type);
 
@@ -49,34 +45,18 @@ const [loading,setLoading]= useState(false)
     })
    
 
-    const onSubmit = async (data:z.infer<typeof formSchema>) => {  
+  const onSubmit = async (data:z.infer<typeof formSchema>) => {  
       setLoading(true)  
         try{
-            if(type==='sign-up'){
-             
-             //   const string = JSON.stringify(userData)
-              const userData = {
+             if(type==='sign-up'){
+                const userData = {
                 firstName:data.firstName!,
                 lastName:data.lastName!,
                 userName:data.userName!,
                 email:data.email,
                 password:data.password
-              }
-            //   }
-              // const response = await signUp(userData);
-              
-              // const result =  setData(response)
-              // if(response !== null){
-              // router.push('/sign-in')
-              // }
-            //  result.ok ? (co)
-            // console.log(datas)
-              
-             
-                
-        //     let userKey ;
-
-        const Post = await fetch('/api/signUpRoute',{
+               }
+               const Post = await fetch('/api/signUpRoute',{
                     method:'POST',
                     body:JSON.stringify(userData), 
                     headers :{
@@ -85,61 +65,46 @@ const [loading,setLoading]= useState(false)
                    
                 })
                 const response = await Post.json();
+                if(Post.status === 400){
+                  setError(response.error)
+                }
                 if(Post.status === 200){
                   router.push('/sign-in')
                 }
-                
-
-        //    if(!res.ok) throw new Error('Login failed')
-        //     const {token} = await post.json()
-        // document.cookie = `token =${token} path:/`;
-        
-                       
-        }
-          if (type==="sign-in"){
-
-            // setLoading(true)  
-            const userLogin = {
+           
+             }
+            if (type==="sign-in"){
+               const userLogin = {
                 email:data.email,
                 password:data.password
-            }
-            const Post =await fetch('/api/loginRoute',{
+               }
+               const Post =await fetch('/api/loginRoute',{
                    method:'POST',
                     body:JSON.stringify(userLogin), 
                     headers :{
                     'Content-type':'application/json'        
                     }
-            })
-            const Response = await Post.json();
-            console.log(Response)
-            if(Post.status === 200){
-              router.push('/Home');
-            }
-            setMessage(Response.message);
-          //   const response = await Login(userLogin)
-          // if (response.status === 400){
-          // //  setData(response.data);
-          //   setMessage(response.message)
-            
-          // }
-          // if(response.status === 200){
-          //   setData(JSON.parse(response.data));
-          //   setMessage(response.message)
-            
-            
-          //   console.log(datas)
-          //   router.push('/Home');
-          // }
+               })
+               const Response = await Post.json();
+               // console.log(Response)
+               if(Post.status === 400){
+                setError(Response.error)
+               }
+               if(Post.status === 200){
+                 router.push('/Home');
+               }
+                setMessage(Response.message);
           
+              }      
         }
-      
-    }catch(error){
-           return error
-        }finally{
-          setLoading(false);
+        catch(error){     
+         return error
+        }
+        finally{
+          setLoading(false)
         }
         
-
+   
     }
 
 
@@ -191,9 +156,20 @@ return(
                 </div>
                 }
                 {type === "sign-in" &&(
-                 <p className="text-red-600 font-semi-bold text-[16px]">{ message}
+                 <p className="text-red-600 font-semibold text-[16px] flex">{message}
                   </p>
                 )}
+                <div className="p-1">{
+                  !loading &&
+                  (
+                  error &&(
+                  <p className="p-1 rounded-sm text-white font-semibold text-center text-[16px] flex flex-wrap bg-red-500">
+                    {error}
+                  </p>
+                  )
+                )
+                  }
+                </div>
               
         </section>
     )

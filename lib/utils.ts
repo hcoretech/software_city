@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge"
 import {z} from  "zod";
 // import { useCallback } from "react";
 
-export function cn(...inputs: ClassValue[]) {
+export function cn (...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 

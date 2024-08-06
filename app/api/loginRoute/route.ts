@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 // const jwt = require('jsonwebtoken');
 import { User } from "../../../lib/userModel";
 import { cookies } from "next/headers";
-import dbConnection from "../../../lib/mongodb";
+// import dbConnection from "../../../lib/mongodb";
 import { nanoid } from "nanoid";
 import { SignJWT } from "jose";
 import { jwtCheck } from "../../../lib/constant";
@@ -12,7 +12,7 @@ import { jwtCheck } from "../../../lib/constant";
 //   }
   
 export async function POST(req:Request,res:NextResponse){
-    await dbConnection();
+    // await dbConnection();
 
     const body = await req.json();
     const {email,password} = body
@@ -32,7 +32,7 @@ export async function POST(req:Request,res:NextResponse){
          .setProtectedHeader({ alg: 'HS256' })
           .setJti(nanoid())
           .setIssuedAt()
-          .setExpirationTime('1day')
+          .setExpirationTime('2day')
           .sign(new TextEncoder().encode(jwtCheck()))
 
          cookies().set('authSession', token, {
@@ -45,7 +45,7 @@ export async function POST(req:Request,res:NextResponse){
 
     }
       catch(error){
-        return NextResponse.json({Message:'error in connection '},{status:400})
+        return NextResponse.json({error:'Error in sign-in,check internet connection'},{status:400})
      }
 
     }

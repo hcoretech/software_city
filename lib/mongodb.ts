@@ -1,11 +1,5 @@
 'use server'
 import mongoose from 'mongoose'
-// import User from './userModel'
-// import { userSchema } from './userModel'
-
-
-
-
 
 const MONGODB_URI = process.env.MONGODB_URL
 
@@ -26,7 +20,7 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null }
 }
 
-async function dbConnection() {
+export const dbConnection = async () => {
   if (cached.conn) {
     return cached.conn
   }
@@ -36,18 +30,20 @@ async function dbConnection() {
       bufferCommands: false,
     }
 
-    cached.promise =await mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = await mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       return mongoose
+    }).catch((error)=>{
+      throw new Error('error in connection')
     })
   }
 
   try {
     cached.conn = await cached.promise
-  } catch (e) {
+  } catch (error) {
     cached.promise = null
-    throw e
+    console.log('error in connection')
+    throw new Error("check network coonnectivity")
   }
 
   return cached.conn
 }
-module.exports = dbConnection;

@@ -8,6 +8,9 @@ mongoose.Promise = global.Promise;
  const postModel = new Schema({
   name:String,
   Filename:String,
+ 
+  Description:String,
+  ImageLink:String,
   path:String,
   itemId:ObjectId,
   ContentType:String,

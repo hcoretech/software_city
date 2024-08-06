@@ -1,8 +1,8 @@
 'use server'
-import  {type NextApiRequest,NextApiResponse } from "next";
-// import { User } from "../../../lib/userModel";
+
+import { User } from "../../../lib/userModel";
 import { NextResponse } from "next/server";
-const {User} =require ('../../../lib/userModel.js')
+// const {User} =require ('../../../lib/userModel.js')
 // const jwt = require('jsonwebtoken');
 
 
@@ -10,11 +10,9 @@ const {User} =require ('../../../lib/userModel.js')
 //   return jwt.sign({_id}, process.env.my_SECRET, { expiresIn: '3m' })
 // }
 
-export async function POST(req:Request){
-  
-      
-         const body = await req.json()
-          const {firstName,lastName,userName,email,password} = body
+export async function POST(req:Request){    
+        const body = await req.json()
+        const {firstName,lastName,userName,email,password} = body
           
     try{              
           const createAccount = await User.create({
@@ -25,13 +23,13 @@ export async function POST(req:Request){
             password
           })
           const response = createAccount;
+
           if(!response){
                return NextResponse.json({message:'user creation failed'},{status:400})
           }
           return NextResponse.json({response},{status:200});
         }
-
-     catch(error){
-            return NextResponse.json({Message:'error connecting to db'},{status:400})
+      catch(error){
+            return NextResponse.json({error:'Error in sign-up,check internet connection'},{status:400})
           }
         }

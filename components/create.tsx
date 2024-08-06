@@ -2,40 +2,32 @@
 
 import {useRef, useState,useEffect} from "react";
 import { Button } from "./ui/button";
-import { Suspense } from "react";
-import Image from "next/image";
-import { FormEvent } from 'react'
- 
 import { useRouter } from 'next/navigation'
-import renderImage from "../app/(root)/downloads/[id]/page";
-
-
-
 export const dynamic = 'auto'
-export const runtime = 'edge'
+import { FormEvent } from 'react'
 
-
-
-export const Create = ({type}:{type:string}) => {
+export default function Create ()  {
     const router = useRouter();
     const[loading,setLoading] = useState(false);
     const [title,setTitle] =useState("");
     const [file,setFile] =useState(null);
-    const[search,setSearch]= useState('')
-    const [image,setImage]=useState(null);
+    const [description,setDescription] = useState('')
+    const [imageLink,setImageLink] = useState('')
 
+    
 
     const fileInput =useRef<HTMLInputElement>(null)
 const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true)
       try{
-        if(type==='create'){
 
             let formData =new FormData();
             formData.append("title",title);
             formData.append('file',file);
-            formData.append('search',search);
+            formData.append('description',description);
+            formData.append('imageLink',imageLink);
+            
      
          const upload = await fetch('/api/postRoute',
               {
@@ -52,37 +44,7 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
          console.log(response)
     //    setImg(response.insert.image)
             // "blob:http://localhost:3000/2f11c027-5de3-4d7f-a714-2e0d4847d54a"
-        }
-        if(type === "downloads")
-            {
- 
-              
-
-            const res = await fetch(`/api/getImage?name=${search}`,{
-            
-
-                // body:formData,
-                cache:'force-cache',
-                next:{ revalidate: 0},
-                headers:{
-                    // "Content-Type":'application/form-data',
-                    "Accept":"image/jpeg,image/png,"
-                }
-    
-            })
-            // setLoading(data.ok)
-            const data = await res.json()
-            // renderImage(data)
-            // router.push(`/downloads/1`);
-            console.log(data);
-            setImage(data)
-
-            // console.log(img)
-            // if(data.status = 200){
-            // setImg(stream);
-            // console.log(data)
-            // }
-        }
+       
       }catch(error){
         throw error
             //    setLoading(false)
@@ -95,9 +57,7 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
 
     return (
         <section className="pt-10">
-             <form onSubmit={handleSubmit} encType="multipart/form-data" >
-                 {type ==="create" ?(
-                   <div>                  
+             <form onSubmit={handleSubmit} encType="multipart/form-data" >                  
                      <input 
                       name="title"
                       type='text' 
@@ -106,49 +66,28 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                       placeholder="enter title"
                       />
                       <input 
+                      name="imageLink"
+                      type='text' 
+                      onChange={(e)=>setImageLink(e.target.value)}
+                      value={imageLink}         
+                      placeholder="enter image link"
+                      />
+                      <textarea
+                      name="description"
+                      onChange={(e)=>setDescription(e.target.value)}
+                      value={description}
+                      placeholder="write about"
+                      />
+                      <input 
                        name="file"
                        type='file'
                        ref={fileInput}
                        onChange={(e)=>setFile(e.target.files[0])} 
   
                        />
-                    </div>
-                    ):(
-                     <div>
-                        <input 
-                        name="search"
-                        type='text' 
-                         onChange={(e)=>setSearch(e.target.value)}
-                         value={search}         
-                        placeholder="enter title"
-                        />
-                      <div>
-                       {
-                        image  ?
-                        <div>                                          
-                        <div>
-                      <Image
-                       src={image.response.path}
-                       width={100}
-                       height={100}
-                       alt="image"
-                       className="w-[100px] h-[100px]"
-                       />
-                       <p>{image.response.name}</p>
-                       </div>
-                       
-                       </div>:
-                       <div>
-                        loading
-                        </div>
-                      }
-                       </div>
-                    </div> 
-                    )
-                    
-                }
+                      
                    <Button type='submit'>
-                        {type==='create' ?'upload' :'get'}
+                        Upload
                    </Button>
                </form>
                  {/* <div>

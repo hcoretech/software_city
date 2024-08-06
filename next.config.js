@@ -7,3 +7,21 @@ module.exports = {
       },
     },
   }
+  const NextConfig ={
+    images :{
+      remotePatterns :[
+        {
+          protocol:'https',
+          hostname:'www.zwodnik.com',
+          
+        },
+        {
+          protocol:'https',
+          hostname:'w7.pngwing.com',
+          
+        }
+      ]
+      // domains:['www.zwodnik.com']
+    }
+  }
+  module.exports = NextConfig

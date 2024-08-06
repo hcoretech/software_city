@@ -1,11 +1,11 @@
 // import DownloadP from "../../../components/downloads";
-import { Create } from "../../../components/create";
+import GetDownload from "../../../components/downloads";
+
 export default function Downloads (){
+
     return(
-<section>
-    <div>
-       <Create type='downloads'/>
-    </div>
-</section>
+         <section> 
+            <GetDownload />
+        </section>
     );
 }
