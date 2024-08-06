@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 import { createReadStream, createWriteStream } from "fs";
 import { Post } from "../../../lib/postModel";
 export const dynamic ='force-dynamic'
+import client from "../../../lib/mongodb";
 // import { useSearchParams } from 'next/navigation'
 
 
@@ -37,7 +38,7 @@ export const dynamic ='force-dynamic'
 
 
 // }
-const client = new MongoClient(process.env.MONGODB_URL);
+
 const db = client.db()
   
 // let bucket ;
@@ -61,14 +62,18 @@ const db = client.db()
  }
   
  const bucket = new GridFSBucket(db, GridFSBucketOptions)
+
 export async function POST(req:Request){
+    const clientd = client;
+    const db = clientd.db();
+    const post = await db.collection('Post')
 
     const form = await req.formData();
     const name = form.get('search') as String ;
     // console.log(name);
 
  try{
-     const findUser = await Post.findOne({
+     const findUser = await post.findOne({
           name
        })
      if(!findUser){

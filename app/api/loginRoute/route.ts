@@ -26,7 +26,7 @@ export async function POST(req:Request){
         const finds =  user.findOne({
           'email':email,
           'password':password         
-        });
+        })
 
         if(!finds){
             return NextResponse.json({message:"no user found with such id try again"},
