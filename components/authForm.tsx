@@ -86,7 +86,7 @@ const AuthForm =  ({type}:{type:string}) => {
                     }
                })
                const Response = await Post.json();
-               // console.log(Response)
+               console.log(Response)
                if(Post.status === 400){
                 setError(Response.error)
                }
