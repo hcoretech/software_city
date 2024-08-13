@@ -78,7 +78,7 @@ const AuthForm =  ({type}:{type:string}) => {
                 email:data.email,
                 password:data.password
                }
-               const Post =await fetch('/api/loginRoute',{
+               const Post = await fetch('/api/loginRoute',{
                    method:'POST',
                     body:JSON.stringify(userLogin), 
                     headers :{
@@ -90,10 +90,11 @@ const AuthForm =  ({type}:{type:string}) => {
                if(Response.status === 400){
                 setError(Response.error)
                }
-               if(Response.status === 200){
+               if(Post.status === 200){
+
                  router.push('/Home');
                }
-                setMessage(Response.message);
+                // setMessage(Response.message);
           
               }      
         }
