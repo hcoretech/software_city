@@ -24,7 +24,7 @@ export default async function middleware(req:NextRequest,){
         // }
         return NextResponse.redirect(new URL('/sign-in', req.url))
       }
-     return NextResponse.redirect(new URL('/Home',req.url));
+    //  return NextResponse.redirect(new URL('/Home',req.url));
         // otherwise, redirect to the set token page
         // else {
         //   return NextResponse.rewrite(new URL('/Home',req.url))
