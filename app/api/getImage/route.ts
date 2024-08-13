@@ -2,14 +2,15 @@
 import { NextResponse } from "next/server";
 import { GridFSBucket } from "mongodb";
 import { MongoClient } from 'mongodb';
-import { WriteConcern } from "mongodb";
 import { ReadPreference } from "mongodb";
 import { existsSync } from "fs";
+import fs from "node:fs/promises"
 import mongoose from "mongoose";
 import { createReadStream, createWriteStream } from "fs";
 import { Post } from "../../../lib/postModel";
 export const dynamic ='force-dynamic'
 import client from "../../../lib/mongodb";
+import { isUtf8 } from "buffer";
 // import { useSearchParams } from 'next/navigation'
 
 
@@ -57,7 +58,7 @@ const db = clients.db()
   const GridFSBucketOptions = {
 
     bucketName:'upload',
-    chunkSizeBytes : 256 *1024,
+    chunkSizeBytes : 1024*1024,
     readPreference:ReadPreference.secondary
  }
   
@@ -91,14 +92,49 @@ export async function POST(req:Request){
       console.log("log")
  
       const response = findUser
-      const check = existsSync(`./public/images/${uploadFilename}`)
+      const downloadLink = findUser.path
+      const check = existsSync(`./public/uploads/${uploadFilename}`)
   
      if(check){
         return NextResponse.json({response},{status:200})
       }
+     const openDownload =  bucket.openDownloadStreamByName(uploadFilename)
+      const interval = ()=>{
+        
+        let chunck =[];
+      openDownload.on('data',(data)=>{
+         chunck.push(data)
+      }).pipe(createWriteStream(`./public/uploads/${uploadFilename}`,"utf8"))
+      .on('finish',()=>{
+        fs.link("./public" + `${downloadLink}`,`/search ${downloadLink}`)
+        .then(()=>{
+          console.log("running")
+        }).catch((error)=>{
+          console.log('rejected')
+        })
+      })
+      openDownload.on('error',()=>{
+        process.exit(0)
+      })
+      }
+      setTimeout(interval,30);
+      
+   
+      // openDownload.on('finish',()=>{
+        // chunck.push(chuncks)
+      //   console.log(chunck)
+      //   console.log("finished")
+          
+      // })
+      // console.log(chunck)
+      // const option = openDownload._construct((error)=>{
+      //  console.log(error)
+      // })
 
-      bucket.openDownloadStreamByName(uploadFilename)
-      .pipe(createWriteStream(`./public/images/${uploadFilename}`))
+      //  let stream ;
+      //  const writeStream = openDownload.pipe(createWriteStream(`./public/images/${uploadFilename}`)
+      // )
+
        return NextResponse.json({response},{status:200})  
  
     }

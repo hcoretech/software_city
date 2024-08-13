@@ -8,7 +8,7 @@ mongoose.Promise = global.Promise;
  const postModel = new Schema({
   name:String,
   Filename:String,
- 
+  FileSize:Number,
   Description:String,
   ImageLink:String,
   path:String,

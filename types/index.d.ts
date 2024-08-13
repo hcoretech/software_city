@@ -32,3 +32,7 @@ declare type upload ={
     name:string,
     value:string
  }
+ declare type fileDownload ={
+    fileLink:string,
+    filezie:number
+ }

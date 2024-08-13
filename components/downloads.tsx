@@ -1,20 +1,26 @@
 'use client'
 import { Input } from "./ui/input"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image"
 import Link from "next/link";
 import { CiMenuBurger } from "react-icons/ci";
-import { FormEvent } from 'react'
+import { FormEvent } from 'react';
 import { CiMenuKebab } from "react-icons/ci";
-import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
+import { downloadFile } from "../lib/clientAction";
+import { useRouter } from "next/navigation";
+// const fs = require ("node:fs/promises")
+
 
 export default function GetDownload () {
    const [search,setSearch] = useState("");
    const [image,setImage] = useState(null);
    const [error,setError] = useState(null);
    const [loading,setLoading] = useState(false);
-
+   const [data,setData]= useState(null);
+   const [download,setDownload]= useState(false)
+   
+   const router =useRouter();
     const handleSubmit = async(event:FormEvent<HTMLFormElement>)=>{
       setError(null)
 
@@ -39,7 +45,7 @@ export default function GetDownload () {
         // setLoading(data.ok)
         const data = await response.json()
         if(response.ok){
-          setImage(data)
+          setData(data)
         }else{
           setError(data)
         }
@@ -54,6 +60,40 @@ export default function GetDownload () {
       }
 
     }
+      const getFile = async() => {
+            //  setDownload(true)
+            console.log('staring')
+            router.prefetch(` ./public${data.response.path}`)
+            console.log(data.response.path)
+        const downloadData:fileDownload =  {
+           fileLink:data.response.path,
+           filezie:data.response.FileSize
+        }
+
+        const download = await downloadFile(downloadData)
+         const response = download;
+         console.log(response)
+            setDownload(false)
+            if(response.status ===300){
+              setDownload(false)
+              alert('no download path found')
+            }
+           if(response.status ==="pending"){
+               setDownload(false)
+           }
+           else if(response.status ==="downloading"){
+                setDownload(true)
+                // console.log('file ready')
+           }
+           else{
+               setLoading(false) 
+           }
+      }
+        // const HREF = download ?data.response.path : data.response.path;
+
+    useEffect(()=>{
+       getFile()
+    },[download])
     return(
         <section className="flex-center gap-5 flex-col flex py-5 ">
              <div className="flex-center flex  shadow-md bg-light-300 shadow-gray-300  w-full">
@@ -90,22 +130,22 @@ export default function GetDownload () {
             
              <div className="w-full">
               {
-                image && (
+                data && (
               <div className="justify-between w-full border-black shadow-lg shadow-blue-200 border-t-[1px] p-2 items-center flex flex-row">
                 <div>
                   <p className="bg-black text-white w-[70px] text-center rounded-md">
                     Utilities
                   </p>
-                <p className=" rounded-full w-[70px] font-sans font-semibold  text-[15px] text-center"> {image?.response?.name}</p>
+                <p className=" rounded-full w-[70px] font-sans font-semibold  text-[15px] text-center"> {data?.response?.name}</p>
                     <Image
-                    src={image?.response?.ImageLink}
+                    src={data?.response?.ImageLink}
                     width={60}
                     height={60}
                     alt="image"
                     
                     />
                 
-                <p className=" text-[13px] w-[250px] font-sans"> {image?.response?.Description}<span className="text-[15px] ">...</span></p>
+                <p className=" text-[13px] w-[250px] font-sans"> {data?.response?.Description}<span className="text-[15px] ">...</span></p>
                </div>
                <div className="flex flex-col items-center gap-7  justify-between">
                 <div className="flex  items-center">
@@ -124,11 +164,22 @@ export default function GetDownload () {
                     
                     />
                     </div>
-              <Link className="bg-blue-500 rounded-md text-white p-2 text-" href={image?.response?.path}>
+               
+                    
+                     <Button onClick={()=>{
+                    
+                     }}  className="bg-blue-500 rounded-md text-white p-2 text-" >  
+                                                      
+                        <Link href={data?.response?.path} prefetch={true}>
+                          succes
+                       </Link>
+                     
 
-               Download 
-
-              </Link>
+                   
+                      
+                     
+                      </Button>
+                  
               <div>
                 <Link className="text-blue-600 pointer underline " href='/'> Install guide</Link>
                 </div>

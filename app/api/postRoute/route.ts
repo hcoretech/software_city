@@ -1,4 +1,4 @@
-// 'use server'
+'use server'
 
 import { NextRequest, NextResponse } from "next/server";
 import { GridFSBucket,ReadPreference,} from "mongodb";
@@ -7,7 +7,8 @@ import fs from "node:fs/promises"
 import { MongoClient } from 'mongodb';
 import { createReadStream,} from "node:fs";
 import { Post } from "../../../lib/postModel";
-export const dynamic ='force-dynamic'
+import client from "../../../lib/mongodb";
+// export const dynamic ='force-dynamic'
 
 
 
@@ -15,8 +16,8 @@ export const dynamic ='force-dynamic'
 
 // mongoose.createConnection(process.env.MONGODB_URL)
 
-const client = new MongoClient(process.env.MONGODB_URL);
- const db = client.db();
+// const client = new MongoClient(process.env.MONGODB_URL);
+ const db = client.db("software_city");
   
 // let bucket ;
 //   async function run (){
@@ -35,7 +36,7 @@ const GridFSBucketOptions =
 
  {
     bucketName:'upload',
-    chunkSizeBytes : 256 *1024,
+    chunkSizeBytes : 1024*1024,
     readPreference:ReadPreference.secondary,
 
   } 
@@ -44,32 +45,34 @@ const bucket = new GridFSBucket(db, GridFSBucketOptions)
 export async function POST(req:NextRequest){ 
 
    const form = await req.formData();
-   const image = form.get('file') as File;
+   const file = form.get('file') as File;
    const title=form.get('title') as string;
    const imageLink = form.get('imageLink') as string;
    const description=form.get('description') as string;
-   const buffer = await image.arrayBuffer()
+   const buffer = await file.arrayBuffer()
    const New = new Uint8Array(buffer)
-   const fileFormat = image.name.slice(-4)
+   const fileFormat = file.name.slice(-4)
+   const dbCreate = db.createCollection('posts')
   
     try{    
-         if(!image ||  !title){
+        
+         if(!file ||  !title){
            return NextResponse.json({messsage:'no valid file'},{status:400})
          }
 
-         await fs.writeFile(`./public/images/${title}${fileFormat}`,New)
+         await fs.writeFile(`./public/uploads/${title}${fileFormat}`,New)
           .then((file)=>{
             console.log('file written succesfully') })
            .catch((error)=>{    // throw error
             console.log('fail to write the file')
          })
 
-         const createStream =  createReadStream(`./public/images/${title}${fileFormat}`)
+         const createStream =  createReadStream(`./public/uploads/${title}${fileFormat}`)
          const uploadStream = createStream.pipe(bucket.openUploadStream(`${title}${fileFormat}`,
          {
             metadata:{
-                name:title,
-                bufferArray:"henry"
+              name:title,
+              bufferArray:"henry"
             }
          }
          ))
@@ -77,30 +80,31 @@ export async function POST(req:NextRequest){
             const filename = uploadStream.filename;
             const path = createStream.path.slice(8);
 
-           const post = await Post.create({
+           const post = (await dbCreate).insertOne({
             name:title,
             Filename:filename,
+             FileSize:file.size,
              Description:description,
              ImageLink:imageLink,
              path:path,
              id : itemId,
-             ContentType:image.type,       
+             ContentType:file.type,       
             })
 
              console.log(post)
 
          const Unlink = ()=>{
             const interval = setInterval(()=>{
-              fs.unlink(`./public/images/${title}${fileFormat}`)
+              fs.unlink(`./public/uploads/${title}${fileFormat}`)
              .then((file)=>{
                 console.log("file deleted succesfully")
               }).catch((error)=>{
                 console.log('failed to delete')
                })
-              },100)
+              },20)
                setTimeout(()=>{
                 clearInterval(interval) 
-               },200)
+               },80)
              }
     
          Unlink();
