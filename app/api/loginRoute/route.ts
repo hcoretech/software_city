@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 import { SignJWT } from "jose";
 // import { jwtCheck } from "../../../lib/constant";
 import { jwtSecret } from "../../../lib/constant";
-export const dynamic ='force-dynamic'
+// export const dynamic ='force-dynamic'
 import client from "../../../lib/mongodb";
 
 // const createToken = (_id) => {
