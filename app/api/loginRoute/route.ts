@@ -42,7 +42,7 @@ export async function POST(req:Request){
 
          cookies().set('authSession', token, {
          httpOnly: true,
-         domain:process.env.NODE_ENV ==="development"?"software_city.vercel.app":"locahost:3000",
+         domain:"https://software_city.vercel.app",
          sameSite:'strict',
          secure:true,
          maxAge: 60 * 60 * 24, 
