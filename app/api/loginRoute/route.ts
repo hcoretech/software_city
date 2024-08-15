@@ -37,14 +37,15 @@ export async function POST(req:Request){
          .setProtectedHeader({ alg: 'HS256' })
           .setJti(nanoid())
           .setIssuedAt()
-          .setExpirationTime('2day')
+          .setExpirationTime('1day')
           .sign(new TextEncoder().encode(jwtSecret))
 
          cookies().set('authSession', token, {
          httpOnly: true,
+         domain:process.env.NODE_ENV ==="development"?'localhost:300':"software_city.vercel.app",
          sameSite:'strict',
          secure:true,
-         maxAge: 60 * 60 * 24, // 2 hours in seconds
+         maxAge: 60 * 60 * 24, 
       })
           return NextResponse.json({message:'logged succesfull'},{status:200})            
 

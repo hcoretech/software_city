@@ -9,6 +9,7 @@ import { FormEvent } from 'react';
 import { CiMenuKebab } from "react-icons/ci";
 import { downloadFile } from "../lib/clientAction";
 import { useRouter } from "next/navigation";
+import { getFile } from "../lib/clientAction";
 // const fs = require ("node:fs/promises")
 
 
@@ -29,29 +30,32 @@ export default function GetDownload () {
     const formData = new FormData();
     formData.append('search',search)
       try{
+        const Post  = await getFile(formData);
+        const response = await Post;
+        console.log(response)
             
-        const response = await fetch(`/api/getImage`,{
-            method:'POST',
-            body:formData,
-            // body:formData,
-            cache:'force-cache',
-            next:{ revalidate: 0},
+        // const response = await fetch(`/api/getImage`,{
+        //     method:'POST',
+        //     body:formData,
+        //     // body:formData,
+        //     cache:'force-cache',
+        //     next:{ revalidate: 0},
             // headers:{
             //     "Content-Type":'application/form-data',
             //     "Accept":"image/jpeg,image/png,"
             // }
 
-        })
+        // })
         // setLoading(data.ok)
-        const data = await response.json()
-        if(response.ok){
-          setData(data)
-        }else{
-          setError(data)
-        }
+        // const data = await response.json()
+        // if(response.ok){
+        //   setData(data)
+        // }else{
+          // setError(data)
+        // }
         // renderImage(data)
         // router.push(`/downloads/1`);
-        console.log(data);
+        // console.log(data);
        
         setLoading(false)
   
@@ -60,40 +64,40 @@ export default function GetDownload () {
       }
 
     }
-      const getFile = async() => {
-            //  setDownload(true)
-            console.log('staring')
-            router.prefetch(` ./public${data.response.path}`)
-            console.log(data.response.path)
-        const downloadData:fileDownload =  {
-           fileLink:data.response.path,
-           filezie:data.response.FileSize
-        }
+      // const getFile = async() => {
+      //       //  setDownload(true)
+      //       console.log('staring')
+      //       router.prefetch(` ./public${data.response.path}`)
+      //       console.log(data.response.path)
+      //   const downloadData:fileDownload =  {
+      //      fileLink:data.response.path,
+      //      filezie:data.response.FileSize
+      //   }
 
-        const download = await downloadFile(downloadData)
-         const response = download;
-         console.log(response)
-            setDownload(false)
-            if(response.status ===300){
-              setDownload(false)
-              alert('no download path found')
-            }
-           if(response.status ==="pending"){
-               setDownload(false)
-           }
-           else if(response.status ==="downloading"){
-                setDownload(true)
-                // console.log('file ready')
-           }
-           else{
-               setLoading(false) 
-           }
-      }
+      //   const download = await downloadFile(downloadData)
+      //    const response = download;
+      //    console.log(response)
+      //       setDownload(false)
+      //       if(response.status ===300){
+      //         setDownload(false)
+      //         alert('no download path found')
+      //       }
+      //      if(response.status ==="pending"){
+      //          setDownload(false)
+      //      }
+      //      else if(response.status ==="downloading"){
+      //           setDownload(true)
+      //           // console.log('file ready')
+      //      }
+      //      else{
+      //          setLoading(false) 
+      //      }
+      // }
         // const HREF = download ?data.response.path : data.response.path;
 
-    useEffect(()=>{
-       getFile()
-    },[download])
+    // useEffect(()=>{
+    //    getFile()
+    // },[download])
     return(
         <section className="flex-center gap-5 flex-col flex py-5 ">
              <div className="flex-center flex  shadow-md bg-light-300 shadow-gray-300  w-full">
@@ -126,7 +130,7 @@ export default function GetDownload () {
                 </Button>
             </form>
             </div>
-            <div className=""> 
+            {/* <div className=""> 
             
              <div className="w-full">
               {
@@ -192,13 +196,13 @@ export default function GetDownload () {
             </div>
         
         </div>
-        {
-          error &&(
+        { */}
+          {/* error &&(
             <p>
               {error?.message}
             </p>
           )
-        }
+        } */}
         </section>
     )
 }

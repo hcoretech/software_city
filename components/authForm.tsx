@@ -85,14 +85,14 @@ const AuthForm =  ({type}:{type:string}) => {
                     'Content-type':'application/json'        
                     }
                })
-               const Response = await Post.json();
-               console.log(Response)
-               if(Response.status === 400){
-                setError(Response.error)
+               const response = await Post.json();
+               console.log(response)
+               if(response.status === 400){
+                setError(response.error)
                }
                if(Post.status === 200){
 
-                 router.push('/Home');
+                 router.push('/downloads');
                }
                 // setMessage(Response.message);
           
