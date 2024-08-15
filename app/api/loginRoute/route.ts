@@ -47,7 +47,7 @@ export async function POST(req:Request){
          secure:true,
          maxAge: 60 * 60 * 24, 
        })
-          return NextResponse.json({message:'logged succesfull'},{status:200}).cookies            
+          return NextResponse.json({message:'logged succesfull'},{status:200})          
 
     }
       catch(error){
