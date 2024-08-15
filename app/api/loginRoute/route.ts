@@ -41,7 +41,7 @@ export async function POST(req:Request){
           .sign(new TextEncoder().encode(jwtSecret))
 
          cookies().set('authSession', token, {
-         httpOnly: true,
+        //  httpOnly: true,
          domain:"https://software_city.vercel.app",
          sameSite:'strict',
          secure:true,
