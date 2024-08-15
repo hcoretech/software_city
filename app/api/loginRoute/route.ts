@@ -40,14 +40,14 @@ export async function POST(req:Request){
           .setExpirationTime('1day')
           .sign(new TextEncoder().encode(jwtSecret))
 
-         cookies().set('authSession', token, {
-        //  httpOnly: true,
+         const cookie = cookies().set('authSession', token, {
+         httpOnly: true,
          domain:"https://software_city.vercel.app",
          sameSite:'strict',
          secure:true,
          maxAge: 60 * 60 * 24, 
        })
-          return NextResponse.json({message:'logged succesfull'},{status:200})            
+          return NextResponse.json({message:'logged succesfull'},{status:200}).cookies            
 
     }
       catch(error){
