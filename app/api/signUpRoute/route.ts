@@ -1,10 +1,10 @@
-// 'use server'
+'use server'
 
 import { User } from "../../../lib/userModel";
 import { NextResponse } from "next/server";
 // const {User} =require ('../../../lib/userModel.js')
 // const jwt = require('jsonwebtoken');
-export const dynamic ='force-dynamic'
+// export const dynamic ='force-dynamic'
 import client from "../../../lib/mongodb";
 
 
