@@ -30,29 +30,29 @@ export default function GetDownload () {
     const formData = new FormData();
     formData.append('search',search)
       try{
-        const Post  = await getFile(formData);
-        const response = await Post;
-        console.log(response)
+        // const Post  = await getFile(formData);
+        // const response = await Post;
+        // console.log(response)
             
-        // const response = await fetch(`/api/getImage`,{
-        //     method:'POST',
-        //     body:formData,
-        //     // body:formData,
-        //     cache:'force-cache',
-        //     next:{ revalidate: 0},
-            // headers:{
-            //     "Content-Type":'application/form-data',
-            //     "Accept":"image/jpeg,image/png,"
-            // }
+        const response = await fetch(`/api/getImage`,{
+            method:'POST',
+            body:formData,
+            // body:formData,
+            cache:'force-cache',
+            next:{ revalidate: 0},
+            headers:{
+                "Content-Type":'application/form-data',
+                "Accept":"image/jpeg,image/png,"
+            }
 
-        // })
+        })
         // setLoading(data.ok)
-        // const data = await response.json()
-        // if(response.ok){
-        //   setData(data)
-        // }else{
-          // setError(data)
-        // }
+        const data = await response.json()
+        if(response.ok){
+          setData(data)
+        }else{
+          setError(data)
+        }
         // renderImage(data)
         // router.push(`/downloads/1`);
         // console.log(data);
@@ -130,7 +130,7 @@ export default function GetDownload () {
                 </Button>
             </form>
             </div>
-            {/* <div className=""> 
+            <div className=""> 
             
              <div className="w-full">
               {
@@ -196,13 +196,13 @@ export default function GetDownload () {
             </div>
         
         </div>
-        { */}
-          {/* error &&(
+     
+          { error &&(
             <p>
               {error?.message}
             </p>
           )
-        } */}
+        }
         </section>
     )
 }
