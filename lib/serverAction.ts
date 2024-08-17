@@ -28,7 +28,9 @@ export  async function sessionClient (){
     
 
 }
+
 export async function verifyAuth(req: NextRequest) {
+  
     const token = req.cookies.get("authSession")?.value
   
     if (!token) throw new Error('Missing user token')

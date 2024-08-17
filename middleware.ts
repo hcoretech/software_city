@@ -12,7 +12,7 @@ export default async function middleware(req:NextRequest,){
     // }
     
     const verifiedToken = await verifyAuth(req).catch((err) => {
-        console.error(err.message)
+        console.log(err.message)
       })
     
       if (!verifiedToken) {
