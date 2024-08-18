@@ -106,12 +106,7 @@ export async function POST(req:Request){
          chunck.push(data)
       }).pipe(createWriteStream(`./public/uploads/${uploadFilename}`,"utf8"))
       .on('finish',()=>{
-        fs.link("./public" + `${downloadLink}`,`/search ${downloadLink}`)
-        .then(()=>{
-          console.log("running")
-        }).catch((error)=>{
-          console.log('rejected')
-        })
+       console.log('finish')
       })
       openDownload.on('error',()=>{
         process.exit(0)
