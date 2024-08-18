@@ -171,12 +171,20 @@ export default function GetDownload () {
                
                     
                      <Button onClick={()=>{
-                    
+                     setDownload(!download) 
+                     const create = document.createElement("a");
+                     create.href = data.response.path
+                     create.click();
+                     setDownload(false)
+                     
                      }}  className="bg-blue-500 rounded-md text-white p-2 text-" >  
-                                                      
-                        <Link href={data?.response?.path} prefetch={true}>
-                          succes
-                       </Link>
+
+                      {download ?(                                                  
+                      "downloading"
+                      ):(
+                        "download"
+                      )
+                      }
                      
 
                    
