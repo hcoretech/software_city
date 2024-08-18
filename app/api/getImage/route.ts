@@ -1,4 +1,4 @@
-// 'use server'
+'use server'
 import { NextResponse } from "next/server";
 import { GridFSBucket } from "mongodb";
 import { MongoClient } from 'mongodb';
@@ -8,7 +8,7 @@ import fs from "node:fs/promises"
 import mongoose from "mongoose";
 import { createReadStream, createWriteStream } from "fs";
 import { Post } from "../../../lib/postModel";
-export const dynamic ='force-dynamic'
+// export const dynamic ='force-dynamic'
 import client from "../../../lib/mongodb";
 import { isUtf8 } from "buffer";
 // import { useSearchParams } from 'next/navigation'
@@ -117,7 +117,7 @@ export async function POST(req:Request){
         process.exit(0)
       })
       }
-      setTimeout(interval,30);
+      setTimeout(interval,10);
       
    
       // openDownload.on('finish',()=>{

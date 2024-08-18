@@ -40,10 +40,10 @@ export default function GetDownload () {
             // body:formData,
             cache:'force-cache',
             next:{ revalidate: 0},
-            headers:{
-                "Content-Type":'application/form-data',
-                "Accept":"image/jpeg,image/png,"
-            }
+            // headers:{
+            //     "Content-Type":'application/form-data',
+            //     "Accept":"image/jpeg,image/png,"
+            // }
 
         })
         // setLoading(data.ok)
