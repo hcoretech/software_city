@@ -210,7 +210,12 @@ export default function GetDownload () {
                
                     
                      <Button onClick={
-                      getFile 
+                      ( )=>{
+                        setDownload(true)
+                        const create = document.createElement('a')
+                        create.href = data.response.path
+                        create.click();
+                      }
                       }  className="bg-blue-500 rounded-md text-white p-2 text-" >  
 
                       {download ?(                                                  
