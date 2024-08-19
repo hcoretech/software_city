@@ -10,33 +10,41 @@ import { CiMenuKebab } from "react-icons/ci";
 import { downloadFile } from "../lib/clientAction";
 import { useRouter } from "next/navigation";
 import { getFile } from "../lib/clientAction";
+import useSWR from "swr";
+import { Search } from "lucide-react";
+// import { url } from "inspector";
+// import { URL } from "url";
+
 // const fs = require ("node:fs/promises")
 
 
 export default function GetDownload () {
+
    const [search,setSearch] = useState("");
    const [image,setImage] = useState(null);
    const [error,setError] = useState(null);
    const [loading,setLoading] = useState(false);
    const [data,setData]= useState(null);
    const [download,setDownload]= useState(false)
+
    
-   const router =useRouter();
+   
+   const router = useRouter();
     const handleSubmit = async(event:FormEvent<HTMLFormElement>)=>{
       setError(null)
 
       setLoading(true)
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('search',search)
+    // const formData = new FormData();
+    // formData.append('search',search)
       try{
         // const Post  = await getFile(formData);
         // const response = await Post;
         // console.log(response)
             
-        const response = await fetch(`/api/getImage`,{
-            method:'POST',
-            body:formData,
+        const response = await fetch(`/api/getFile?search=${search}`,{
+            method:'GET',
+            // body:formData,
             // body:formData,
             cache:'force-cache',
             next:{ revalidate: 0},
@@ -46,8 +54,32 @@ export default function GetDownload () {
             // }
 
         })
+
+        // .then((d)=> setData(d.json())).catch((error)=>setError(error));
         // setLoading(data.ok)
+        // const fetcher = () => fetch('api/getFile',
+        // {
+          
+            // method:'POST',
+            // body:formData,
+            // body:formData,
+            // cache:'force-cache',
+            // next:{ revalidate: 0},
+            // headers:{
+            //     "Content-Type":'application/form-data',
+            //     "Accept":"image/jpeg,image/png,"
+            // }
+
+        
+        // }).then((r)=>r.json())
+
+        
+        // const {data} = useSWR('/api/getFile',fetcher)
+        // setData(data);
+        // setError(error);
+        
         const data = await response.json()
+        console.log(data)
         if(response.ok){
           setData(data)
         }else{
@@ -64,15 +96,22 @@ export default function GetDownload () {
       }
 
     }
-      // const getFile = async() => {
-      //       //  setDownload(true)
-      //       console.log('staring')
-      //       router.prefetch(` ./public${data.response.path}`)
-      //       console.log(data.response.path)
-      //   const downloadData:fileDownload =  {
-      //      fileLink:data.response.path,
-      //      filezie:data.response.FileSize
-      //   }
+
+      const getFile = async() => {
+             setDownload(true)
+         const  getbuffer = await fetch(`/api/download?id=${data.response.Filename}`,{
+          method:'GET'
+
+         })
+         const response = await getbuffer ;
+         console.log(response)
+        //     console.log('staring')
+        //     router.prefetch(` ./public${data.response.path}`)
+        //     console.log(data.response.path)
+        // const downloadData:fileDownload =  {
+        //    fileLink:data.response.path,
+        //    filezie:data.response.FileSize
+        }
 
       //   const download = await downloadFile(downloadData)
       //    const response = download;
@@ -170,14 +209,9 @@ export default function GetDownload () {
                     </div>
                
                     
-                     <Button onClick={()=>{
-                     setDownload(!download) 
-                     const create = document.createElement("a");
-                     create.href = data.response.path
-                     create.click();
-                     setDownload(false)
-                     
-                     }}  className="bg-blue-500 rounded-md text-white p-2 text-" >  
+                     <Button onClick={
+                      getFile 
+                      }  className="bg-blue-500 rounded-md text-white p-2 text-" >  
 
                       {download ?(                                                  
                       "downloading"
