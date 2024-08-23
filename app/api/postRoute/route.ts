@@ -49,7 +49,7 @@ export async function POST(req:NextRequest){
    const title=form.get('title') as string;
    const imageLink = form.get('imageLink') as string;
    const description=form.get('description') as string;
-   const buffer = await file.arrayBuffer()
+   const buffer = Buffer.from(await file.arrayBuffer())
    const New = new Uint8Array(buffer)
    const fileFormat = file.name.slice(-4)
    const dbCreate = db.createCollection('posts')
@@ -60,14 +60,14 @@ export async function POST(req:NextRequest){
            return NextResponse.json({messsage:'no valid file'},{status:400})
          }
 
-         await fs.writeFile(`./public/uploads/${title}${fileFormat}`,New)
-          .then((file)=>{
-            console.log('file written succesfully') })
-           .catch((error)=>{    // throw error
-            console.log('fail to write the file')
-         })
+        //  await fs.writeFile(`./public/uploads/${title}${fileFormat}`,New)
+        //   .then((file)=>{
+        //     console.log('file written succesfully') })
+        //    .catch((error)=>{    // throw error
+        //     console.log('fail to write the file')
+        //  })
 
-         const createStream =  createReadStream(`./public/uploads/${title}${fileFormat}`)
+         const createStream =  createReadStream(buffer)
          const uploadStream = createStream.pipe(bucket.openUploadStream(`${title}${fileFormat}`,
          {
             metadata:{
@@ -93,21 +93,21 @@ export async function POST(req:NextRequest){
 
              console.log(post)
 
-         const Unlink = ()=>{
-            const interval = setInterval(()=>{
-              fs.unlink(`./public/uploads/${title}${fileFormat}`)
-             .then((file)=>{
-                console.log("file deleted succesfully")
-              }).catch((error)=>{
-                console.log('failed to delete')
-               })
-              },20)
-               setTimeout(()=>{
-                clearInterval(interval) 
-               },80)
-             }
+        //  const Unlink = ()=>{
+        //     const interval = setInterval(()=>{
+        //       fs.unlink(`./public/uploads/${title}${fileFormat}`)
+        //      .then((file)=>{
+        //         console.log("file deleted succesfully")
+        //       }).catch((error)=>{
+        //         console.log('failed to delete')
+        //        })
+        //       },20)
+        //        setTimeout(()=>{
+        //         clearInterval(interval) 
+        //        },80)
+        //      }
     
-         Unlink();
+        //  Unlink();
     
          return NextResponse.json({message:'sucess'},{status:200})
          
