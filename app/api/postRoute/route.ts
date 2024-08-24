@@ -6,8 +6,13 @@ import fs from "node:fs/promises"
 // const stream= require('node:stream/promises')
 import { MongoClient } from 'mongodb';
 import { createReadStream,} from "node:fs";
+import { createWriteStream } from "node:fs";
 import { Post } from "../../../lib/postModel";
 import client from "../../../lib/mongodb";
+import { buffer } from "node:stream/consumers";
+import path from "node:path";
+import { TbChevronsDownLeft } from "react-icons/tb";
+// import { Buffer } from "node:buffer";
 // export const dynamic ='force-dynamic'
 
 
@@ -36,38 +41,52 @@ const GridFSBucketOptions =
 
  {
     bucketName:'upload',
-    chunkSizeBytes : 1024*1024,
+    chunkSizeBytes : 256*1024,
     readPreference:ReadPreference.secondary,
 
   } 
 const bucket = new GridFSBucket(db, GridFSBucketOptions)
 
-export async function POST(req:NextRequest){ 
+export async function POST(req:Request,res:Response){ 
 
    const form = await req.formData();
    const file = form.get('file') as File;
    const title=form.get('title') as string;
    const imageLink = form.get('imageLink') as string;
-   const description=form.get('description') as string;
-   const buffer = Buffer.from(await file.arrayBuffer())
-   const New = new Uint8Array(buffer)
+   const description =form.get('description') as string;
+   const buf =  await file.arrayBuffer()
+   const buffers = new Uint8Array(buf)
+  //  const buffer = Buffer.from(file)
+  //  const streamBuffer = new Uint8Array(buffers).buffer
+  //  const buf = Buffer.from(streamBuffer)
+  //  .then((data)=>{
+  //   console.log(data)
+  //  }).catch((error)=>{
+  //   console.log
+  //  })
+  
    const fileFormat = file.name.slice(-4)
-   const dbCreate = db.createCollection('posts')
+   const dbCreate = db.collection('posts')
+
+   if(!file ||  !title){
+    return NextResponse.json({messsage:'no valid file'},{status:400})
+  }
   
     try{    
         
-         if(!file ||  !title){
-           return NextResponse.json({messsage:'no valid file'},{status:400})
-         }
+        
 
-        //  await fs.writeFile(`./public/uploads/${title}${fileFormat}`,New)
-        //   .then((file)=>{
-        //     console.log('file written succesfully') })
-        //    .catch((error)=>{    // throw error
-        //     console.log('fail to write the file')
-        //  })
-
-         const createStream =  createReadStream(buffer)
+         fs.writeFile(`./public/uploads/${title}${fileFormat}`,buffers)
+         
+         console.log('starting1')
+         const createStream =  createReadStream(`./public/uploads/${title}${fileFormat}`)
+         .on('data',(data)=>{
+           console.log('starting new reading of file')
+         })
+         .on('error',(error)=>{
+          console.log(error)
+         })
+         console.log('starting')
          const uploadStream = createStream.pipe(bucket.openUploadStream(`${title}${fileFormat}`,
          {
             metadata:{
@@ -75,7 +94,9 @@ export async function POST(req:NextRequest){
               bufferArray:"henry"
             }
          }
-         ))
+         )).on('finish',(finish)=>{
+          return new Response("done ")
+         })
             const itemId = uploadStream.id;
             const filename = uploadStream.filename;
             const path = createStream.path.slice(8);
@@ -108,7 +129,7 @@ export async function POST(req:NextRequest){
         //      }
     
         //  Unlink();
-    
+         
          return NextResponse.json({message:'sucess'},{status:200})
          
     }catch(error){
