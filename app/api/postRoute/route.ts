@@ -95,7 +95,7 @@ export async function POST(req:Request,res:Response){
             }
          }
          )).on('finish',(finish)=>{
-          return new Response("done ")
+          console.log('done')
          })
             const itemId = uploadStream.id;
             const filename = uploadStream.filename;

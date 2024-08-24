@@ -18,7 +18,7 @@ export default function Create ()  {
 
     const fileInput =useRef<HTMLInputElement>(null)
 const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    // event.preventDefault();
     setLoading(true)
       try{
 
@@ -33,9 +33,9 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
               {
           method:'POST',
           body:formData,
-          next:{revalidate:0}
+          next:{revalidate:0},
         //   headers:{
-        //     Content-Type:'application/form-data'
+        //     'Content-Type':'application/form-data'
         // }
          }
         )
