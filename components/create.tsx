@@ -13,12 +13,13 @@ export default function Create ()  {
     const [file,setFile] =useState(null);
     const [description,setDescription] = useState('')
     const [imageLink,setImageLink] = useState('')
+    const [stream,setStream] =useState(null)
 
     
 
     const fileInput =useRef<HTMLInputElement>(null)
 const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
-    // event.preventDefault();
+    event.preventDefault();
     setLoading(true)
       try{
 
@@ -29,7 +30,7 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
             formData.append('imageLink',imageLink);
             
      
-         const upload = await fetch('/api/postRoute',
+         const upload = await fetch('/api/createFileIndex',
               {
           method:'POST',
           body:formData,
@@ -40,8 +41,34 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
          }
         )
 
-         const response = await upload.json();
+         const response = await upload.json()
          console.log(response)
+
+         if(upload.status == 200){
+            const Uploadstream = await fetch('/api/streamFile',{
+                method:'POST',
+                body:formData
+            })
+            const value = await Uploadstream.json()
+            console.log(value)
+            // setStream(value);
+            if(Uploadstream.status === 200){
+                console.log(value.itemId)
+                formData.append('itemId',value.itemId);
+                formData.append('filename',value.filename)
+              const postItem = await fetch('/api/postRoute',{
+                 method:'POST',
+                 body:formData
+                })
+                const result = await postItem.json();
+                console.log(result)
+
+            }
+         }
+        //  if(stream.)  itemId,
+        // filename
+            // console.log(stream.itemId)
+
     //    setImg(response.insert.image)
             // "blob:http://localhost:3000/2f11c027-5de3-4d7f-a714-2e0d4847d54a"
        
