@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { useRouter } from 'next/navigation'
 export const dynamic = 'auto'
 import { FormEvent } from 'react'
+import { streamLine } from "../app/api/serverStream/route";
 
 export default function Create ()  {
     const router = useRouter();
@@ -30,40 +31,45 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
             formData.append('imageLink',imageLink);
             
      
-         const upload = await fetch('/api/createFileIndex',
+           const upload = await fetch('/api/createFileIndex',
               {
-          method:'POST',
-          body:formData,
-          next:{revalidate:0},
-        //   headers:{
-        //     'Content-Type':'application/form-data'
-        // }
+               method:'POST',
+              body:formData,
+            next:{revalidate:0},
+         //   headers:{
+         //     'Content-Type':'application/form-data'
+         // }
          }
-        )
+         )
 
          const response = await upload.json()
          console.log(response)
 
-         if(upload.status == 200){
-            const Uploadstream = await fetch('/api/streamFile',{
-                method:'POST',
-                body:formData
-            })
-            const value = await Uploadstream.json()
-            console.log(value)
-            // setStream(value);
-            if(Uploadstream.status === 200){
-                console.log(value.itemId)
-                formData.append('itemId',value.itemId);
-                formData.append('filename',value.filename)
-              const postItem = await fetch('/api/postRoute',{
-                 method:'POST',
-                 body:formData
-                })
-                const result = await postItem.json();
-                console.log(result)
+        //  if(upload.status===200){
 
-            }
+        //     const d = 
+        //     console.log(file)
+        //     const result = await streamLine(d)
+            // console.log(result)
+            // const Uploadstream = await fetch('/api/streamFile',{
+            //     method:'POST',
+            //     body:formData
+            // })
+            // const value = await Uploadstream.json()
+            // console.log(value)
+            // // setStream(value);
+            // if(Uploadstream.status === 200){
+            //     console.log(value.itemId)
+            //     formData.append('itemId',value.itemId);
+            //     formData.append('filename',value.filename)
+            //   const postItem = await fetch('/api/postRoute',{
+            //      method:'POST',
+            //      body:formData
+            //     })
+            //     const result = await postItem.json();
+            //     console.log(result)
+
+            // }
          }
         //  if(stream.)  itemId,
         // filename
@@ -72,8 +78,8 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
     //    setImg(response.insert.image)
             // "blob:http://localhost:3000/2f11c027-5de3-4d7f-a714-2e0d4847d54a"
        
-      }catch(error){
-        throw error
+       catch(error){
+        console.log( error)
             //    setLoading(false)
       }
    

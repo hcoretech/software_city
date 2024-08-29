@@ -1,6 +1,7 @@
  'use server'
  import { NextResponse } from "next/server";
  import fs from "node:fs/promises"
+ import { put } from "@vercel/blob";
 
  export async function POST(req:Request){
 
@@ -15,14 +16,14 @@
   }
   try{
      const fileFormat = file.name.slice(-4)
-     fs.writeFile(`./public/uploads/${title}${fileFormat}`,buffers)
-     .then((data)=>{
-       console.log(data)
+
+     const blob = await put(`./public/uploads/${title}${fileFormat}`,file,{
+      access:'public',
+      // multipart:true
      })
-     .catch((err)=>{
-      console.log(err)
-     })
-     return  NextResponse.json('file creation success',{
+
+     
+     return  NextResponse.json(blob,{
         status:200,
        
     })
