@@ -92,7 +92,7 @@ const AuthForm =  ({type}:{type:string}) => {
                }
                if(Post.status === 200){
 
-                 router.push('/Home');
+                 router.push('/home');
                }
                 // setMessage(Response.message);
           
