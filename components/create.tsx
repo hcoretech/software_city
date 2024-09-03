@@ -3,8 +3,11 @@
 import {useRef, useState,useEffect} from "react";
 import { Button } from "./ui/button";
 import { useRouter } from 'next/navigation'
-export const dynamic = 'auto'
 import { FormEvent } from 'react'
+import { PutBlobResult } from "@vercel/blob";
+import { uploadPart } from "@vercel/blob";
+import { put } from "@vercel/blob";
+export const runtime = 'edge'
 // import { streamLine } from "../app/api/serverStream/route";
 
 export default function Create ()  {
@@ -31,18 +34,22 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
             formData.append('imageLink',imageLink);
             
      
-           const upload = await fetch('/api/createFileIndex',
-              {
-               method:'POST',
-              body:formData,
-            next:{revalidate:0},
+        //    const upload = await fetch('/api/createFileIndex',
+        //       {
+        //        method:'POST',
+        //       body:formData,
+        //     next:{revalidate:0},
          //   headers:{
          //     'Content-Type':'application/form-data'
          // }
-         }
-         )
+        //  }
+        //  )
+         const newBlob = await put(file.name,file,{
+            access:'public'
+         }) 
 
-         const response = await upload.json()
+         const response = newBlob 
+        
          console.log(response)
 
         //  if(upload.status===200){
