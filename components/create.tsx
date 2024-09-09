@@ -8,6 +8,7 @@ import {upload} from "@vercel/blob/client"
 import { PutBlobResult } from "@vercel/blob";
 import { uploadPart } from "@vercel/blob";
 import { put } from "@vercel/blob";
+import { LuLoader2 } from "react-icons/lu";
 export const runtime = 'edge'
 // import { streamLine } from "../app/api/serverStream/route";
 
@@ -27,11 +28,11 @@ export default function Create ()  {
         throw new Error('no file found');
      }
 
-     const insertFile = await fetch(`api/fileUpload?id=${title}`,{
+     const insertFile = await fetch(`/api/fileUpload?id=${title}`,{
         method:"POST",
         body:file,
         headers:{
-            'Content-type':file?.type ||'application/text/plain'
+            'Content-type':file?.type ||'application/octet-stream'
         }
       })
       const {url} = (await insertFile.json() as PutBlobResult );
@@ -47,6 +48,7 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
       try{
           const filepath = await fileSend();
              console.log(filepath)
+             setLoading(false)
             // let formData =new FormData();
             // formData.append("title",title);
             // formData.append('file',file);
@@ -148,8 +150,9 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
   
                        />
                       
-                   <Button type='submit'>
-                        Upload
+                   <Button type='submit'
+                   disabled={loading}>
+                        {loading ? <LuLoader2  className="animate-spin text-white w-[25px] h-[25px]"/>:'Upload'}
                    </Button>
                </form>
                  {/* <div>

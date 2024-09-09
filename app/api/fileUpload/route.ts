@@ -1,3 +1,4 @@
+'use server'
 import { put } from "@vercel/blob";
 import { createReadStream } from "fs";
 import { useSearchParams } from "next/navigation";
