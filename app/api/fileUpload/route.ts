@@ -1,18 +1,27 @@
 import { put } from "@vercel/blob";
+import { createReadStream } from "fs";
+import { useSearchParams } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function POST(request:Request){
   const file =  request.body || '';
-  const Contentype = request.headers.get('content-type') || 'text/plain'
+  const params = useSearchParams();
+  const id = params.get('id');
+  const Contentype = request.headers.get('Content-type') || 'text/plain'
   try{
-  const blob = await put('projectS',file,{
-    access:'public',
+    console.log('start')
+    console.log(file)
+    // createReadStream(file)
+  const blob = await put(id,file,{
+    access:'public',  
     contentType:Contentype
   });
 
+console.log(blob)
   return NextResponse.json(blob)
+
 }
 catch(error){
- throw new Error("failed to writeFile")
+ return NextResponse.json("failed to writeFile");
 }
 }

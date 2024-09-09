@@ -27,11 +27,11 @@ export default function Create ()  {
         throw new Error('no file found');
      }
 
-     const insertFile = await fetch('/api/fileUpload',{
+     const insertFile = await fetch(`api/fileUpload?id=${title}`,{
         method:"POST",
         body:file,
         headers:{
-            'content-type':file?.type ||'application/octet-stream'
+            'Content-type':file?.type ||'application/text/plain'
         }
       })
       const {url} = (await insertFile.json() as PutBlobResult );
