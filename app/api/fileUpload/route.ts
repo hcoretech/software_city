@@ -1,7 +1,7 @@
 import { put } from "@vercel/blob";
 import { NextResponse } from "next/server";
 
-export default async function POST(request:Request){
+export async function POST(request:Request){
   const file =  request.body || '';
   const Contentype = request.headers.get('content-type') || 'text/plain'
   try{
