@@ -1,9 +1,10 @@
 'use client'
 
-import {useRef, useState,useEffect} from "react";
+import {useRef, useState,useEffect, ChangeEvent} from "react";
 import { Button } from "./ui/button";
 import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
+import {upload} from "@vercel/blob/client"
 import { PutBlobResult } from "@vercel/blob";
 import { uploadPart } from "@vercel/blob";
 import { put } from "@vercel/blob";
@@ -12,26 +13,45 @@ export const runtime = 'edge'
 
 export default function Create ()  {
     const router = useRouter();
-    const[loading,setLoading] = useState(false);
-    const [title,setTitle] =useState("");
-    const [file,setFile] =useState(null);
-    const [description,setDescription] = useState('')
+    const[loading,setLoading] = useState<boolean>(false);
+    const [title,setTitle] =useState<string>("");
+    const [file,setFile] =useState <File | null>(null);
+    const [description,setDescription] = useState<string>('');
     const [imageLink,setImageLink] = useState('')
-    const [stream,setStream] =useState(null)
+    // const [stream,setStream] =useState(null)
 
-    
+    const fileSend = async()=>{
+     const files = file
+       if(files === null){
+        console.log( "no file found")
+        throw new Error('no file found');
+     }
 
-    const fileInput =useRef<HTMLInputElement>(null)
+     const insertFile = await fetch('/api/fileUpload',{
+        method:"POST",
+        body:file,
+        headers:{
+            'content-type':file?.type ||'application/octet-stream'
+        }
+      })
+      const {url} = (await insertFile.json() as PutBlobResult );
+      return url
+   
+
+    }
+
+    const fileInput = useRef<HTMLInputElement>(null)
 const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true)
       try{
-
-            let formData =new FormData();
-            formData.append("title",title);
-            formData.append('file',file);
-            formData.append('description',description);
-            formData.append('imageLink',imageLink);
+          const filepath = await fileSend();
+             console.log(filepath)
+            // let formData =new FormData();
+            // formData.append("title",title);
+            // formData.append('file',file);
+            // formData.append('description',description);
+            // formData.append('imageLink',imageLink);
             
      
         //    const upload = await fetch('/api/createFileIndex',
@@ -44,13 +64,15 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
          // }
         //  }
         //  )
-         const newBlob = await put(file.name,file,{
-            access:'public'
-         }) 
+    //      const newBlob = await upload(file.name,file,{
+    //         access:'public',
+    //         handleUploadUrl:'/api/createFileIndex'
+    //      },
+    // ) 
 
-         const response = newBlob 
+        //  const response = newBlob 
         
-         console.log(response)
+        //  console.log(response)
 
         //  if(upload.status===200){
 
@@ -122,7 +144,7 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                        name="file"
                        type='file'
                        ref={fileInput}
-                       onChange={(e)=>setFile(e.target.files[0])} 
+                       onChange={(event)=> setFile(event.currentTarget.files[0])} 
   
                        />
                       
