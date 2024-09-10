@@ -1,12 +1,13 @@
 'use server'
 import { put } from "@vercel/blob";
 import { createReadStream } from "fs";
-import { useSearchParams } from "next/navigation";
-import { NextResponse } from "next/server";
+// import { useSearchParams } from "next/navigation";
 
-export async function POST(request:Request){
+import { NextRequest, NextResponse } from "next/server";
+
+export async function POST(request:NextRequest){
   const file =  request.body || '';
-  const params = useSearchParams();
+  const params = request.nextUrl.searchParams
   const id = params.get('id');
   const Contentype = request.headers.get('Content-type') || 'text/plain'
   try{
