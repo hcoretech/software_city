@@ -9,7 +9,7 @@ export async function POST(request:NextRequest){
   const file =  request.body || '';
   const params = request.nextUrl.searchParams
   const id = params.get('id');
-  const Contentype = request.headers.get('Content-type') || 'text/plain'
+  const Contentype = request.headers.get('content-type') || 'text/plain';
   try{
     console.log('start')
     console.log(file)

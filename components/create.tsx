@@ -4,7 +4,7 @@ import {useRef, useState,useEffect, ChangeEvent} from "react";
 import { Button } from "./ui/button";
 import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
-import {upload} from "@vercel/blob/client"
+// import {upload} from "@vercel/blob/client"
 import { PutBlobResult } from "@vercel/blob";
 import { uploadPart } from "@vercel/blob";
 import { put } from "@vercel/blob";
@@ -16,26 +16,27 @@ export default function Create ()  {
     const router = useRouter();
     const[loading,setLoading] = useState<boolean>(false);
     const [title,setTitle] =useState<string>("");
-    const [file,setFile] =useState <File | null>(null);
+    const [file,setFile] = useState <File | null>(null);
+    const [blob,setBlob] = useState(null);
     const [description,setDescription] = useState<string>('');
-    const [imageLink,setImageLink] = useState('')
+    const [imageLink,setImageLink] = useState<string>('')
     // const [stream,setStream] =useState(null)
 
     const fileSend = async()=>{
      const files = file
        if(files === null){
         console.log( "no file found")
-        throw new Error('no file found');
+        return null;
      }
 
      const insertFile = await fetch(`/api/fileUpload?id=${title}`,{
         method:"POST",
         body:file,
         headers:{
-            'Content-type':file?.type ||'application/octet-stream'
+            'content-type':file?.type ||'application/octet-stream'
         }
       })
-      const {url} = (await insertFile.json() as PutBlobResult );
+      const url = await insertFile.json() as PutBlobResult ;
       return url
    
 
@@ -48,7 +49,21 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
       try{
           const filepath = await fileSend();
              console.log(filepath)
-             setLoading(false)
+             setBlob(filepath);
+            if(!blob){            
+                return null
+
+            }
+            if(blob) {
+            const docFile = {
+                title:title,
+                blobb :blob.downloadUrl,
+                description:description,
+                imageLink:imageLink
+            }
+
+              const stringFy = JSON.stringify(docFile)
+
             // let formData =new FormData();
             // formData.append("title",title);
             // formData.append('file',file);
@@ -56,17 +71,22 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
             // formData.append('imageLink',imageLink);
             
      
-        //    const upload = await fetch('/api/createFileIndex',
-        //       {
-        //        method:'POST',
-        //       body:formData,
-        //     next:{revalidate:0},
-         //   headers:{
-         //     'Content-Type':'application/form-data'
-         // }
-        //  }
-        //  )
-    //      const newBlob = await upload(file.name,file,{
+           const upload = await fetch('/api/createFileIndex',
+              {
+               method:'POST',
+              body:stringFy,
+            next:{revalidate:0},
+           headers:{
+             'Content-Type':'application/json'
+         }
+         }
+         )
+         const newBlob = await upload.json();
+         console.log(newBlob);
+        }
+         
+         setLoading(false)
+
     //         access:'public',
     //         handleUploadUrl:'/api/createFileIndex'
     //      },
