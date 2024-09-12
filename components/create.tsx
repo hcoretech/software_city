@@ -17,7 +17,7 @@ export default function Create ()  {
     const[loading,setLoading] = useState<boolean>(false);
     const [title,setTitle] =useState<string>("");
     const [file,setFile] = useState <File | null>(null);
-    const [blob,setBlob] = useState(null);
+    const [blob,setBlob] = useState<PutBlobResult>(null);
     const [description,setDescription] = useState<string>('');
     const [imageLink,setImageLink] = useState<string>('')
     // const [stream,setStream] =useState(null)
@@ -37,11 +37,37 @@ export default function Create ()  {
         }
       })
       const url = await insertFile.json() as PutBlobResult ;
-      return url
-   
+      return url  
 
     }
 
+
+    const uploadDoc = async ()=>{
+
+        const docFile = {
+            title:title,
+            blobb :blob?.downloadUrl,
+            description:description,
+            imageLink:imageLink
+        }
+
+         const stringFy = JSON.stringify(docFile)
+         const upload = await fetch('/api/createFileIndex',{
+            method:'POST',
+            body:stringFy,
+            next:{revalidate:0},
+            headers:{
+               'Content-Type':'application/json'
+            }
+       }
+     )
+     const newBlob = await upload.json();
+     console.log(newBlob);
+   
+    
+
+    }
+ 
     const fileInput = useRef<HTMLInputElement>(null)
 const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,94 +76,22 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
           const filepath = await fileSend();
              console.log(filepath)
              setBlob(filepath);
-            if(!blob){            
-                return null
-
-            }
-            if(blob) {
-            const docFile = {
-                title:title,
-                blobb :blob.downloadUrl,
-                description:description,
-                imageLink:imageLink
-            }
-
-              const stringFy = JSON.stringify(docFile)
-
-            // let formData =new FormData();
-            // formData.append("title",title);
-            // formData.append('file',file);
-            // formData.append('description',description);
-            // formData.append('imageLink',imageLink);
-            
-     
-           const upload = await fetch('/api/createFileIndex',
-              {
-               method:'POST',
-              body:stringFy,
-            next:{revalidate:0},
-           headers:{
-             'Content-Type':'application/json'
-         }
-         }
-         )
-         const newBlob = await upload.json();
-         console.log(newBlob);
-        }
-         
-         setLoading(false)
-
-    //         access:'public',
-    //         handleUploadUrl:'/api/createFileIndex'
-    //      },
-    // ) 
-
-        //  const response = newBlob 
-        
-        //  console.log(response)
-
-        //  if(upload.status===200){
-
-        //     const d = 
-        //     console.log(file)
-        //     const result = await streamLine(d)
-            // console.log(result)
-            // const Uploadstream = await fetch('/api/streamFile',{
-            //     method:'POST',
-            //     body:formData
-            // })
-            // const value = await Uploadstream.json()
-            // console.log(value)
-            // // setStream(value);
-            // if(Uploadstream.status === 200){
-            //     console.log(value.itemId)
-            //     formData.append('itemId',value.itemId);
-            //     formData.append('filename',value.filename)
-            //   const postItem = await fetch('/api/postRoute',{
-            //      method:'POST',
-            //      body:formData
-            //     })
-            //     const result = await postItem.json();
-            //     console.log(result)
-
-            // }
-         }
-        //  if(stream.)  itemId,
-        // filename
-            // console.log(stream.itemId)
-
-    //    setImg(response.insert.image)
-            // "blob:http://localhost:3000/2f11c027-5de3-4d7f-a714-2e0d4847d54a"
-       
-       catch(error){
+           if(blob){
+             const result =  await uploadDoc(); 
+             console.log(result);
+           }            
+             setLoading(false)
+    
+    }  
+    catch(error){
         console.log( error)
             //    setLoading(false)
       }
    
 }
 // useEffect(()=>{
-   
-// },[img])
+//    uploadDoc();
+// },[blob])
 
     return (
         <section className="pt-10">
