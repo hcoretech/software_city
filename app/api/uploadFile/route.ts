@@ -13,7 +13,8 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
     const createCollection = db.createCollection('postFile');
     try{
     const jsonResponse = handleUpload(
-        {
+        {   
+            token:process.env.BLOB_READ_WRITE_TOKEN,
             body,
             request,
             onBeforeGenerateToken:async(pathname)=>{
