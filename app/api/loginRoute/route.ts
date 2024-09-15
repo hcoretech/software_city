@@ -34,12 +34,22 @@ export async function POST(req:Request){
              {status:400}
             )
         }
+        const id = finds._id.toString();
+        
         const token = await new SignJWT({})
          .setProtectedHeader({ alg: 'HS256' })
           .setJti(nanoid())
           .setIssuedAt()
           .setExpirationTime('1day')
           .sign(new TextEncoder().encode(jwtSecret))
+
+          cookies().set('userid', id, {
+            httpOnly: true,
+           //  domain:"https://software_city.vercel.app",
+            sameSite:'strict',
+            secure:true,
+            maxAge: 60 * 60 * 24, 
+          })
 
         cookies().set('authSession', token, {
          httpOnly: true,
@@ -48,6 +58,7 @@ export async function POST(req:Request){
          secure:true,
          maxAge: 60 * 60 * 24, 
        })
+      
           return NextResponse.json({message:'logged succesfull'},{status:200})         
 
     }
