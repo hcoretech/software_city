@@ -43,7 +43,7 @@ export async function POST(req:Request){
           .setExpirationTime('1day')
           .sign(new TextEncoder().encode(jwtSecret))
 
-          cookies().set('userid', id, {
+          cookies().set('userId', id, {
             httpOnly: true,
            //  domain:"https://software_city.vercel.app",
             sameSite:'strict',
