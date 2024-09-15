@@ -12,22 +12,22 @@ interface UserJwtPayload {
   
 // const jwtSecret :string |undefined = process.env.my_SECRET 
 
-export  async function sessionClient (){
-    const session =  cookies().get('authSession');
-    try{
-        if (!session){
+// export  async function sessionClient (){
+//     const session =  cookies().get('authSession');
+//     try{
+//         if (!session){
  
-            return null
-        }
+//             return null
+//         }
    
-            return session ;
+//             return session ;
 
-    }catch(error){
-       throw error 
-    }
+//     }catch(error){
+//        throw error 
+//     }
     
 
-}
+// }
 
 export async function verifyAuth(req: NextRequest) {
   
@@ -49,4 +49,11 @@ export async function verifyAuth(req: NextRequest) {
 // export function route(req:NextRequest,next){
 
 // }
-
+export async function uploadAuth(request:NextRequest){
+  const userId = request.cookies.get('userId')?.value;
+  if(!userId){
+    throw new Error('no user token found');
+  }
+  return userId;
+   
+}

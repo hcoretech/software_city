@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
 // import {upload} from "@vercel/blob/client"
 import { PutBlobResult } from "@vercel/blob";
-import { uploadPart } from "@vercel/blob";
+import { upload } from "@vercel/blob/client";
 import { put } from "@vercel/blob";
 import { LuLoader2 } from "react-icons/lu";
 export const runtime = 'edge'
@@ -26,27 +26,43 @@ export default function Create ()  {
      const files = file
        if(files === null){
         console.log( "no file found")
-        return null;
+        throw new Error('no file found');
      }
+     const uploadFile =await upload(file.name,file,{
+        access:'public',
+        contentType:file.type,
+        handleUploadUrl:'/api/uploadFile',
+        
+        // abortSignal:new()=>{
+        //     const abort = AbortController;
+        //     return abort
+        // }
 
-     const insertFile = await fetch(`/api/fileUpload?id=${title}`,{
-        method:"POST",
-        body:file,
-        headers:{
-            'content-type':file?.type ||'application/octet-stream'
-        }
-      })
-      const url = await insertFile.json() as PutBlobResult ;
-      return url  
+     })
+     setBlob(uploadFile)
+     console.log(blob)
+    //  const insertFile = await fetch(`/api/fileUpload?id=${title}`,{
+    //     method:"POST",
+    //     body:file,
+    //     headers:{
+    //         'content-type':file?.type ||'application/octet-stream'
+    //     }
+    //   })
+    //   const url = await insertFile.json() as PutBlobResult ;
+    //   return url  
 
     }
 
 
     const uploadDoc = async ()=>{
-
+          const bloburl = await blob
+          try{
+            if(!bloburl){
+                return null
+            }
         const docFile = {
             title:title,
-            blobb :blob?.downloadUrl,
+            blobb :bloburl?.downloadUrl,
             description:description,
             imageLink:imageLink
         }
@@ -64,7 +80,10 @@ export default function Create ()  {
      const newBlob = await upload.json();
      console.log(newBlob);
    
-    
+          }
+          catch(error){
+            return error
+          }
 
     }
  
@@ -75,11 +94,11 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
       try{
           const filepath = await fileSend();
              console.log(filepath)
-             setBlob(filepath);
-           if(blob){
-             const result =  await uploadDoc(); 
-             console.log(result);
-           }            
+            //  setBlob(filepath);
+         
+            //  const result =  await uploadDoc(); 
+            //  console.log(result);
+                     
              setLoading(false)
     
     }  
