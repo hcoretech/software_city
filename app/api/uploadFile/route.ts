@@ -19,7 +19,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
             request,
             onBeforeGenerateToken:async(pathname)=>{
                  try{
-                    const userId = uploadAuth(request);
+                    const userId =await uploadAuth(request);
                     if(!userId){
                         throw new Error  ('no user with such Id')
                     }
@@ -47,21 +47,14 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
             )=>
             {
                 try{
-                  const userId = uploadAuth(request);
+                  const userId = await uploadAuth(request);
 
                   if(!collection){
-                    const upload = (await createCollection).insertOne({
-                        userid:userId,
-                        pathname:blob.pathname,
-                        downloadUrl:blob.downloadUrl,
-                        url:blob.url,
-                        contentType:blob.contentType
-                    }) 
-                    // const response = await upload;
-                    // return response;
-                    
+
+                   await db.createCollection('postFile')                 
                   }
-                  const upload = (await createCollection).insertOne({
+
+                  const upload = await collection.insertOne({
                     userid:userId,
                     pathname:blob.pathname,
                     downloadUrl:blob.downloadUrl,
