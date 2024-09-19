@@ -2,7 +2,7 @@ import {handleUpload,type HandleUploadBody } from "@vercel/blob/client"
 import { NextRequest, NextResponse } from "next/server";
 import { uploadAuth } from "../../../lib/serverAction";
 import client from "../../../lib/mongodb";
-import { error } from "console";
+import { blobToken } from "../../../lib/constant";
 
 
 
@@ -14,7 +14,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
     try{
     const jsonResponse = handleUpload(
         {   
-            token:process.env.BLOB_READ_WRITE_TOKEN,
+            token:blobToken,
             body,
             request,
             onBeforeGenerateToken:async(pathname)=>{
