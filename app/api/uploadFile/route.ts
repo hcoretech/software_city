@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { uploadAuth } from "../../../lib/serverAction";
 import client from "../../../lib/mongodb";
 import { blobToken } from "../../../lib/constant";
+import { blob } from "stream/consumers";
 
 
 
@@ -12,68 +13,116 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
     const collection = db.collection('postFile');
     const createCollection = db.createCollection('postFile');
     try{
-    const jsonResponse = handleUpload(
+     const jsonResponse = await handleUpload(
         {   
             token:blobToken,
             body,
             request,
-            onBeforeGenerateToken:async(pathname)=>{
+            onBeforeGenerateToken:async(pathname:string,clientPayload:string)=>{
+                console.log(pathname);
+                const payload = clientPayload
+                
                  try{
-                    const userId =await uploadAuth(request);
-                    if(!userId){
-                        throw new Error  ('no user with such Id')
+                    if(!clientPayload){
+                        throw new Error('no payload attach')
                     }
+                    // const payload = clientPayload;
 
-                return{
-                    cacheControlMaxAge:1,
-                    allowedContentTypes:[
-                    'text/plain','text/csv','text/html',
-                    'image/png','image/svg',
-                    'image/jpeg','image/gif','image/svg+xml','image/webp',
-                    'video/mp4','video/mkv','video/avi',
-                    'audio/mp3'],
+                    // const userId = await uploadAuth(request);
+                    // if(!userId){
+                    //     throw new Error  ('no user with such Id')
+                    // }
+                    console.log("start");
+                    // return {
+                    //    allowedContentTypes:['image/png']
+                    // }
+                    //     // validUntil:16000,
+                        // cacheControlMaxAge:1,
+                        
+                    
+              
+                // return {
+                  
+                // }
+                return {
+                    
+                    // allowedContentTypes:'image/png'
+                  }
+                
+                //    validUntil:1600
+                    // cacheControlMaxAge:1,
+                    // validUntil:60 * 5 ,
+                    // allowedContentTypes:[
+                    // 'text/plain','text/csv','text/html',
+                    // 'image/png','image/svg',
+                    // 'image/jpeg','image/gif','image/svg+xml','image/webp',
+                    // 'video/mp4','video/mkv','video/avi',
+                    // 'audio/mp3']
                     // tokenPayload:JSON.stringify({
                     //   clientPayload
                     // })
-                }
+                
+            
             }
             catch(error){
-                throw new Error ('failed generateUploadToken')
+                throw new Error('failed generateUploadToken')
             }
+             
+         },
+         onUploadCompleted:async({blob,tokenPayload})=>{
+             try{
+                 if(!blob){
+                    throw new Error('no blob found')
+                 }
+                 const userId = await uploadAuth(request);
+                 if(!userId){
+                    throw new Error('no user with such id');
+                 }
+                 if(!collection){
 
-            },
-            onUploadCompleted:async({blob}
+                       await db.createCollection('postFile')                 
+                      }
+
+                      const upload = await collection.insertOne({
+                            userid:userId,
+                            title:tokenPayload,
+                            pathname:blob.pathname,
+                            downloadUrl:blob.downloadUrl,
+                            url:blob.url,
+                            contentType:blob.contentType
+                        }) 
+
+             }
+             catch(error){
+                throw new Error('failed to upload file to mongodb')
+             }
+
+         }
+            // onUploadCompleted:async({blob,tokenPayload}
     
-            )=>
-            {
-                try{
-                  const userId = await uploadAuth(request);
+            // )=>
+            // {
+            //     try{
+            //       
 
-                  if(!collection){
+            //     
 
-                   await db.createCollection('postFile')                 
-                  }
-
-                  const upload = await collection.insertOne({
-                    userid:userId,
-                    pathname:blob.pathname,
-                    downloadUrl:blob.downloadUrl,
-                    url:blob.url,
-                    contentType:blob.contentType
-                }) 
+                //   
                 // const response = await upload;
                 // return new NextResponse(response)
                   
-                }
-                catch(error){
-                    throw new Error('failed to upload to db')
-                }
+                // }
+                // catch(error){
+                //     throw new Error('failed to upload to db')
+                // }
               
-            }
-        }
+            // }
+            
+ 
+      }
     )
-
-    return NextResponse.json(jsonResponse);
+    console.log(handleUpload)
+       return NextResponse.json(jsonResponse,{status:200});
     }
     catch(error){
         return NextResponse.json(

@@ -28,10 +28,17 @@ export default function Create ()  {
         console.log( "no file found")
         throw new Error('no file found');
      }
-     const uploadFile =await upload(file.name,file,{
+
+     
+     const uploadFile = await upload(file.name,file,{
         access:'public',
         contentType:file.type,
         handleUploadUrl:'/api/uploadFile',
+        clientPayload:title
+        
+        
+           
+        
         
         // abortSignal:new()=>{
         //     const abort = AbortController;
@@ -39,8 +46,10 @@ export default function Create ()  {
         // }
 
      })
+
      setBlob(uploadFile)
      console.log(blob)
+     return blob
     //  const insertFile = await fetch(`/api/fileUpload?id=${title}`,{
     //     method:"POST",
     //     body:file,
@@ -54,39 +63,40 @@ export default function Create ()  {
     }
 
 
-    const uploadDoc = async ()=>{
-          const bloburl = await blob
-          try{
-            if(!bloburl){
-                return null
-            }
-        const docFile = {
-            title:title,
-            blobb :bloburl?.downloadUrl,
-            description:description,
-            imageLink:imageLink
-        }
+    // const uploadDoc = async ()=>{
+    //       const bloburl = await blob
+    //       try{
+    //         if(!bloburl){
+    //             return null
+    //         }
+    //     const docFile = {
+    //         title:title,
+    //         blobb :bloburl?.downloadUrl,
+    //         description:description,
+    //         imageLink:imageLink
+    //     }
 
-         const stringFy = JSON.stringify(docFile)
-         const upload = await fetch('/api/createFileIndex',{
-            method:'POST',
-            body:stringFy,
-            next:{revalidate:0},
-            headers:{
-               'Content-Type':'application/json'
-            }
-       }
-     )
-     const newBlob = await upload.json();
-     console.log(newBlob);
+    //      const stringFy = JSON.stringify(docFile)
+    //      const upload = await fetch('/api/createFileIndex',{
+    //         method:'POST',
+    //         body:stringFy,
+    //         next:{revalidate:0},
+    //         headers:{
+    //            'Content-Type':'application/json'
+    //         }
+    //    }
+    //  )
+    //  const newBlob = await upload.json();
+    //  console.log(newBlob);
    
-          }
-          catch(error){
-            return error
-          }
+    //       }
+    //       catch(error){
+    //         return error
+    //       }
 
-    }
+    // }
  
+    
     const fileInput = useRef<HTMLInputElement>(null)
 const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
