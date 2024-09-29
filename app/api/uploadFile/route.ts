@@ -12,7 +12,7 @@ import { blob } from "stream/consumers";
 export async function POST(request:NextRequest):Promise<NextResponse>{
     const body = (await request.json()) as HandleUploadBody;
     const db = client.db('software_city');
-    const collection = await db.collection('postFiles');
+    const collection =  db.collection('postFiles');
     // const createCollection = await db.createCollection('postFiles');
     try{
      const jsonResponse = await handleUpload(
@@ -96,7 +96,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                 //        await db.createCollection('postFile')                 
                 //       }
 
-                      await Post.create({
+                      await collection.insertOne({
                             userid:userId,
                             title:tokenPayload,
                             pathname:blob.pathname,
