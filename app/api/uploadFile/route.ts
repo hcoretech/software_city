@@ -83,14 +83,15 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                  if(!blob){
                     throw new Error('no blob found')
                  }
-                 const userId = await uploadAuth(request);
+                //  const userId = await uploadAuth(request);
+                const userId = request.cookies.get('userld')?.value;
                  if(!userId){
                     throw new Error('no user with such id');
                  }
-                 if(!collection){
+                //  if(!collection){
 
-                       await db.createCollection('postFile')                 
-                      }
+                //        await db.createCollection('postFile')                 
+                //       }
 
                       const upload = await collection.insertOne({
                             userid:userId,
@@ -130,7 +131,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
  
       }
     )
-    console.log(handleUpload)
+    // console.log(handleUpload)
        return NextResponse.json(jsonResponse,{status:200});
     }
     catch(error){
