@@ -10,8 +10,8 @@ import { blob } from "stream/consumers";
 export async function POST(request:NextRequest):Promise<NextResponse>{
     const body = (await request.json()) as HandleUploadBody;
     const db = client.db('software_city');
-    const collection = db.collection('postFile');
-    const createCollection = db.createCollection('postFile');
+    const collection = await db.collection('postFiles');
+    // const createCollection = await db.createCollection('postFiles');
     try{
      const jsonResponse = await handleUpload(
         {   
@@ -22,7 +22,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                 console.log(pathname);
                 const payload = clientPayload
                 
-                 try{
+                //  try{
                     if(!clientPayload){
                         throw new Error('no payload attach')
                     }
@@ -45,7 +45,16 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                   
                 // }
                 return {
-                    
+                    allowedContentTypes:[
+                        'text/plain','text/csv','text/html',
+                        'image/png','image/svg',
+                        'application/zip',
+                        'image/jpeg','image/gif','image/svg+xml','image/webp',
+                        'video/mp4','video/mkv','video/avi',
+                        'audio/mp3'],
+                        validUntil:60*60*2,
+                        cacheControlMaxAge:1,
+                        tokenPayload:clientPayload
                     // allowedContentTypes:'image/png'
                   }
                 
@@ -63,10 +72,10 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                     // })
                 
             
-            }
-            catch(error){
-                throw new Error('failed generateUploadToken')
-            }
+            // }
+            // catch(error){
+            //     throw new Error('failed generateUploadToken')
+            // }
              
          },
          onUploadCompleted:async({blob,tokenPayload})=>{
