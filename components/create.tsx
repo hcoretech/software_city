@@ -21,7 +21,8 @@ export default function Create ()  {
     const [description,setDescription] = useState<string>('');
     const [imageLink,setImageLink] = useState<string>('')
     // const [stream,setStream] =useState(null)
-
+    const abortController = new AbortController();
+    
     const fileSend = async()=>{
      const files = file
        if(files === null){
@@ -34,8 +35,8 @@ export default function Create ()  {
         access:'public',
         contentType:file.type,
         handleUploadUrl:'/api/uploadFile',
-        clientPayload:title
-        
+        clientPayload:title,
+        abortSignal:abortController.signal
         
            
         
@@ -47,9 +48,9 @@ export default function Create ()  {
 
      })
 
-     setBlob(uploadFile)
-     console.log(blob)
-     return blob
+    //  setBlob(uploadFile)
+    //  console.log(blob)
+     return uploadFile
     //  const insertFile = await fetch(`/api/fileUpload?id=${title}`,{
     //     method:"POST",
     //     body:file,
@@ -157,6 +158,19 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                    disabled={loading}>
                         {loading ? <LuLoader2  className="animate-spin text-white w-[25px] h-[25px]"/>:'Upload'}
                    </Button>
+                   {
+                    loading &&
+                   <Button type='submit'
+                   onClick={()=>{
+                     abortController.abort;
+                     setLoading(false);
+                   }}
+                   >
+                {/* //    disabled={loading} */}
+                      
+                        stop
+                   </Button>
+}
                </form>
                  {/* <div>
                     {

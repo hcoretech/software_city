@@ -52,8 +52,8 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                         'image/jpeg','image/gif','image/svg+xml','image/webp',
                         'video/mp4','video/mkv','video/avi',
                         'audio/mp3'],
-                        validUntil:60*60*2,
-                        cacheControlMaxAge:1,
+                        // validUntil:60*60*2,
+                        // cacheControlMaxAge:1,
                         tokenPayload:clientPayload
                     // allowedContentTypes:'image/png'
                   }
