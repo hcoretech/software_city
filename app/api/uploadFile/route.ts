@@ -81,6 +81,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
              
          },
          onUploadCompleted:async({blob,tokenPayload})=>{
+            console.log(blob,tokenPayload)
              try{
                  if(!blob){
                     throw new Error('no blob found')
@@ -95,7 +96,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                 //        await db.createCollection('postFile')                 
                 //       }
 
-                      const upload = await Post.create({
+                      await Post.create({
                             userid:userId,
                             title:tokenPayload,
                             pathname:blob.pathname,
@@ -103,7 +104,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                             url:blob.url,
                             contentType:blob.contentType
                         }) 
-                        console.log(upload)
+                        // console.log(upload)
                         // return {
                         //     upload
                         // }
