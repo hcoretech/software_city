@@ -1,6 +1,8 @@
 import {handleUpload,type HandleUploadBody } from "@vercel/blob/client"
 import { NextRequest, NextResponse } from "next/server";
 import { uploadAuth } from "../../../lib/serverAction";
+
+import { Post } from "../../../lib/postModel";
 import client from "../../../lib/mongodb";
 import { blobToken } from "../../../lib/constant";
 import { blob } from "stream/consumers";
@@ -93,7 +95,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                 //        await db.createCollection('postFile')                 
                 //       }
 
-                      const upload = await collection.insertOne({
+                      const upload = await Post.create({
                             userid:userId,
                             title:tokenPayload,
                             pathname:blob.pathname,
@@ -101,6 +103,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                             url:blob.url,
                             contentType:blob.contentType
                         }) 
+                        console.log(upload)
                         // return {
                         //     upload
                         // }
