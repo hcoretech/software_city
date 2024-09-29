@@ -8,10 +8,10 @@ import { blobToken } from "../../../lib/constant";
 import { blob } from "stream/consumers";
 
 
-
+const db = client.db('software_city');
 export async function POST(request:NextRequest):Promise<NextResponse>{
     const body = (await request.json()) as HandleUploadBody;
-    const db = client.db('software_city');
+   
     const collection =  db.collection('postFiles');
     // const createCollection = await db.createCollection('postFiles');
     try{
@@ -96,7 +96,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                 //        await db.createCollection('postFile')                 
                 //       }
 
-                      await collection.insertOne({
+                      (await collection).insertOne({
                             userid:userId,
                             title:tokenPayload,
                             pathname:blob.pathname,
