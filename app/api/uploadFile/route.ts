@@ -101,7 +101,9 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                             url:blob.url,
                             contentType:blob.contentType
                         }) 
-                        return upload;
+                        // return {
+                        //     upload
+                        // }
 
              }
              catch(error){
