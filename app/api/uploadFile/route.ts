@@ -50,10 +50,10 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                     allowedContentTypes:[
                         'text/plain','text/csv','text/html',
                         'image/png','image/svg',
-                        'application/zip',
+                        'application/zip','application/x-msdos-program',
                         'image/jpeg','image/gif','image/svg+xml','image/webp',
                         'video/mp4','video/mkv','video/avi',
-                        'audio/mp3'],
+                        'audio/mp3','audio/mpeg','audio/wav','audio/ogg'],
                         // validUntil:60*60*2,
                         // cacheControlMaxAge:1,
                         tokenPayload:clientPayload
@@ -82,22 +82,21 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
          },
          onUploadCompleted:async({blob,tokenPayload})=>{
             console.log(blob,tokenPayload)
-             try{
-                 if(!blob){
+            
+                 if(!blob || tokenPayload){
                     throw new Error('no blob found')
                  }
                 //  const userId = await uploadAuth(request);
-                const userId = request.cookies.get('userld')?.value;
-                 if(!userId){
-                    throw new Error('no user with such id');
-                 }
+                // const userId = request.cookies.get('userld')?.value;
+                //  if(!userId){
+                //     throw new Error('no user with such id');
+                //  }
                 //  if(!collection){
 
                 //        await db.createCollection('postFile')                 
                 //       }
-
-                      (await collection).insertOne({
-                            userid:userId,
+                try{
+                      await collection.insertOne({
                             title:tokenPayload,
                             pathname:blob.pathname,
                             downloadUrl:blob.downloadUrl,
