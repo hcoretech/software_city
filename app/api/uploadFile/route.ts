@@ -96,6 +96,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                 //        await db.createCollection('postFile')                 
                 //       }
                 try{
+                    console.log('start uploading')
                       await new Post({
                             title:tokenPayload,
                             pathname:blob.pathname,
