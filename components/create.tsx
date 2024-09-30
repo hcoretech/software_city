@@ -9,6 +9,7 @@ import { PutBlobResult } from "@vercel/blob";
 import { upload } from "@vercel/blob/client";
 import { put } from "@vercel/blob";
 import { LuLoader2 } from "react-icons/lu";
+import { LuFileInput } from "react-icons/lu";
 export const runtime = 'edge'
 // import { streamLine } from "../app/api/serverStream/route";
 
@@ -125,39 +126,50 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
 
     return (
         <section className="pt-10">
-             <form onSubmit={handleSubmit} encType="multipart/form-data" >                  
-                     <input 
-                      name="title"
-                      type='text' 
-                      onChange={(e)=>setTitle(e.target.value)}
-                      value={title}         
-                      placeholder="enter title"
-                      />
-                      <input 
-                      name="imageLink"
-                      type='text' 
-                      onChange={(e)=>setImageLink(e.target.value)}
-                      value={imageLink}         
-                      placeholder="enter image link"
-                      />
-                      <textarea
-                      name="description"
-                      onChange={(e)=>setDescription(e.target.value)}
-                      value={description}
-                      placeholder="write about"
-                      />
-                      <input 
-                       name="file"
-                       type='file'
-                       ref={fileInput}
-                       onChange={(event)=> setFile(event.currentTarget.files[0])} 
-  
+             <form onSubmit={handleSubmit} encType="multipart/form-data" >
+                <div className="flex flex-col gap-3 ">
+                
+                    <div className=" p-10 rounded-md   border border-green-200 shadow-md">
+                        
+    
+                       <input  className=""
+                          name="file"
+                          type='file'
+                          ref={fileInput}
+                          onChange={(event)=> setFile(event.currentTarget.files[0])} 
+                          placeholder="select file"
+                        />   
+                         
+                    </div>
+                    <div className="flex flex-col">
+                       <input 
+                        className="p-2 border-gray-700 border-2 rounded-sm h-7 "
+                        name="title"
+                        type='text' 
+                        onChange={(e)=>setTitle(e.target.value)}
+                        value={title}         
+                        placeholder="enter title"
                        />
-                      
-                   <Button type='submit'
-                   disabled={loading}>
+                       <input 
+                        name="imageLink"
+                        type='text' 
+                        onChange={(e)=>setImageLink(e.target.value)}
+                        value={imageLink}         
+                        placeholder="enter image link"
+                       />
+                       <textarea
+                        name="description"
+                        onChange={(e)=>setDescription(e.target.value)}
+                        value={description}
+                        placeholder="write about"
+                       />
+                    </div>
+                  </div> 
+                  <div className="flex flex-row gap-5">   
+                    <Button type='submit'
+                       disabled={loading}>
                         {loading ? <LuLoader2  className="animate-spin text-white w-[25px] h-[25px]"/>:'Upload'}
-                   </Button>
+                    </Button>
                    {
                     loading &&
                    <Button type='submit'
@@ -170,7 +182,8 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                       
                         stop
                    </Button>
-}
+                  }  
+             </div>        
                </form>
                  {/* <div>
                     {
