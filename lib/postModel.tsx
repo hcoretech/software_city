@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
  const Schema = mongoose.Schema
 
  const postModel = new Schema({
-  userId:String,
+  // userId:String,
   title:String,
   pathname:String,
   downloadUrl:String,

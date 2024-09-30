@@ -96,7 +96,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                 //        await db.createCollection('postFile')                 
                 //       }
                 try{
-                      await collection.insertOne({
+                      await new Post({
                             title:tokenPayload,
                             pathname:blob.pathname,
                             downloadUrl:blob.downloadUrl,
