@@ -37,7 +37,9 @@ export default function Create ()  {
         contentType:file.type,
         handleUploadUrl:'/api/uploadFile',
         clientPayload:title,
-        abortSignal:abortController.signal
+        abortSignal:abortController.signal,
+        
+
         
            
         
@@ -126,10 +128,10 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
 
     return (
         <section className="pt-10">
-             <form onSubmit={handleSubmit} encType="multipart/form-data" >
+             <form onSubmit={handleSubmit} encType="multipart/form-data" className="gap-5 flex flex-col" >
                 <div className="flex flex-col gap-3 ">
                 
-                    <div className=" p-10 rounded-md   border border-green-200 shadow-md">
+                    <div className=" p-10 rounded-md   border border-blue-200 shadow-md">
                         
     
                        <input  className=""
@@ -141,38 +143,43 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                         />   
                          
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col gap-3">
                        <input 
-                        className="p-2 border-gray-700 border-2 rounded-sm h-7 "
+                        className= " p-1 border-gray-700 border-b "
                         name="title"
                         type='text' 
                         onChange={(e)=>setTitle(e.target.value)}
                         value={title}         
-                        placeholder="enter title"
+                        placeholder="Title"
                        />
                        <input 
+                       className="p-1 border-gray-700 border-b "
                         name="imageLink"
                         type='text' 
                         onChange={(e)=>setImageLink(e.target.value)}
                         value={imageLink}         
-                        placeholder="enter image link"
+                        placeholder="Image link "
                        />
                        <textarea
+                        className="p-1 border-gray-700 border rounded-md"
                         name="description"
+                        lang="eng"
                         onChange={(e)=>setDescription(e.target.value)}
                         value={description}
-                        placeholder="write about"
+                        placeholder="write about file"
                        />
                     </div>
                   </div> 
-                  <div className="flex flex-row gap-5">   
+                  <div className="flex flex-row gap-5 justify-space-between ">   
                     <Button type='submit'
+                       className="bg-blue-400 hover:bg-blue-200"
                        disabled={loading}>
                         {loading ? <LuLoader2  className="animate-spin text-white w-[25px] h-[25px]"/>:'Upload'}
                     </Button>
                    {
                     loading &&
                    <Button type='submit'
+                    className="bg-red-500 hover:bg-red-200"
                    onClick={()=>{
                      abortController.abort;
                      setLoading(false);
