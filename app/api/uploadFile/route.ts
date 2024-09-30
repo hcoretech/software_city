@@ -8,7 +8,7 @@ import { blobToken } from "../../../lib/constant";
 import { blob } from "stream/consumers";
 
 
-const db = client.db('software_city');
+const db = client.db();
 export async function POST(request:NextRequest):Promise<NextResponse>{
     const body = (await request.json()) as HandleUploadBody;
    
