@@ -21,7 +21,7 @@ const navLink = [
     {
         label:"Downloads",
         route:"/downloads",
-        icon:"/download.svg"
+        icon:"/hardrive.svg"
     },
     {
         label:"Community",
