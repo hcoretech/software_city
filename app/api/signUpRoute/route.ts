@@ -2,6 +2,7 @@
 
 import { User } from "../../../lib/userModel";
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 // const {User} =require ('../../../lib/userModel.js')
 // const jwt = require('jsonwebtoken');
 // export const dynamic ='force-dynamic'
@@ -12,24 +13,26 @@ import client from "../../../lib/mongodb";
 //   return jwt.sign({_id}, process.env.my_SECRET, { expiresIn: '3m' })
 // }
 
-export async function POST(req:Request){   
+export async function POST(req:NextRequest,res:NextResponse):Promise<NextResponse>{   
 
-        const body = await req.json()
-        const {firstName,lastName,userName,email,password} = body
-        const clients = client;
-        const db = clients.db('software_city');
-        const dbCreate = db.createCollection('users');
+        const body = await req.json();
+        const userData = await body;
+        console.log(userData);
+          
+
+        
 
           
-    try{       
-      console.log('working with try')       
-          const createAccount = (await dbCreate).insertOne({
-            firstName,
-            lastName,
-            userName,
-            email,
-            password
-          })
+    try{  
+
+        if(!userData){
+          throw new Error ("check input and try again");
+        }
+         const db = client.db('software_city');
+         const dbCreate = await db.collection('users');
+
+           console.log('working with try')       
+          const createAccount = await dbCreate.insertOne({userData});
           console.log("working")
           const response = createAccount;
          

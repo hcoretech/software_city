@@ -45,31 +45,41 @@ const AuthForm =  ({type}:{type:string}) => {
     })
    
 
-  const onSubmit = async (data:z.infer<typeof formSchema>) => {  
-      setLoading(true)  
+  const onSubmit = async (data:z.infer<typeof formSchema>) => {
+      setLoading(true) ;
+      const usersData = data ;
+
         try{
-             if(type==='sign-up'){
-                const userData = {
-                firstName:data.firstName!,
-                lastName:data.lastName!,
-                userName:data.userName!,
-                email:data.email,
-                password:data.password
-               }
+
+            if ( type==='sign-up' ) {
+
+                // const userData: = {
+                //   firstName:data.firstName!,
+              //     lastName:data.lastName!,
+              //     userName:data.userName!,
+              //     email:data.email,
+              //    password:data.password
+              //  
+              if(!usersData){
+                return setError("no user data found ")
+              }
+
                const Post = await fetch('/api/signUpRoute',{
                     method:'POST',
-                    body:JSON.stringify(userData), 
+                    body:JSON.stringify(usersData), 
                     headers :{
                     'Content-type':'application/json'        
                     }
                    
                 })
                 const response = await Post.json();
+                
+                if(Post.status === 200){
+                  router.push('/sign-in',{scroll:false})
+                }
+
                 if(Post.status === 400){
                   setError(response.error)
-                }
-                if(Post.status === 200){
-                  router.push('/sign-in')
                 }
            
              }
@@ -85,14 +95,16 @@ const AuthForm =  ({type}:{type:string}) => {
                     'Content-type':'application/json'        
                     }
                })
-               const response = await Post.json();
+               const response:{res:string |object,status:number} = await Post.json();
                console.log(response)
-               if(response.status === 400){
-                setError(response.error)
-               }
-               if(Post.status === 200){
+               
+               if (Post.status === 200) {
 
                  router.push('/home');
+               }
+
+               if(response.status === 400){
+                setError(response.res)
                }
                 // setMessage(Response.message);
           

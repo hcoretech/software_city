@@ -23,7 +23,7 @@ mongoose.Promise = global.Promise;
     true
 })
 
- export const Post = mongoose.models.post||mongoose.model("post",postModel)
+ export const Post = mongoose.models.post||mongoose.model("posts",postModel)
 //  userid:userId,
 //  title:tokenPayload,
 //  pathname:blob.pathname,
