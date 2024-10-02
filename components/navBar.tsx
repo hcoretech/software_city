@@ -20,7 +20,7 @@ const navLink = [
     },
     {
         label:"Downloads",
-        route:"/download",
+        route:"/downloads",
         icon:"/download.svg"
     },
     {
