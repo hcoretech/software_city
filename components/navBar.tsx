@@ -36,9 +36,9 @@ const Navbar = () => {
 
 return(
     <section>
-        <div >
+        <div className='shadow-md shadow-green-400'>
             
-            <ul className='navbar'>
+            <ul className='navbar z-100 '>
         {navLink.map((value,index)=>
         (
             <li key={index}>
@@ -56,7 +56,7 @@ return(
                 {/* //  height={25}
                  alt="home"
              */}
-               <span className='text-[11px] font-semibold text-gray-50'>
+               <span className='text-[11px] font-semibold '>
                {value.label}
                </span>
                </span>
