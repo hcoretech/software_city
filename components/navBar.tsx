@@ -43,7 +43,7 @@ return(
             <ul className='navbar z-100 '>
         {navLink.map((value,index)=>{
            const active = pathname === value.route;
-           const color = active && (" text-green-700");
+           const color = active && ("  text-red-700");
          return (
            
             
