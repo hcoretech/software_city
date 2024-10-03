@@ -10,7 +10,7 @@ const navLink = [
 
     {
         label:"Home",
-        route:"/Home",
+        route:"/home",
         icon: "/download.svg"
         
     },

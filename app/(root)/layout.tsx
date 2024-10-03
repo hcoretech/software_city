@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from '../../components/navBar';
 import SideBar from '../../components/sideBar';
+import { useState } from 'react';
 
 
 export default function RootLayout({
@@ -26,12 +27,18 @@ export default function RootLayout({
     //   checkUser();
      
     //  },[])
+    const [click,setClick]= useState<Boolean>(false);
+
 
     return(
-        <main className="flex h-screen w-full  text-inter">
-            <SideBar />       
-          <div className='flex flex-col justify-between size-full'>
-          <div>
+        <main className="flex h-screen  text-inter">
+            {
+                click && (
+            <SideBar /> ) 
+              
+              }     
+          <div className='flex flex-col size-full'>
+          <div className=''>
           {children}                
                </div>   
            </div> 

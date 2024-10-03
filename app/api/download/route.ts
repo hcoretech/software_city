@@ -5,31 +5,17 @@ import { GridFSBucket, ObjectId,  } from "mongodb";
 import { ReadPreference } from "mongodb";
 import client from "../../../lib/mongodb";
 import { createReadStream } from "fs";
+import { pipeline } from "stream";
 
 const db = client.db();
 
-const GridFSBucketOptions = {
+const GridFSBucketOptions = {r
 
-    bucketName:'upload',
-    chunkSizeBytes : 1024*1024,
-    readPreference:ReadPreference.secondary
- }
-  
- const bucket = new GridFSBucket(db, GridFSBucketOptions)
-
-export async function GET(req:NextRequest,res:NextApiResponse){
-     
-    const params = req.nextUrl 
-    const id =  params.searchParams.get('id') 
-    // const search = id : ObjectId
-  try{
-
-    
-    const cursor = bucket.openDownloadStreamByName(id)
    
     
 
     const array = await cursor.toArray()
+     
     res.send(array)
     // const uploadFilename = array[0].filename
 

@@ -99,12 +99,21 @@ export default function GetDownload () {
 
       const getFile = async() => {
              setDownload(true)
+        try{ 
+
          const  getbuffer = await fetch(`/api/download?id=${data.response.Filename}`,{
           method:'GET'
-
          })
+         
          const response = await getbuffer ;
          console.log(response)
+
+        
+
+        }
+        catch(error){
+         console.log(error)
+        }
         //     console.log('staring')
         //     router.prefetch(` ./public${data.response.path}`)
         //     console.log(data.response.path)
@@ -210,12 +219,11 @@ export default function GetDownload () {
                
                     
                      <Button onClick={
-                      ( )=>{
-                        setDownload(true)
-                        const create = document.createElement('a')
-                        create.href = data.response.path
-                        create.click();
-                      }
+                        getFile
+                        // setDownload(true)
+                        // const create = document.createElement('a')
+                        // create.href = data.response.path
+                        // create.click();     
                       }  className="bg-blue-500 rounded-md text-white p-2 text-" >  
 
                       {download ?(                                                  

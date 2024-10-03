@@ -41,7 +41,7 @@ import { isUtf8 } from "buffer";
 
 // }
 // const clients = new MongoClient(process.env.MONGODB_URL);
-const db = client.db()
+
   
 // let bucket ;
 //   async function run (){

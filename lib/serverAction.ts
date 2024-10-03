@@ -1,7 +1,7 @@
 'use server'
 
 import { cookies } from "next/headers"
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 import { jwtSecret } from "./constant";
 
@@ -49,11 +49,13 @@ export async function verifyAuth(req: NextRequest) {
 // export function route(req:NextRequest,next){
 
 // }
-export async function uploadAuth(request:NextRequest){
+export async function uploadAuth(request:NextRequest,response:NextResponse){
   const userId = request.cookies.get('userId')?.value;
   if(!userId){
     throw new Error('no user token found');
   }
   return userId;
+
    
 }
+

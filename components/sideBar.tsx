@@ -6,7 +6,7 @@ import React from 'react'
 import { usePathname } from 'next/navigation';
 import { GoHome } from "react-icons/go";
 
-const SideBar = ()=>{
+const SideBar = () => {
     const pathName = usePathname();
 
     return(

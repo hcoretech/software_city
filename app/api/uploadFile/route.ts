@@ -12,7 +12,7 @@ const db = client.db();
 export async function POST(request:NextRequest):Promise<NextResponse>{
     const body = (await request.json()) as HandleUploadBody;
    
-    const collection =  db.collection('postFiles');
+   
     // const createCollection = await db.createCollection('postFiles');
     try{
      const jsonResponse = await handleUpload(
@@ -81,11 +81,12 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
              
          },
          onUploadCompleted:async({blob,tokenPayload})=>{
-            console.log(blob,tokenPayload)
+            console.log(blob,tokenPayload);
+            const collection =  db.collection('postFiles');
             
-                 if(!blob || tokenPayload){
-                    throw new Error('no blob found')
-                 }
+                //  if(!blob || tokenPayload){
+                //     throw new Error('no blob found')
+                //  }
                 //  const userId = await uploadAuth(request);
                 // const userId = request.cookies.get('userld')?.value;
                 //  if(!userId){
@@ -97,7 +98,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                 //       }
                 try{
                     console.log('start uploading')
-                      await new Post({
+                      await collection.insertOne({
                             title:tokenPayload,
                             pathname:blob.pathname,
                             downloadUrl:blob.downloadUrl,
