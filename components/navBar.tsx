@@ -37,10 +37,12 @@ const Navbar = () => {
 return(
     <section>
         <div >
+            
             <ul className='navbar'>
         {navLink.map((value,index)=>
         (
             <li key={index}>
+                
             <Link href={value.route} className=''>
                 <span className='items-center flex flex-col p-1' >
                     <span>
@@ -54,7 +56,7 @@ return(
                 {/* //  height={25}
                  alt="home"
              */}
-               <span>
+               <span className='text-[11px] font-semibold text-gray-50'>
                {value.label}
                </span>
                </span>
