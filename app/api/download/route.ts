@@ -7,24 +7,24 @@ import client from "../../../lib/mongodb";
 import { createReadStream } from "fs";
 import { pipeline } from "stream";
 
-const db = client.db();
+// const db = client.db();
 
-const GridFSBucketOptions = {r
+// const GridFSBucketOptions = {r
 
    
     
 
-    const array = await cursor.toArray()
+//     const array = await cursor.toArray()
      
-    res.send(array)
-    // const uploadFilename = array[0].filename
+//     res.send(array)
+//     // const uploadFilename = array[0].filename
 
-    // console.log(array)
-    // return new NextResponse().arrayBuffer()
-  }
-  catch(error){
-   return new NextResponse(error,{status:400})
-  }
+//     // console.log(array)
+//     // return new NextResponse().arrayBuffer()
+//   }
+//   catch(error){
+//    return new NextResponse(error,{status:400})
+//   }
     
 
-}
+// }
