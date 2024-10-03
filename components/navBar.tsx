@@ -4,6 +4,7 @@ import { MdOutlineHome } from 'react-icons/md';
 import Link from 'next/link';
 
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const navLink = [
 
@@ -15,7 +16,7 @@ const navLink = [
     },
     {
         label:"Search",
-        route:"search",
+        route:"/search",
         icon:"/download.svg"
     },
     {
@@ -25,13 +26,14 @@ const navLink = [
     },
     {
         label:"Community",
-        route:"Chat",
+        route:"/community",
         icon:"download.svg"
 
     }
 ]
 
 const Navbar = () => {
+    const pathname = usePathname();
     // const nav = navLink ;
 
 return(
@@ -39,14 +41,18 @@ return(
         <div className='shadow-md shadow-green-400'>
             
             <ul className='navbar z-100 '>
-        {navLink.map((value,index)=>
-        (
+        {navLink.map((value,index)=>{
+           const active = pathname === value.route;
+           const color = active && (" text-green-700");
+         return (
+           
+            
             <li key={index}>
                 
             <Link href={value.route} className=''>
                 <span className='items-center flex flex-col p-1' >
                     <span>
-                <Image   className='  w-[20px] h-[20px] text-green-200 '  src={value.icon} width={20} height={200} alt='menu'
+                <Image   className = {`${color} w-[20px] h-[20px] `}  src={value.icon} width={20} height={200} alt='menu'
                
                     
                 />
@@ -56,13 +62,14 @@ return(
                 {/* //  height={25}
                  alt="home"
              */}
-               <span className='text-[11px] font-semibold '>
+               <span className={`${color} text-[11px] font-semibold `}>
                {value.label}
                </span>
                </span>
             </Link>
             </li>
-        )
+         )
+        }
           
         )
         
