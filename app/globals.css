@@ -80,6 +80,6 @@
 
 .navbar{
 
-@apply max-h-screen justify-between  overflow-hidden pt-2 flex md:hidden lg:hidden  border-t border-gray-300 w-full  xl:hidden fixed bottom-0 right-0 
+@apply max-h-screen justify-between  overflow-hidden pt-3 flex md:hidden lg:hidden  border-t border-gray-300 w-full  xl:hidden fixed bottom-0 right-0 
 
 }
