@@ -32,7 +32,7 @@ const navLink = [
 ]
 
 const Navbar = () => {
-    const nav = navLink ;
+    // const nav = navLink ;
 
 return(
     <section>
@@ -41,10 +41,10 @@ return(
         {navLink.map((value,index)=>
         (
             <li key={index}>
-            <Link href={value.route} className='text-white'>
+            <Link href={value.route} className=''>
                 <span className='items-center flex flex-col p-1' >
                     <span>
-                <Image   className=' rounded-full w-[25px]  h-[25px]  bg-white' src="/cloud.svg" width={25} height={25} alt='menu'
+                <Image   className='  w-[20px] h-[20px] text-green-200 '  src={value.icon} width={20} height={200} alt='menu'
                
                     
                 />
