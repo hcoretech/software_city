@@ -58,33 +58,33 @@ import { isUtf8 } from "buffer";
 
   
  
-export async function GET(req:NextRequest){
+// export async function GET(req:NextRequest){
     
-    const searchParams =req.nextUrl
-    const clientd = client;
-    // const db = clientd.db();
-    const post = db.collection('posts')
-    const name = searchParams.searchParams.get('search')
-    // const form = await req.formData();
-    // const name = form.get('search') as String ;
-    // console.log(name);
+//     const searchParams =req.nextUrl
+//     const clientd = client;
+//     // const db = clientd.db();
+//     const post = db.collection('posts')
+//     const name = searchParams.searchParams.get('search')
+//     // const form = await req.formData();
+//     // const name = form.get('search') as String ;
+//     // console.log(name);
 
- try{
-     const findUser = await post.findOne({
-          name
-       })
-     if(!findUser){
-        return NextResponse.json({message:"no app with such name try different name"},{status:500})
-      }
+//  try{
+//      const findUser = await post.findOne({
+//           name
+//        })
+//      if(!findUser){
+//         return NextResponse.json({message:"no app with such name try different name"},{status:500})
+//       }
      
  
-       const response = findUser
-       console.log(response)
-       return NextResponse.json({response},{status:200})  
+//        const response = findUser
+//        console.log(response)
+//        return NextResponse.json({response},{status:200})  
  
-    }
-    catch(error){
-      throw error
+//     }
+//     catch(error){
+//       throw error
     
-    }
-}
+//     }
+// }
