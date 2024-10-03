@@ -1,7 +1,9 @@
 // 'use client'
 import React from 'react' ;
-import { MdOutlineHome } from 'react-icons/md';
+// import { MdOutlineHome } from 'react-icons/md';
 import Link from 'next/link';
+
+
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -39,7 +41,7 @@ const Navbar = () => {
 return(
     <section>
         <div className='shadow-md shadow-green-400'>
-            
+        {/* <FontAwesomeIcon icon="fa-solid fa-cloud-arrow-up" /> */}
             <ul className='navbar z-100 '>
         {navLink.map((value,index)=>{
            const active = pathname === value.route;
