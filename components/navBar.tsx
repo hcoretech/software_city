@@ -64,10 +64,10 @@ return(
             <li key={index} className=''>
                 
             <Link href={value.route} className=''>
-                <span className='items-center flex flex-col p-1' >
+                <span className='items-center flex flex-col p-1 ' >
                     <span className={`${round}`}>
                         <Suspense fallback={<div className='p-2 animate-pulse bg-gray-300'></div>}>
-                <Image   className = {`${color}  w-[25px] h-[25px] `}  src={active ? value.icon2:value.icon1} width={20} height={20} alt='menu'
+                <Image   className = {`${color}  w-[23px] h-[23px] `}  src={active ? value.icon2:value.icon1} width={20} height={20} alt='menu'
                
                     
                 />
