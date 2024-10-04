@@ -2,11 +2,14 @@
 import React from 'react' ;
 // import { MdOutlineHome } from 'react-icons/md';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+
+export 
 
 const navLink = [
 
@@ -40,6 +43,10 @@ const navLink = [
 
 const Navbar = () => {
     const pathname = usePathname();
+
+    function pulse (){
+        return (<div className='animate-pulse bg-gray-200 p-2'></div>);
+    }
     // const nav = navLink ;
 
 return(
@@ -49,8 +56,8 @@ return(
             <ul className='navbar z-100 '>
         {navLink.map((value,index)=>{
            const active = pathname === value.route;
-           const color = active && (" text-[#29C665]");
-           const round = active && ("p-1 border-2 rounded-full text-[#29C665] shadow-md shadow-[#29C665] bg-white");
+           const color = active && (" text-[#29C665] ");
+           const round = active && ("p-1 border-2  rounded-full  text-[#29C665] shadow-md shadow-[#29C665] bg-white");
          return (
            
             
@@ -59,10 +66,12 @@ return(
             <Link href={value.route} className=''>
                 <span className='items-center flex flex-col p-1' >
                     <span className={`${round}`}>
+                        <Suspense fallback={<div className='p-2 animate-pulse bg-gray-300'></div>}>
                 <Image   className = {`${color}  w-[25px] h-[25px] `}  src={active ? value.icon2:value.icon1} width={20} height={20} alt='menu'
                
                     
                 />
+                </Suspense>
                 </span>
                {/* < {value.icon?} /> */}
                 {/* //  width={25} */}
