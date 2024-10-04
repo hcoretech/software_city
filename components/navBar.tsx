@@ -13,23 +13,27 @@ const navLink = [
     {
         label:"Home",
         route:"/Home",
-        icon: "/download.svg"
+        icon1: "/upload1.svg",
+        icon2: "/upload2.svg"
         
     },
     {
         label:"Search",
         route:"/search",
-        icon:"/download.svg"
+        icon1:"/download.svg",
+        icon2:"/download.svg"
     },
     {
         label:"Downloads",
         route:"/downloads",
-        icon:"/hardrive.svg"
+        icon1:"/hardrive1.svg",
+        icon2:"/hardrive2.svg"
     },
     {
         label:"Community",
         route:"/community",
-        icon:"download.svg"
+        icon1:"download.svg",
+        icon2:"download.svg"
 
     }
 ]
@@ -45,7 +49,7 @@ return(
             <ul className='navbar z-100 '>
         {navLink.map((value,index)=>{
            const active = pathname === value.route;
-           const color = active && ("  text-red-700");
+           const color = active && ("  text-[#29C665]");
          return (
            
             
@@ -54,7 +58,7 @@ return(
             <Link href={value.route} className=''>
                 <span className='items-center flex flex-col p-1' >
                     <span>
-                <Image   className = {`${color} w-[20px] h-[20px] `}  src={value.icon} width={20} height={200} alt='menu'
+                <Image   className = {`${color} w-[20px] h-[20px] `}  src={active ? value.icon2:value.icon1} width={20} height={200} alt='menu'
                
                     
                 />
