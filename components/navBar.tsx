@@ -53,12 +53,12 @@ return(
          return (
            
             
-            <li key={index}>
+            <li key={index} className=''>
                 
             <Link href={value.route} className=''>
                 <span className='items-center flex flex-col p-1' >
                     <span>
-                <Image   className = {`${color} w-[20px] h-[20px] `}  src={active ? value.icon2:value.icon1} width={20} height={200} alt='menu'
+                <Image   className = {`${color} w-[25px] h-[25px] `}  src={active ? value.icon2:value.icon1} width={20} height={20} alt='menu'
                
                     
                 />
