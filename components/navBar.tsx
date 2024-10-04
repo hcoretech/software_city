@@ -23,8 +23,8 @@ const navLink = [
     {
         label:"Search",
         route:"/search",
-        icon1:"/download.svg",
-        icon2:"/download.svg"
+        icon1:"/search1.svg",
+        icon2:"/search2.svg"
     },
     {
         label:"Downloads",
