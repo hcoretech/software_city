@@ -16,8 +16,8 @@ const navLink = [
     {
         label:"Home",
         route:"/Home",
-        icon1: "/upload1.svg",
-        icon2: "/upload2.svg"
+        icon1: "/cloud1.svg",
+        icon2: "/cloud2.svg"
         
     },
     {
@@ -51,9 +51,11 @@ const Navbar = () => {
 
 return(
     <section>
-        <div className='shadow-md shadow-green-400'>
+        <div className=''>
+            
         {/* <FontAwesomeIcon icon="fa-solid fa-cloud-arrow-up" /> */}
-            <ul className='navbar z-100 '>
+            <ul className='navbar '>
+                
         {navLink.map((value,index)=>{
            const active = pathname === value.route;
            const color = active && (" text-[#29C665] ");
@@ -64,9 +66,9 @@ return(
             <li key={index} className=''>
                 
             <Link href={value.route} className=''>
-                <span className='items-center flex flex-col p-1 ' >
+                <span className='items-center flex flex-col  ' >
                     <span className={`${round}`}>
-                        <Suspense fallback={<div className='p-2 animate-pulse bg-gray-300'></div>}>
+                        <Suspense fallback={<div className=' animate-pulse bg-gray-300'></div>}>
                 <Image   className = {`${color}  w-[23px] h-[23px] `}  src={active ? value.icon2:value.icon1} width={20} height={20} alt='menu'
                
                     
