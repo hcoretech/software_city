@@ -52,7 +52,7 @@ const Navbar = () => {
 return(
     <section>
         <div className='navbar '>
-            <div className=' w-screen border-4 border-white m-2  shadow-md shadow-[#29C665]'> </div>
+            <div className=' border-2 border-white m-2  shadow-md shadow-[#29C665]'> </div>
             
         {/* <FontAwesomeIcon icon="fa-solid fa-cloud-arrow-up" /> */}
             <ul className=' flex justify-around'>
