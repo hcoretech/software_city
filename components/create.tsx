@@ -15,116 +15,59 @@ export const runtime = 'edge'
 
 export default function Create ()  {
     const router = useRouter();
+
     const[loading,setLoading] = useState<boolean>(false);
     const [title,setTitle] =useState<string>("");
     const [file,setFile] = useState <File | null>(null);
-    const [blob,setBlob] = useState<PutBlobResult>(null);
+    const [imageLink,setImageLink] = useState<string>('');
     const [description,setDescription] = useState<string>('');
-    const [imageLink,setImageLink] = useState<string>('')
-    // const [stream,setStream] =useState(null)
+
+
     const abortController = new AbortController();
     
     const fileSend = async()=>{
-     const files = file
-       if(files === null){
-        console.log( "no file found")
-        throw new Error('no file found');
-     }
 
+         if(file === null){
+          console.log( "no file found")
+        return ;
+      }
+    
+     const fileSet = {
+      title,
+      imageLink,
+      description
+
+     }
      
      const uploadFile = await upload(file.name,file,{
         access:'public',
         contentType:file.type,
         handleUploadUrl:'/api/uploadFile',
-        clientPayload:title,
+        clientPayload:JSON.stringify(fileSet),
         abortSignal:abortController.signal,
-        
+       }
+      )
 
-        
-           
-        
-        
-        // abortSignal:new()=>{
-        //     const abort = AbortController;
-        //     return abort
-        // }
-
-     })
-
-    //  setBlob(uploadFile)
-    //  console.log(blob)
-     return uploadFile
-    //  const insertFile = await fetch(`/api/fileUpload?id=${title}`,{
-    //     method:"POST",
-    //     body:file,
-    //     headers:{
-    //         'content-type':file?.type ||'application/octet-stream'
-    //     }
-    //   })
-    //   const url = await insertFile.json() as PutBlobResult ;
-    //   return url  
+      return uploadFile
 
     }
 
-
-    // const uploadDoc = async ()=>{
-    //       const bloburl = await blob
-    //       try{
-    //         if(!bloburl){
-    //             return null
-    //         }
-    //     const docFile = {
-    //         title:title,
-    //         blobb :bloburl?.downloadUrl,
-    //         description:description,
-    //         imageLink:imageLink
-    //     }
-
-    //      const stringFy = JSON.stringify(docFile)
-    //      const upload = await fetch('/api/createFileIndex',{
-    //         method:'POST',
-    //         body:stringFy,
-    //         next:{revalidate:0},
-    //         headers:{
-    //            'Content-Type':'application/json'
-    //         }
-    //    }
-    //  )
-    //  const newBlob = await upload.json();
-    //  console.log(newBlob);
-   
-    //       }
-    //       catch(error){
-    //         return error
-    //       }
-
-    // }
- 
-    
-    const fileInput = useRef<HTMLInputElement>(null)
+ const fileInput = useRef<HTMLInputElement>(null);
 const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true)
+      event.preventDefault();
+      setLoading(true);
+
       try{
           const filepath = await fileSend();
-             console.log(filepath)
-            //  setBlob(filepath);
-         
-            //  const result =  await uploadDoc(); 
-            //  console.log(result);
-                     
-             setLoading(false)
-    
-    }  
-    catch(error){
-        console.log( error)
-            //    setLoading(false)
+             console.log(filepath)                  
+             setLoading(false)   
+        }  
+      catch(error){
+        console.log( error);
       }
    
-}
-// useEffect(()=>{
-//    uploadDoc();
-// },[blob])
+ }
+
 
     return (
         <section className="pt-10">
@@ -184,32 +127,16 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                      abortController.abort;
                      setLoading(false);
                    }}
-                   >
-                {/* //    disabled={loading} */}
-                      
-                        stop
+                   >  
+                      stop
                    </Button>
-                  }  
-             </div>        
-               </form>
-                 {/* <div>
-                    {
-                 
-                
-                    <Image
-                  
-                         src={img}
-                         width={200}
-                        height={200}
-                         alt="image"                   
-                         />
-                  
-                     }
-                 </div> */}
-        </section>
+                 }  
+            
+             </div> 
+
+          </form>
+
+       </section>
     )
 }
 
-// const imageLoader = () => {
-//     return `loading`
-//   }

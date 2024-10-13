@@ -9,6 +9,7 @@ import { blob } from "stream/consumers";
 
 
 const db = client.db();
+
 export async function POST(request:NextRequest):Promise<NextResponse>{
     const body = (await request.json()) as HandleUploadBody;
    
@@ -82,24 +83,16 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
          },
          onUploadCompleted:async({blob,tokenPayload})=>{
             console.log(blob,tokenPayload);
-            const collection =  db.collection('postFiles');
-            
-                //  if(!blob || tokenPayload){
-                //     throw new Error('no blob found')
-                //  }
-                //  const userId = await uploadAuth(request);
-                // const userId = request.cookies.get('userld')?.value;
-                //  if(!userId){
-                //     throw new Error('no user with such id');
-                //  }
-                //  if(!collection){
+            const fileSet = JSON.parse(tokenPayload)
 
-                //        await db.createCollection('postFile')                 
-                //       }
+            const collection =  db.collection('postFiles');
+    
+            
+         
                 try{
                     console.log('start uploading')
                       await collection.insertOne({
-                            title:tokenPayload,
+                            title:fileSet?.title,
                             pathname:blob.pathname,
                             downloadUrl:blob.downloadUrl,
                             url:blob.url,

@@ -8,40 +8,10 @@ import { Suspense } from 'react';
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { navLink } from '../lib/navBaricon';
 
-export 
-
-const navLink = [
-
-    {
-        label:"Home",
-        route:"/Home",
-        icon1: "/cloud1.svg",
-        icon2: "/cloud2.svg"
-        
-    },
-    {
-        label:"Search",
-        route:"/search",
-        icon1:"/search1.svg",
-        icon2:"/search2.svg"
-    },
-    {
-        label:"Downloads",
-        route:"/downloads",
-        icon1:"/hardrive1.svg",
-        icon2:"/hardrive2.svg"
-    },
-    {
-        label:"Community",
-        route:"/community",
-        icon1:"/community1.svg",
-        icon2:"/community2.svg"
-
-    }
-]
-
-const Navbar = () => {
+export const Navbar = () => {
+    
     const pathname = usePathname();
 
     function pulse (){
