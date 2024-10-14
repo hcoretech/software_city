@@ -92,6 +92,9 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                      <select value={type} onChange={(e)=>{
                         setType(e.target.value)
                      }}>
+                        <option value=''>
+                             
+                         </option>
                      <option value='office'>
                              offices
                          </option>
