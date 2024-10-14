@@ -14,16 +14,16 @@ import { useRouter } from "next/navigation";
 export default function GetDownload () {
 
    const [search,setSearch] = useState<string>("");
-   const [image,setImage] = useState<string>(null);
    const [error,setError] = useState(null);
    const [loading,setLoading] = useState<Boolean>(false);
    const [data,setData]= useState(null);
-   const [download,setDownload]= useState(false)
+
 
    const abortController = new AbortController();
    
    const router = useRouter();
     const handleSubmit = async(event:FormEvent<HTMLFormElement>)=>{
+      setData(null)
       setError(null)
 
       setLoading(true)
@@ -57,36 +57,40 @@ export default function GetDownload () {
   return(
         <section className="flex-center gap-5 flex-col flex py-5 ">
             <div className="flex-center flex  shadow-md bg-light-300 shadow-gray-300  w-full">
+              <h1>search</h1>
               </div>
 
              <div className="flex items-center flex-center  justify-around">            
                  <div className=" p-[5px] rounded-md">
                     <CiMenuKebab  className=" w-[23px] h-[23px]  text-black"/>
                  </div>
-            <form className="flex gap-3" onSubmit={handleSubmit} >
-                <Input 
-                className="shadow-md w-[250px]"
-                value={search}
-                placeholder="searching...."
-                onChange={(text)=>{setSearch(text.target.value)}}
-                 type="text"
-                />
+                 <form className="flex gap-3" onSubmit={handleSubmit} >
+                   <Input 
+                      className="shadow-md w-[250px]"
+                      value={search}
+                      placeholder="searching...."
+                      onChange={(text)=>{setSearch(text.target.value)}}
+                      type="text"
+                     />
                  
-                <Button>
-                   {loading ? "Searching ":"search" }
-                </Button>
-                {
-                  loading &&(
-                    <Button onClick={()=>{
-                      abortController.abort();
-                    }}>
-                    cancel
-                 </Button>
-                  )
-                }
+                   {
+                      loading ?(
+                          <Button onClick={()=>{
+                           abortController.abort();
+                            }}>
+                             cancel
+                           </Button>
+                         )
+                         :(
+                            <Button>
+                              {loading ? "Searching ":"search" }
+                             </Button>
+                           )
+                    }
 
 
-            </form>
+                </form>
+               </div>
            
             <div className=""> 
             
@@ -122,10 +126,16 @@ export default function GetDownload () {
                         />
                      </div>
                    </div>
-
-                      <Link href={data?.response?.downloadUrl}>
+                      <Button onClick={()=>{
+                        const link = document.createElement("a");
+                        link.href = data?.response?.downloadUrl;
+                        link.click();
+                      }}>
+                         download
+                      </Button>
+                      {/* <Link href={data?.response?.downloadUrl}>
                         download
-                      </Link> 
+                      </Link>  */}
 
                       {/* {download ?(                                                  
                       "downloading"
@@ -151,7 +161,7 @@ export default function GetDownload () {
             </p>
            )
          }
-        </div>
+        
         </section>
     )
 }
