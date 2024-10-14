@@ -91,8 +91,12 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
          
                 try{
                     console.log('start uploading')
+
                       await collection.insertOne({
+                            type:fileSet?.type,
                             title:fileSet?.title,
+                            imageLink:fileSet?.imageLink,
+                            description:fileSet?.description,
                             pathname:blob.pathname,
                             downloadUrl:blob.downloadUrl,
                             url:blob.url,

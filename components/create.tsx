@@ -17,7 +17,8 @@ export default function Create ()  {
     const router = useRouter();
 
     const[loading,setLoading] = useState<boolean>(false);
-    const [title,setTitle] =useState<string>("");
+    const [title,setTitle] = useState<string>("");
+    const [type,setType] = useState<string>('');
     const [file,setFile] = useState <File | null>(null);
     const [imageLink,setImageLink] = useState<string>('');
     const [description,setDescription] = useState<string>('');
@@ -33,6 +34,7 @@ export default function Create ()  {
       }
     
      const fileSet = {
+      type,
       title,
       imageLink,
       description
@@ -87,6 +89,16 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                          
                     </div>
                     <div className="flex flex-col gap-3">
+                     <select value={type} onChange={(e)=>{
+                        setType(e.target.value)
+                     }}>
+                     <option value='office'>
+                             offices
+                         </option>
+                         <option value='utlities'>
+                             Utilities
+                         </option>
+                     </select>
                        <input 
                         className= " p-1 border-gray-700 border-b "
                         name="title"
