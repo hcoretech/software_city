@@ -28,7 +28,13 @@ export default function GetDownload () {
 
       setLoading(true)
     event.preventDefault();
-      try{           
+
+      try{ 
+                  
+         if(!search){
+          setError("input value  and try agtain");
+          return ;
+         }
           const response = await fetch(`/api/getFile?search=${search}`,{
             method:'GET',
             cache:'force-cache',
@@ -76,7 +82,8 @@ export default function GetDownload () {
                    {
                       loading ?(
                           <Button onClick={()=>{
-                           abortController.abort();
+                           abortController.abort;
+                           setLoading(false);
                             }}>
                              cancel
                            </Button>
@@ -98,57 +105,51 @@ export default function GetDownload () {
               {
                  data && (
                     <div className="justify-between w-full border-black shadow-lg shadow-blue-200 border-t-[1px] p-2 items-center flex flex-row">
-                      <div>
-                        <p className="bg-black text-white w-[70px] text-center rounded-md"> {data?.response?.type}  </p>                 
-                        <p className=" rounded-full w-[70px] font-sans font-semibold  text-[15px] text-center"> {data?.response?.title}</p>  
+                      <div className="flex flex-col gap-4">
+                        <p className="bg-black text-white w-[70px] text-center rounded-sm"> {data?.response?.type} </p>                 
+                         <span className="flex flex-row">
                         <Image
                           src={data?.response?.imageLink}
                           width={30}
                           height={30}
                           alt="image"
-                         />             
+                         /> 
+                          <p className=" rounded-full w-[70px] font-sans font-semibold  text-[15px] text-center"> {data?.response?.title}</p>  
+                          </span>            
                         <p className=" text-[13px] w-[250px] font-sans"> {data?.response?.description}<span className="text-[15px] ">...</span></p>
                      </div>
 
-                     <div className="flex flex-col items-center gap-7  justify-between">
-                      <div className="flex  items-center">
+                     <div className="flex flex-col items-center gap-4  justify-between">
+                      <div className="flex flex-row items-center">
                         <Image
                           src="/apple.svg"
-                          width={30}
-                          height={30}
+                          width={25}
+                          height={25}
                           alt="image"
                          />
-                       <Image
+                         <Image
                          src="/windows.svg"
-                         width={30}
-                         height={30}
+                         width={25}
+                         height={25}
                          alt="image"        
-                        />
-                     </div>
-                   </div>
-                      <Button onClick={()=>{
-                        const link = document.createElement("a");
-                        link.href = data?.response?.downloadUrl;
-                        link.click();
-                      }}>
-                         download
-                      </Button>
-                      {/* <Link href={data?.response?.downloadUrl}>
-                        download
-                      </Link>  */}
-
-                      {/* {download ?(                                                  
-                      "downloading"
-                      ):(
-                        "download"
-                      )
-                      } */}
+                          />
+                      </div>
+                      <div>
+                         <Button onClick={()=>{
+                             const link = document.createElement("a");
+                             link.href = data?.response?.downloadUrl;
+                              link.click();
+                            }}>
+                             download
+                           </Button>
+                           </div>
+                   
                   
                    <div>
                      <Link className="text-blue-600 pointer underline " href='/'> Install guide</Link>
                    </div>
                  </div>
-                // </div>
+               </div>
               )
              }
              
