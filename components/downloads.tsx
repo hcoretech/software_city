@@ -30,7 +30,7 @@ export default function GetDownload () {
     event.preventDefault();
 
       try{ 
-                  
+
          if(!search){
           setError("input value  and try agtain");
           return ;
@@ -63,10 +63,10 @@ export default function GetDownload () {
   return(
         <section className="flex-center gap-5 flex-col flex py-5 ">
             <div className="flex-center flex  shadow-md bg-light-300 shadow-gray-300  w-full">
-              <h1>search</h1>
+              <h1 className="text-md font-semibold  font-sans">search</h1>
               </div>
 
-             <div className="flex items-center flex-center  justify-around">            
+             <div className="flex items-center flex-center justify-around">            
                  <div className=" p-[5px] rounded-md">
                     <CiMenuKebab  className=" w-[23px] h-[23px]  text-black"/>
                  </div>
