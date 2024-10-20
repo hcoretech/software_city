@@ -18,6 +18,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import {  redirect, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 
 
@@ -122,7 +123,11 @@ const AuthForm =  ({type}:{type:string}) => {
 
 
 return(
-        <section className="flex  flex-col min-h-screen w-full justify-center py-10 items-center  max-w-[1024px]">
+        <section className="flex  flex-col min-h-screen w-full justify-center py-10 items-center gap-3 max-w-[1024px]">
+             <div  className="rounded-full  bg-black p-2">
+          <Image className="w-[50px] h-[50px]" width={50} height={50} src='/main.svg' alt='logo'/>
+          </div>
+
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
            { type ==="sign-up" &&(

@@ -1,8 +1,10 @@
+import { Discovers } from "../../../components/discover";
 
 export default function Discover(){
+
     return(
-        <section>
-            Discover
-        </section>
+        <main>
+           <Discovers/>
+        </main>
     );
 }
