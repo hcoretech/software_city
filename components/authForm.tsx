@@ -125,7 +125,7 @@ const AuthForm =  ({type}:{type:string}) => {
 return(
         <section className="flex  flex-col min-h-screen w-full justify-center py-10 items-center gap-3 max-w-[1024px]">
              <div  className="rounded-full  bg-[#05140C] p-2">
-          <Image className="w-[50px] h-[50px]" width={50} height={50} src='/main.svg' alt='logo'/>
+          <Image className="w-[50px] h-[50px]" width={50} height={50} src='/main.svg' alt='logo' priority/>
           </div>
 
             <Form {...form}>

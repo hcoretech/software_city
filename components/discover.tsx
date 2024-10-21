@@ -13,6 +13,9 @@ export const Discovers = async() => {
         <div className="">
             <CarouselPlugin/>
         </div>
+        <div>
+          
+        </div>
       </section>
     );
 
