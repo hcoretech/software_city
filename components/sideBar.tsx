@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link';
 import Image from 'next/image';
-import { sideBarLink } from '../constants/icon';
+// import { sideBarLink } from '../constants/icon';
 import React from 'react'
 import { usePathname } from 'next/navigation';
 import { GoHome } from "react-icons/go";
