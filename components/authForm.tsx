@@ -161,11 +161,30 @@ return(
                     </Button>
                 </form>
               </Form>
+              
+                
+                  {
+                      type === "sign-in" &&(
+                        <div className="flex gap-2">
+                   <p className="">
+                    
+                        forget password ?
+                     
+                  </p>
+                  <Link className="text-blue-700" href='/'>
+                    reset 
+                  </Link>
+                  </div>
+                   ) 
+                  }
+               
+              
              
-              {
-                 <div className="flex gap-3">
+              {   
+               
+                 <div className="flex  gap-3">
                   <p>
-                    {type === "sign-in" ?"create an account"
+                    {type === "sign-in" ? "don't have an account"
                     : "already have an account"}
                  </p>
                  <Link className="text-blue-700" href={`${type === "sign-in" ?"/sign-up":"/sign-in"}`}>
