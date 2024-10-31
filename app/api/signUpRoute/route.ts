@@ -13,7 +13,7 @@ import client from "../../../lib/mongodb";
 //   return jwt.sign({_id}, process.env.my_SECRET, { expiresIn: '3m' })
 // }
 
-export async function POST(req:NextRequest,res:NextResponse):Promise<NextResponse>{   
+export async function POST(req:NextRequest):Promise<NextResponse>{   
 
         const body = await req.json();
         const userData = await body;
