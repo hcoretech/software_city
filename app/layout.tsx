@@ -15,8 +15,8 @@ const inter = Inter({
     variable:'--font-ibm-plex-serif'
   })
 
-const metadata :Metadata = {
-    title:'project',
+ export const metadata :Metadata = {
+    title:'software city',
     description:'web developer' 
 }
 

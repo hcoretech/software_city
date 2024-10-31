@@ -7,6 +7,10 @@ import Link from "next/link";
 import { FormEvent } from 'react';
 import { CiMenuKebab } from "react-icons/ci";
 import { useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { MdStar } from "react-icons/md";
+import { MdStarHalf } from "react-icons/md";
+import { MdVerified } from "react-icons/md";
 
 
 
@@ -17,7 +21,9 @@ export default function GetDownload () {
    const [error,setError] = useState(null);
    const [loading,setLoading] = useState<Boolean>(false);
    const [data,setData]= useState(null);
-
+    
+   
+   
 
    const abortController = new AbortController();
    
@@ -61,12 +67,12 @@ export default function GetDownload () {
     }
 
   return(
-        <section className="flex-center gap-5 flex-col flex py-5 ">
-            <div className="flex-center flex  shadow-md bg-light-300 shadow-gray-300  w-full">
+        <section className="flex-center gap-5 flex-col flex  py-14 ">
+            {/* <div className="flex-center flex  shadow-md bg-light-300 shadow-gray-300  w-full">
               <h1 className="text-md font-semibold  font-sans">search</h1>
-              </div>
+              </div> */}
 
-             <div className="flex items-center flex-center justify-around">            
+             <div className="flex items-center flex-center pt-4 justify-around">            
                  <div className=" p-[5px] rounded-md">
                     <CiMenuKebab  className=" w-[23px] h-[23px]  text-black"/>
                  </div>
@@ -104,29 +110,34 @@ export default function GetDownload () {
              <div className="w-full">
               {
                  data && (
-                    <div className="justify-between w-full border-black shadow-lg shadow-blue-200 border-t-[1px] p-2 items-center flex flex-row">
-                      <div className="flex flex-col gap-4">
-                        <p className="bg-black text-white w-[70px] text-center rounded-sm"> {data?.response?.type} </p>                 
-                         <span className="flex flex-row">
-                        <Image
-                          src={data?.response?.imageLink}
-                          width={30}
-                          height={30}
-                          alt="image"
-                         /> 
-                          <p className=" rounded-full w-[70px] font-sans font-semibold  text-[15px] text-center"> {data?.response?.title}</p>  
-                          </span>            
-                        <p className=" text-[13px] w-[250px] font-sans"> {data?.response?.description}<span className="text-[15px] ">...</span></p>
+                    <div className="justify-between w-full border-gray border  p-2 items-center flex flex-row">
+                      <div className="flex flex-col gap-1 ">
+                         {/* <p className="bg-black text-white w-[70px] text-center rounded-sm"> {data?.response?.type} </p>                  */}
+                         <span className="flex flex-row items-center">
+                         <Suspense fallback={<h1>loading..</h1>}>
+                           <Image
+                              className="w-[45px] h-[45px]"
+                              src={data?.response?.imageLink}
+                              width={30}
+                              height={30}
+                              alt="image"
+                           /> 
+                          </Suspense>
+                          <p className=" rounded-full w-[70px] font-sans   text-[15px] text-center"> {data?.response?.title}</p>  
+                          </span>   
+                          <p className=" text-[12px] w-[250px] font-sans"><span className="font-sans  text-[14px]">Type:</span> Internet</p>    
+                          <p className=" text-[12px] w-[250px] font-sans"><span className="font-sans  text-[14px]">Size:</span> 95mb</p>      
+                        <details className=" text-[12px] w-[250px] font-sans"><summary className="font-sans  text-[14px]">Description:</summary> {data?.response?.description}<span className="text-[15px] ">...</span></details>
                      </div>
 
-                     <div className="flex flex-col items-center gap-4  justify-between">
+                     <div className="flex flex-col items-center gap-2  justify-between">
                       <div className="flex flex-row items-center">
-                        <Image
+                        {/* <Image
                           src="/apple.svg"
                           width={25}
                           height={25}
                           alt="image"
-                         />
+                         /> */}
                          <Image
                          src="/windows.svg"
                          width={25}
@@ -135,18 +146,24 @@ export default function GetDownload () {
                           />
                       </div>
                       <div>
-                         <Button onClick={()=>{
+                         <Button className="border-2 border-[#29C665] bg-transparent text-black hover:text-white " onClick={()=>{
                              const link = document.createElement("a");
                              link.href = data?.response?.downloadUrl;
                               link.click();
                             }}>
-                             download
+                             Get App
                            </Button>
                            </div>
-                   
-                  
-                   <div>
-                     <Link className="text-blue-600 pointer underline " href='/'> Install guide</Link>
+                   <div className=" rounded-sm p-1  w-[70px] text-center ">
+                    <p className=" flex text-center items-center gap-1" >
+                    {/* <MdStar width={5} height={5} color="yellow" />
+                    <MdStar width={5} height={5} color="yellow" />
+                    <MdStar width={5} height={5} color="yellow" />
+                    <MdStarHalf width={5} height={5} color="yellow" /> */}
+                       <span>  <MdVerified width={5} height={5} color="blue" /></span>
+                        verified
+                    </p>
+                     {/* <Link className="text-blue-600 pointer underline " href='/'> Install guide</Link> */}
                    </div>
                  </div>
                </div>

@@ -41,23 +41,23 @@ export async function POST(req:Request){
           .setJti(nanoid())
           .setIssuedAt()
           .setExpirationTime('1day')
-          .sign(new TextEncoder().encode(jwtSecret))
+          .sign(new TextEncoder().encode(jwtSecret));
 
-          cookies().set('userId', id, {
+            (await cookies()).set('userId', id, {
             httpOnly: true,
            //  domain:"https://software_city.vercel.app",
             sameSite:'strict',
             secure:true,
             maxAge: 60 * 60 * 24, 
-          })
+          });
 
-        cookies().set('authSession', token, {
+          (await cookies()).set('authSession', token, {
          httpOnly: true,
         //  domain:"https://software_city.vercel.app",
          sameSite:'strict',
          secure:true,
          maxAge: 60 * 60 * 24, 
-       })
+       });
       
           return NextResponse.json({message:'logged succesfull'},{status:200})         
 

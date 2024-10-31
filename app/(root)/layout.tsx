@@ -1,14 +1,16 @@
 'use client'
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../../components/navBar';
 import SideBar from '../../components/sideBar';
 import { useState } from 'react';
+import { Header } from '../../components/header';
 
 
 export default function RootLayout({
- children
+ children,
   }:Readonly<{
-    children:React.ReactNode
+    children:React.ReactNode,
+
 }>){
     // const router = useRouter();
 
@@ -27,19 +29,31 @@ export default function RootLayout({
     //   checkUser();
      
     //  },[])
+    interface osType {
+        android:string,
+        mac:string
+    }
     const [click,setClick]= useState<Boolean>(false);
+    const [os,setOs] = useState<string>('Windows');
+
+    // setOs("android");
+    useEffect(()=>{
+      
+    },[os]);
 
 
     return(
         <main className="flex h-screen  text-inter">
+            
             {
                 click && (
             <SideBar /> ) 
               
-              }     
+              }  
           <div className='flex flex-col size-full'>
           <div className=''>
-          {children}                
+          <Header osType={os} set={setOs}/>
+          {children }                
                </div>   
            </div> 
            <Navbar />        

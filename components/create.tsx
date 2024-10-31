@@ -1,13 +1,15 @@
 'use client'
 
-import {useRef, useState,useEffect, ChangeEvent} from "react";
+import {useRef, useState} from "react";
 import { Button } from "./ui/button";
-import { useRouter } from 'next/navigation'
-import { FormEvent } from 'react'
+import { useRouter } from 'next/navigation';
+import { FormEvent } from "react";
+// import { FormEvent } from 'react'
 // import {upload} from "@vercel/blob/client"
 import { PutBlobResult } from "@vercel/blob";
 import { upload } from "@vercel/blob/client";
-import { put } from "@vercel/blob";
+
+
 import { LuLoader2 } from "react-icons/lu";
 import { LuFileInput } from "react-icons/lu";
 export const runtime = 'edge'
@@ -42,11 +44,39 @@ export default function Create ()  {
      }
      
      const uploadFile = await upload(file.name,file,{
+      
         access:'public',
         contentType:file.type,
         handleUploadUrl:'/api/uploadFile',
         clientPayload:JSON.stringify(fileSet),
-        abortSignal:abortController.signal,
+        
+      //   onUploadProgess(event){
+      //    console.log(event.loaded,event.total,event.percentage);
+      //   }
+
+      
+        
+        
+        
+        
+        
+        
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      //   abortSignal:abortController.signal,
+      
+        
+        
+        
        }
       )
 
@@ -72,7 +102,7 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
 
 
     return (
-        <section className="pt-10">
+        <section className=" py-14">
              <form onSubmit={handleSubmit} encType="multipart/form-data" className="gap-5 flex flex-col" >
                 <div className="flex flex-col gap-3 ">
                 

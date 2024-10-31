@@ -3,7 +3,7 @@
 module.exports = {
     experimental: {
       serverActions: {
-        allowedOrigins: ['localhost:3000', '*.my-proxy.com',"https://software-city.vercel.app"],
+        allowedOrigins: ['localhost:3000', '*.my-proxy.com',"https://software-city.vercel.app","https://github.com"],
       },
     },
   }

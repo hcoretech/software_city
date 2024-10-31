@@ -20,14 +20,18 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-    , "lib/userModel.ts", "constants/icon.js", "lib/serverAction.ts"  ],
+    "**/*.tsx",
+    "lib/userModel.ts",
+    "constants/icon.js",
+    "lib/serverAction.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

@@ -12,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel"
+import { Suspense } from "react"
 
 
 export const CarouselPlugin = () => {
@@ -23,7 +24,7 @@ export const CarouselPlugin = () => {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className=" justify-center py-6 w-screen"
+      className=" justify-center w-screen"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -31,10 +32,14 @@ export const CarouselPlugin = () => {
         {swipe.map((data, index) => (
           <CarouselItem key={index}>
             <div className="">
+            {/* <h1 className="font-bold"> Updates</h1> */}
               <Card className={`bg-${data.color} `}>
+             
                 <CardContent className="flex items-center justify-center p-10">
+                  <Suspense fallback={<h1> loading</h1>}>
                   {/* <span className="text-4xl font-semibold">{index + 1}</span> */}
                   <Image src={data.image} alt="image" width={100} height={100}  />
+                  </Suspense>
                 </CardContent>
                 <div>{data.name}</div>
               </Card>

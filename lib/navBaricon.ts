@@ -8,12 +8,7 @@ export const navLink = [
         icon2: "/cloud2.svg"
         
     },
-    {
-        label:"Search",
-        route:"/search",
-        icon1:"/search1.svg",
-        icon2:"/search2.svg"
-    },
+   
     {
         label:"Discover",
         route:"/discover",
@@ -21,11 +16,17 @@ export const navLink = [
         icon2:"/hardrive2.svg"
     },
     {
-        label:"Downloads",
+        label:"Search",
         route:"/downloads",
-        icon1:"/hardrive1.svg",
-        icon2:"/hardrive2.svg"
+        icon1:"/search1.svg",
+        icon2:"/search2.svg"
     },
+    // {
+    //     label:"Downloads",
+    //     route:"",
+    //     icon1:"/hardrive1.svg",
+    //     icon2:"/hardrive2.svg"
+    // },
    
     {
         label:"Community",
