@@ -20,7 +20,7 @@ export async function POST(req:Request):Promise<NextResponse>{
     try{
 
         if(email.indexOf("@")== -1){
-         throw Error ("invalid email address ");
+         throw "invalid email address ";
         }
       
         const finds = await user.findOne({
@@ -29,7 +29,7 @@ export async function POST(req:Request):Promise<NextResponse>{
         })
 
           if(!finds){
-            throw Error("no user found check info and try again");
+            throw "no user found check info and try again";
             
           }
        
