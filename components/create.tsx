@@ -54,10 +54,11 @@ export default function Create ()  {
               contentType:file.type,
               handleUploadUrl:'/api/uploadFile',
               clientPayload:JSON.stringify(fileSet),
-              onUploadProgress:(event)=>{
-               setPercentage(event.percentage);
-             console.log(event.loaded,event.percentage,event.total);
-               }  
+
+            //   onUploadProgress:(event)=>{
+            //    setPercentage(event.percentage);
+            //  console.log(event.loaded,event.percentage,event.total);
+            //    }  
             //   onUploadProgress:(Event)
 
               }
