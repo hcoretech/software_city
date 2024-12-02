@@ -26,7 +26,7 @@ export async function POST(req:NextRequest):Promise<NextResponse>{
     try{  
 
         if(!userData){
-          throw new Error ("check input and try again");
+          throw  "check input and try again";
         }
          const db = client.db('software_city');
          const dbCreate = await db.collection('users');
@@ -37,11 +37,12 @@ export async function POST(req:NextRequest):Promise<NextResponse>{
           const response = createAccount;
          
           if(!response){
-               return NextResponse.json({message:'user creation failed'},{status:400})
+            throw  "user creation failed";
+              //  return NextResponse.json({message:'user creation failed'},{status:400})
           }
           return NextResponse.json({response},{status:200});
         }
-      catch(error){
-            return NextResponse.json({error:'Error in sign-up,check internet connection'},{status:400})
+      catch(err){
+            return NextResponse.json({error:err},{status:400})
           }
         }
