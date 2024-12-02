@@ -4,9 +4,7 @@ import {useRef, useState} from "react";
 import { Button } from "./ui/button";
 import { useRouter } from 'next/navigation';
 import { FormEvent } from "react";
-// import { FormEvent } from 'react'
-// import {upload} from "@vercel/blob/client"
-import { PutBlobResult } from "@vercel/blob";
+// import { CommonUploadOptions } from "@vercel/blob/client";
 import { upload } from "@vercel/blob/client";
 
 
@@ -53,8 +51,9 @@ export default function Create ()  {
               access:'public',
               contentType:file.type,
               handleUploadUrl:'/api/uploadFile',
+              onUploadProgress:((event)=>{setPercentage(event.percentage)}),
               clientPayload:JSON.stringify(fileSet),
-            //   onUploadProgress:((event)=>{setPercentage(event.percentage)})
+              
 
             //   onUploadProgress:(event)=>{
             //    setPercentage(event.percentage);
