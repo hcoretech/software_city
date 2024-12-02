@@ -24,68 +24,53 @@ export default function Create ()  {
     const [file,setFile] = useState <File | null>(null);
     const [imageLink,setImageLink] = useState<string>('');
     const [description,setDescription] = useState<string>('');
+    const [error,setError]= useState(null);
+    const [percentage,setPercentage] = useState<number>(null);
 
 
-    const abortController = new AbortController();
+   const abortController = new AbortController();
     
-    const fileSend = async()=>{
+   const fileSend = async()=>{
+      try {
+         
 
-         if(file === null){
-          console.log( "no file found")
-        return ;
-      }
-    
-     const fileSet = {
-      type,
-      title,
-      imageLink,
-      description
-
-     }
-     
-     const uploadFile = await upload(file.name,file,{
-      
-        access:'public',
-        contentType:file.type,
-        handleUploadUrl:'/api/uploadFile',
-        clientPayload:JSON.stringify(fileSet),
-        
-      //   onUploadProgess(event){
-      //    console.log(event.loaded,event.total,event.percentage);
-      //   }
-
-      
-        
-        
-        
-        
-        
-        
        
+            if(file === null){
+            throw ( "no file selected");
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-      //   abortSignal:abortController.signal,
+           }
+         
+    
+         const fileSet = {
+               type,
+               title,
+               imageLink,
+                description
+              }
+     
+        const uploadFile = await upload(file.name,file,{
       
+              access:'public',
+              contentType:file.type,
+              handleUploadUrl:'/api/uploadFile',
+              clientPayload:JSON.stringify(fileSet),
+              onUploadProgress:(event)=>{
+                   setPercentage(event.percentage);
+                 console.log(event.loaded,event.percentage,event.total);
+              }             
+           }
+         )
         
-        
-        
-       }
-      )
 
-      return uploadFile
+        return uploadFile
+     }catch (error) {
+          setError(error)
+     }
 
     }
 
- const fileInput = useRef<HTMLInputElement>(null);
-const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
+   const fileInput = useRef<HTMLInputElement>(null);
+   const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setLoading(true);
 
@@ -95,7 +80,7 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
              setLoading(false)   
         }  
       catch(error){
-        console.log( error);
+        setError(error);
       }
    
  }
@@ -176,7 +161,7 @@ const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
                       stop
                    </Button>
                  }  
-            
+                {percentage}
              </div> 
 
           </form>
