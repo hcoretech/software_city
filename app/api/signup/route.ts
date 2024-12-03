@@ -10,11 +10,14 @@ export  async function POST(request:NextRequest){
         if(!userData){
             throw "no data found in the request body";
         }
+        if(userData?.email?.indexOf("@")== -1){
+             throw "invalid email try another email";
+        }
         const db = client.db('software_city');
         const dbCreate =  db.collection('soundXusers');
 
           console.log('working with try') ;      
-         const createAccount = await dbCreate.insertOne({userData});
+         const createAccount = await dbCreate.insertOne(userData);
          console.log("working")
          const response = createAccount;
         
