@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import client from "../../../lib/mongodb";
 
 
-export  async function POST(request:NextRequest){
+export  async function POST(request:NextRequest):Promise<NextResponse>{
 
     const body = await request.json();
-    const userData = await body;
+    const userData:signupprop = await body;
     try {
         if(!userData){
             throw "no data found in the request body";
@@ -13,6 +13,11 @@ export  async function POST(request:NextRequest){
         if(userData?.email?.indexOf("@")== -1){
              throw "invalid email try another email";
         }
+        if(userData?.password?.length < 4){
+            throw "password to short";
+       }
+       
+        
         const db = client.db('software_city');
         const dbCreate =  db.collection('soundXusers');
 
