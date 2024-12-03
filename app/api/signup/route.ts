@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import client from "../../../lib/mongodb";
 
 
-export default async function POST(request:NextRequest){
+export  async function POST(request:NextRequest){
 
     const body = await request.json();
     const userData = await body;
