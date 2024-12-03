@@ -21,11 +21,11 @@ export  async function POST(request:NextRequest){
          if(!response){
            throw  "user creation failed";
          }
-         return NextResponse.json({response},{status:200});
+         return NextResponse.json(response,{status:200});
 
         
     } catch (error) {
-       return NextResponse.json({message:error},{status:400});
+       return NextResponse.json(error,{status:400});
     }
 
 }
