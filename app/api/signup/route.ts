@@ -5,7 +5,7 @@ import client from "../../../lib/mongodb";
 export  async function POST(request:NextRequest):Promise<NextResponse>{
 
     const body = await request.json();
-    const userData:signupprop = await body;
+    const userData = await body;
     try {
         if(!userData){
             throw "no data found in the request body";
