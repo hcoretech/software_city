@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import client from "../../../lib/mongodb";
+import { SignupModel } from "../../../lib/signup";
 
 
 export  async function POST(request:NextRequest):Promise<NextResponse>{
@@ -7,7 +8,7 @@ export  async function POST(request:NextRequest):Promise<NextResponse>{
     const body = await request.json();
     const userData = await body;
     try {
-        if(!userData){
+        if(userData == null){
             throw "no data found in the request body";
         }
         if(userData?.email?.indexOf("@")== -1){
