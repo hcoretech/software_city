@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import client from "../../../lib/mongodb";
-import { SignupModel } from "../../../lib/signup";
+// import { SignupModel } from "../../../lib/signup";
 
 
 export  async function POST(request:NextRequest):Promise<NextResponse>{
