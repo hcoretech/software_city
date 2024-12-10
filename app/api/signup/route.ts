@@ -7,6 +7,7 @@ export  async function POST(request:NextRequest):Promise<NextResponse>{
 
     const body = await request.json();
     const userData = await body;
+    console.log(userData);
     try {
         if(userData == null){
             throw "no data found in the request body";
