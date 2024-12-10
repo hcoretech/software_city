@@ -9,7 +9,7 @@ export  async function POST(request:NextRequest):Promise<NextResponse>{
     const userData = await body;
     console.log(userData);
     try {
-        if(userData == null){
+        if(userData?.name || userData?.email || userData?.password === ""){
             throw "no data found in the request body";
         }
         if(userData?.email?.indexOf("@")== -1){
