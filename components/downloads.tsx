@@ -3,7 +3,6 @@ import { Input } from "./ui/input"
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image"
-import Link from "next/link";
 import { FormEvent } from 'react';
 import { CiMenuKebab } from "react-icons/ci";
 import { useRouter } from "next/navigation";
@@ -11,6 +10,8 @@ import { Suspense } from "react";
 import { MdStar } from "react-icons/md";
 import { MdStarHalf } from "react-icons/md";
 import { MdVerified } from "react-icons/md";
+import { searchLinks } from "../lib/searchLink";
+import Link from "next/link";
 
 
 
@@ -67,15 +68,15 @@ export default function GetDownload () {
     }
 
   return(
-        <section className="flex-center gap-5 flex-col flex  py-14 ">
+        <section className="items-center gap-5 flex-col flex  py-14 ">
             {/* <div className="flex-center flex  shadow-md bg-light-300 shadow-gray-300  w-full">
               <h1 className="text-md font-semibold  font-sans">search</h1>
               </div> */}
 
-             <div className="flex items-center flex-center pt-4 justify-around">            
-                 <div className=" p-[5px] rounded-md">
+             <div className="flex flex-row items-center pt-4 justify-between">            
+                 {/* <div className="  rounded-md">
                     <CiMenuKebab  className=" w-[23px] h-[23px]  text-black"/>
-                 </div>
+                 </div> */}
                  <form className="flex gap-3" onSubmit={handleSubmit} >
                    <Input 
                       className="shadow-md w-[250px]"
@@ -105,7 +106,28 @@ export default function GetDownload () {
                 </form>
                </div>
            
-            <div className=""> 
+            <div className="flex gap-5 flex-wrap p-5 " > 
+               {
+                searchLinks.map((data,index)=>{
+
+                  const active = 0 === index;
+                  const color = active && (" text-[#29C665] ");
+                  const round = active ? ("p-1 text-[#fff] shadow-sm shadow-[#29C665] bg-[#29C665] items-center"):(" items-center rounded-[5px] p-2 border border-[#29c665] ");
+                  return(
+                      //  <ul className="flex flex-row">
+                        <li className={`${round} flex flex-row`} key={index}>
+                           <Link href="">
+                             {data.title}                          
+                           </Link>
+                        </li>
+                      //  </ul>
+                  )
+                })
+                  
+               }
+            <div>
+                
+            </div>
             
              <div className="w-full">
               {
