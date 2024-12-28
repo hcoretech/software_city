@@ -54,13 +54,6 @@ export default function Create ()  {
                  setProgress(e.percentage);
               },
               clientPayload:JSON.stringify(fileSet),
-              
-
-            //   onUploadProgress:(event)=>{
-            //    setPercentage(event.percentage);
-            //  console.log(event.loaded,event.percentage,event.total);
-            //    }  
-            //   onUploadProgress:(Event)
 
               }
            )
@@ -79,7 +72,7 @@ export default function Create ()  {
       setLoading(true);
 
       try{
-          const filepath = await fileSend();
+          const filepath = fileSend();
              console.log(filepath)                  
              setLoading(false)   
         }  
