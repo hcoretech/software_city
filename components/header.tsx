@@ -137,13 +137,21 @@ import { resolve } from "node:path";
                 height={25}
                 alt="image"
                />
-              ):(
+              ):change === "android"?(
                 <Image
                          src="/android.png"
                          width={25}
                          height={25}
                          alt="image"        
                           /> 
+              ):(
+                <Image
+                src="/android.png"
+                width={25}
+                height={25}
+                alt="image"        
+                 /> 
+
               )
             }
             </div>
