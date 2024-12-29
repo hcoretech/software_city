@@ -6,8 +6,11 @@ import { usePathname } from "next/navigation";
 import { navLink } from "../lib/navBaricon";
 import { resolve } from "node:path";
 
+
  export const Header =  ({osType,set})=>{
-  
+   const navi = navigator.platform
+
+  console.log(navi)
   const pathname = usePathname();
 
   const [change,setChange] = useState<string>("");
@@ -59,7 +62,7 @@ import { resolve } from "node:path";
 
   useEffect(()=>{
     rotateFunction();
-
+ 
     const  value = rotateFunction();
     console.log(value)
      const active = rotate === 500 ;
