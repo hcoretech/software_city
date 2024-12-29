@@ -21,16 +21,16 @@ export const Navbar = () => {
 
 return(
     <section>
-        <div className='navbar '>
-            <div className=' border-2 border-white m-2  '> </div>
+        <div className='navbar  '>
+            <div className='m-2  '> </div>
             
         {/* <FontAwesomeIcon icon="fa-solid fa-cloud-arrow-up" /> */}
             <ul className=' flex justify-around'>
                 
         {navLink.map((value,index)=>{
            const active = pathname === value.route;
-           const color = active && (" text-[#29C665] ");
-           const round = active && ("p-1 border-2  rounded-full  text-[#29C665] shadow-md shadow-[#29C665] bg-white");
+           const color = active ? " text-[#29C665] ":"text-white";
+           const round = active && ("p-1 border-2  rounded-full  text-[#29C665] shadow-sm shadow-[#29C665] bg-white");
          return (
            
             
