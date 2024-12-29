@@ -92,10 +92,19 @@ export default function Create ()  {
                </h1> */}
              </div>
              <div className=" ">
-                <div  className=" flex justify-around my-10 border bg-gray-200 py-4">
+                <div  className=" flex justify-around  my-10 border bg-gray-200 py-4">
 
-                    <Button className= " transition delay-300 duration-300 ease-in-out bg-white text-gray-400 p-20 shadow-md font-bold text-[30px] ">
-                     +
+                    <Button className= "hover:text-white  transition delay-300 duration-300 ease-in-out bg-white text-gray-400 p-20 shadow-md font-bold  ">
+                     <span className="flex flex-col  items-center">
+                     <span className=" text-[30px]">
+                       +
+                     </span>
+                     <span>
+                        select from device
+                     </span>
+                     
+                     </span>
+                     
                     </Button>
                   </div>  
                     {/* <div className=" justify-between flex flex-row shadow-sm  ">
@@ -129,7 +138,7 @@ export default function Create ()  {
                      <div>
                      <label className="flex flex-row justify-between items-center ">
                        <h1 className="font-bold text-[14px]"> SELECT APP TYPE:</h1>
-                     <select className="w-[50%] py-2  border  bg-gray-900 text-white"    onChange={(e)=>{
+                     <select className="w-[50%] py-2  border   text-gray-900"    onChange={(e)=>{
                         setType(e.target.value)
                      }}>
                         <option value='browser'>
@@ -150,7 +159,7 @@ export default function Create ()  {
                      <label className="flex flex-col">
                      <p className="font-bold ">APP TITLE</p>
                        <input 
-                        className= " py-2  placeholder-white bg-gray-900  w-[80%]   border rounded-[5px] "
+                        className= " py-2 pl-2  placeholder-gray-900 border-gray-900  w-[80%] hover:shadow-sm hover:border-none hover:shadow-gray-900   border rounded-[5px] "
                         name="title"
                         type='text' 
                         onChange={(e)=>setTitle(e.target.value)}
@@ -162,7 +171,7 @@ export default function Create ()  {
                        <label className="flex flex-col">
                        <p className="font-bold ">APP ICON URL</p>
                        <input 
-                       className="py-2 placeholder-white  bg-gray-900  border rounded-[5px]"
+                       className="py-2 pl-2 placeholder-gray-900 border border-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  rounded-[5px]"
                         name="imageLink"
                         type='text' 
                         onChange={(e)=>setImageLink(e.target.value)}
@@ -173,7 +182,7 @@ export default function Create ()  {
                        <label className="flex flex-col">
                         <p className="font-bold ">ABOUT APP</p>
                        <textarea
-                        className="py-2   placeholder-white  bg-gray-900  w-[80%]   border rounded-[5px]"
+                        className="h-[180px] pl-2 placeholder-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  w-[80%] border-gray-900    border rounded-[5px]"
                         name="description"
                         lang="eng"
                         onChange={(e)=>setDescription(e.target.value)}
@@ -197,7 +206,7 @@ export default function Create ()  {
                      
                   </div> 
                  
-                  <div className="flex flex-row gap-5 mt-5 justify-space-between ">   
+                  <div className="flex flex-row gap-5 mt-5 mb-5 justify-space-between ">   
                     <Button type='submit'
                        className="bg-gray-900 hover:bg-blue-200"
                        disabled={loading}>
