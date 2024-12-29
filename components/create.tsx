@@ -84,15 +84,22 @@ export default function Create ()  {
 
 
     return (
-        <section className=" py-14">
-             <form onSubmit={handleSubmit} encType="multipart/form-data" className="gap-5 flex flex-col px-4 " >
+        <section className=" py-16  w-full ">
+             <form onSubmit={handleSubmit} encType="multipart/form-data" className="  " >
              <div>
-               <h1 className="text-[30px] text-center font-sans   font-bold">
+               {/* <h1 className="text-[20px] text-center font-sans sm:text-[15px]   font-bold">
                   Upload software  
-               </h1>
+               </h1> */}
              </div>
-                <div className="flex flex-col ">  
-                    <div className=" justify-between flex flex-row shadow-sm ">
+             <div className=" ">
+                <div  className=" flex justify-around my-10 border bg-gray-200 py-4">
+
+                    <Button className= " transition delay-300 duration-300 ease-in-out bg-white text-gray-400 p-20 shadow-md font-bold text-[30px] ">
+                     +
+                    </Button>
+                  </div>  
+                    {/* <div className=" justify-between flex flex-row shadow-sm  ">
+                     <div>
                      <label className="">
                        <h1 className="font-bold text-[14px] font-inter"> SELECT FILE LOCATION </h1>
                        <input  className=""
@@ -103,8 +110,8 @@ export default function Create ()  {
                           placeholder="select file"
                         />   
                         </label>
-                        {/* <span> OR </span> */}
-
+                        </div>
+                       <div>
                        <label className="">
                          <h1 className="font-bold text-[14px] font-inter"> FILE URL </h1>
                          <input  className=" border border-[#29C665] "
@@ -114,18 +121,19 @@ export default function Create ()  {
                           placeholder="enter file url"
                          />   
                       </label>
+                      </div>
                          
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col gap-4 py-4 ">
                      <div>
-                     <label className="flex flex-row justify-between">
-                       <h1 className="font-bold"> Select a type:</h1>
-                     <select className="w-[200px] border-2 border-[#29C665]"   onChange={(e)=>{
+                     <label className="flex flex-row justify-between items-center ">
+                       <h1 className="font-bold text-[14px]"> SELECT APP TYPE:</h1>
+                     <select className="w-[50%] py-2  border  bg-gray-900 text-white"    onChange={(e)=>{
                         setType(e.target.value)
                      }}>
-                        <option value=''>
-                             
+                        <option value='browser'>
+                             Browser
                          </option>
                      <option value='office'>
                              Office
@@ -140,36 +148,37 @@ export default function Create ()  {
 
                      <div className="flex flex-col  gap-6">
                      <label className="flex flex-col">
-                     <p className="font-bold font-sans">App Title</p>
+                     <p className="font-bold ">APP TITLE</p>
                        <input 
-                        className= " py-2 border-[#29C665]   border rounded-[5px] "
+                        className= " py-2  placeholder-white bg-gray-900  w-[80%]   border rounded-[5px] "
                         name="title"
                         type='text' 
                         onChange={(e)=>setTitle(e.target.value)}
                         value={title}         
-                        placeholder="type in a title"
+                        placeholder="Type in a title"
+                        
                        />
                        </label>
                        <label className="flex flex-col">
-                       <p className="font-bold font-sans">App icon</p>
+                       <p className="font-bold ">APP ICON URL</p>
                        <input 
-                       className="py-2 border-[#29C665]  border rounded-[5px]"
+                       className="py-2 placeholder-white  bg-gray-900  border rounded-[5px]"
                         name="imageLink"
                         type='text' 
                         onChange={(e)=>setImageLink(e.target.value)}
                         value={imageLink}         
-                        placeholder="enter software icon for upload  "
+                        placeholder="Enter software icon url for upload  "
                        />
                        </label>
                        <label className="flex flex-col">
-                        <p className="font-bold font-sans">About App</p>
+                        <p className="font-bold ">ABOUT APP</p>
                        <textarea
-                        className="py-2 border-[#29C665]  border rounded-[5px]"
+                        className="py-2   placeholder-white  bg-gray-900  w-[80%]   border rounded-[5px]"
                         name="description"
                         lang="eng"
                         onChange={(e)=>setDescription(e.target.value)}
                         value={description}
-                        placeholder="write about file"
+                        placeholder="write about App"
                        />
                        </label>
                        </div>
@@ -188,11 +197,11 @@ export default function Create ()  {
                      
                   </div> 
                  
-                  <div className="flex flex-row gap-5 justify-space-between ">   
+                  <div className="flex flex-row gap-5 mt-5 justify-space-between ">   
                     <Button type='submit'
-                       className="bg-blue-400 hover:bg-blue-200"
+                       className="bg-gray-900 hover:bg-blue-200"
                        disabled={loading}>
-                        {loading ? <LuLoader2  className="animate-spin text-white w-[25px] h-[25px]"/>:'Upload'}
+                        {loading ? <LuLoader2  className="animate-spin text-white w-[25px] h-[25px]"/>:'submit'}
                     </Button>
                    {
                     loading &&
@@ -205,8 +214,17 @@ export default function Create ()  {
                    >  
                       stop
                    </Button>
-                 }  
-                 Upload progress: <progress color="" value={progress} max={100} />
+                   }
+
+                 { 
+                 loading &&(
+               <div className="border-b-4 border-l-4 border-l-[#29c665]  border-t-[#29C665] border-t-4 p-1 w-[40px] h-[40px]  rounded-full">
+                  <p className="text-center animate-pulse">
+                      {progress}
+                  </p>
+               </div>
+                 )
+               }
              </div> 
 
           </form>
