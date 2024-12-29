@@ -105,8 +105,11 @@ import { resolve } from "node:path";
           <div className="flex items-center">
             <div>
               <select value={change} className="bg-gray-900 text-white" onChange={handleChange} >
+              <option className="bg-gray-900 " value="android" >
+                     android
+                </option>
                 <option className="bg-gray-900 " value="Windows" >
-                     win
+                     window
                 </option>
                 <option className="bg-gray-900 " value="Mac" >
                    mac
@@ -133,7 +136,7 @@ import { resolve } from "node:path";
                />
               ):(
                 <Image
-                         src="/windows.svg"
+                         src="/android.png"
                          width={25}
                          height={25}
                          alt="image"        
