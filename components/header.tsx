@@ -7,10 +7,11 @@ import { navLink } from "../lib/navBaricon";
 import { resolve } from "node:path";
 
 
- export const Header =  ({osType,set})=>{
-   const navi = navigator.platform
 
-  console.log(navi)
+ export const Header =  ({osType,set})=>{
+  //  const navi = navigator.platform
+
+  // console.log(navi)
   const pathname = usePathname();
 
   const [change,setChange] = useState<string>("");
