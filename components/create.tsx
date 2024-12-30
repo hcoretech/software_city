@@ -209,7 +209,7 @@ export default function Create ()  {
                      <label className="flex flex-col w-[80%]">
                      <p className="font-bold ">APP TITLE</p>
                        <input 
-                        className= " py-2 pl-2 text-sm  placeholder-gray-900 border-gray-900   hover:shadow-sm hover:border-none hover:shadow-gray-900   border rounded-[5px] "
+                        className= " py-2 pl-2 text-sm  placeholder-gray-900 border-gray-900 focus:outline-none   hover:shadow-md hover:border-none hover:shadow-gray-900   border rounded-[5px] "
                         name="title"
                         type='text' 
                         onChange={(e)=>setTitle(e.target.value)}
@@ -221,7 +221,7 @@ export default function Create ()  {
                        <label className="flex flex-col w-[80%]">
                        <p className="font-bold ">APP ICON URL</p>
                        <input 
-                       className="py-2 pl-2 text-sm placeholder-gray-900 border border-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  rounded-[5px]"
+                       className="py-2 pl-2 text-sm placeholder-gray-900 focus:outline-none  border border-gray-900 hover:shadow-md hover:border-none hover:shadow-gray-900  rounded-[5px]"
                         name="imageLink"
                         type='text' 
                         onChange={(e)=>setImageLink(e.target.value)}
@@ -232,7 +232,7 @@ export default function Create ()  {
                        <label className="flex flex-col w-[80%] ">
                         <p className="font-bold ">ABOUT APP</p>
                        <textarea
-                        className="h-[160px] py-2 pl-2 rounded-[5px] bg-gray-900  text-white flex flex-center   text-sm placeholder-white hover:shadow-sm hover:border-none hover:shadow-gray-900   border-gray-900 "
+                        className="h-[160px] py-2 pl-2 rounded-[5px]  border flex flex-center focus:outline-none   text-sm placeholder-white hover:shadow-md hover:border-none hover:shadow-gray-900   border-gray-900 "
                         name="description"
                         lang="eng"
                         onChange={(e)=>setDescription(e.target.value)}
