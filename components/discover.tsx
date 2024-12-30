@@ -14,13 +14,13 @@ export const Discovers = () => {
 
         <div className="">
             <h1 className=" text-[15px] text-gray-900 ">All software</h1>
-            <div className="flex flex-wrap gap-2  " >
+            <div className="flex flex-wrap gap-2  justify-center " >
                    {
                                   imageLib.map((data,index)=>{
                   
                                     return(
-                                      <div key={index} className=" border p-6 mx-2 shadow-md rounded-[5px]   " >
-                                         <Image src={data.src} className="w-[40px]  h-[40px]" width={40} height={40} alt="image"/>
+                                      <div key={index} className=" border p-4 mx-2 shadow-md rounded-[5px]   " >
+                                         <Image src={data.src} className="w-[50px]  h-[50px]" width={40} height={40} alt="image"/>
                                          <p className="text-gray-900 text-center"> {data.name}</p>
                                       </div>
                                       

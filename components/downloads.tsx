@@ -198,12 +198,12 @@ export default function GetDownload () {
              
            </div>    
         </div>
-        <div className="flex flex-row flex-wrap gap-2   ">
+        <div className="flex flex-row flex-wrap gap-2 justify-center   ">
               {
                 imageLib.map((data,index)=>{
 
                   return(
-                    <div key={index} className=" border p-6 mx-2 shadow-md rounded-[5px]   " >
+                    <div key={index} className=" border p-4 mx-2 shadow-md rounded-[5px]   " >
                        <Image src={data.src} className="w-[50px] h-[50px]" width={50} height={50} alt="image"/>
                        <p className="text-gray-900 text-center"> {data.name}</p>
                     </div>
