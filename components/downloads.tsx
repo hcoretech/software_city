@@ -204,7 +204,7 @@ export default function GetDownload () {
 
                   return(
                     <div key={index} className=" border p-6 mx-2 shadow-md rounded-[5px]   " >
-                       <Image src={data.src} className="w-[40px] h-[40px]" width={40} height={40} alt="image"/>
+                       <Image src={data.src} className="w-[50px] h-[50px]" width={50} height={50} alt="image"/>
                        <p className="text-gray-900 text-center"> {data.name}</p>
                     </div>
                     
