@@ -86,7 +86,7 @@ export default function Create ()  {
 
 
     return (
-        <section className=" py-16  w-full ">
+        <section className=" py-16  w-full">
              <form onSubmit={handleSubmit} encType="multipart/form-data" className="  " >
              <div>
                {/* <h1 className="text-[20px] text-center font-sans sm:text-[15px]   font-bold">
@@ -94,7 +94,7 @@ export default function Create ()  {
                </h1> */}
              </div>
              <div className=" ">
-                <div  className=" flex justify-around  my-10 border bg-gray-200 py-4">
+                <div  className=" flex justify-around   my-10 border bg-gray-200 py-4">
                   {
                    
                    blob?(
@@ -176,11 +176,11 @@ export default function Create ()  {
                          
                     </div> */}
 
-                    <div className="flex flex-col gap-4 py-4 ">
+                    <div className="flex flex-col py-4  ">
                      <div>
-                     <label className="flex flex-row justify-between items-center ">
+                     <label className="flex flex-row justify-around items-center ">
                        <h1 className="font-bold text-[14px]"> SELECT APP TYPE:</h1>
-                     <select className="w-[50%] py-2  border   text-gray-900"    onChange={(e)=>{
+                     <select className=" py-2  border   text-gray-900"    onChange={(e)=>{
                         setType(e.target.value)
                      }}>
                         <option value='browser'>
@@ -197,11 +197,11 @@ export default function Create ()  {
                      </label>
                      </div>
 
-                     <div className="flex flex-col  gap-6">
-                     <label className="flex flex-col">
+                     <div className="flex flex-col items-center  gap-6">
+                     <label className="flex flex-col w-[80%]">
                      <p className="font-bold ">APP TITLE</p>
                        <input 
-                        className= " py-2 pl-2 text-sm  placeholder-gray-900 border-gray-900  w-[80%] hover:shadow-sm hover:border-none hover:shadow-gray-900   border rounded-[5px] "
+                        className= " py-2 pl-2 text-sm  placeholder-gray-900 border-gray-900   hover:shadow-sm hover:border-none hover:shadow-gray-900   border rounded-[5px] "
                         name="title"
                         type='text' 
                         onChange={(e)=>setTitle(e.target.value)}
@@ -210,7 +210,7 @@ export default function Create ()  {
                         
                        />
                        </label>
-                       <label className="flex flex-col">
+                       <label className="flex flex-col w-[80%]">
                        <p className="font-bold ">APP ICON URL</p>
                        <input 
                        className="py-2 pl-2 text-sm placeholder-gray-900 border border-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  rounded-[5px]"
@@ -221,10 +221,10 @@ export default function Create ()  {
                         placeholder="Enter software icon url for upload  "
                        />
                        </label>
-                       <label className="flex flex-col">
+                       <label className="flex flex-col w-[80%] ">
                         <p className="font-bold ">ABOUT APP</p>
                        <textarea
-                        className="h-[180px] pl-2 text-sm placeholder-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  w-[80%] border-gray-900    border rounded-[5px]"
+                        className="h-[160px]  bg-gray-900  text-white flex flex-center   text-sm placeholder-white hover:shadow-sm hover:border-none hover:shadow-gray-900   border-gray-900 "
                         name="description"
                         lang="eng"
                         onChange={(e)=>setDescription(e.target.value)}

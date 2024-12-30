@@ -18,30 +18,36 @@
 // ]
 
 export const swipe = [
-    {
+    {   
+        id:1,
         name:'photoshop',
         image:'/photoshop.png',
-        color: "blue-200"
+        color: 'gray-900'
     },
     {
+        id:2,
         name:'word',
         image:'/word.svg',
-         color: "blue-200"
+        color: ' bg-blue-400'
+       
     },
-    {
+    {   
+        id:3,
         name:'microsoft',
         image:'/microsoft.webp',
-         color: "blue-200"
+         color: 'bg-red-300'
     },
-    {
-        name:'photoshop',
-        image:'/photoshop.png',
-         color: "blue-200"
-    },
-    {
-        name:'photoshop',
-        image:'/photoshop.png',
-         color: "blue-200"
-    }
+    // {   
+    //     id:4,
+    //     name:'photoshop',
+    //     image:'/photoshop.png',
+    //      color: "blue-200"
+    // },
+    // {   
+    //     id:5,
+    //     name:'photoshop',
+    //     image:'/photoshop.png',
+    //      color: "blue-200"
+    // }
     
 ]

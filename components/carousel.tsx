@@ -4,6 +4,7 @@ import Autoplay from "embla-carousel-autoplay"
 import { Card, CardContent } from "./ui/card"
 import { swipe } from "../constants/icon"
 import Image from "next/image"
+import { useEffect } from "react"
 
 import {
   Carousel,
@@ -16,7 +17,10 @@ import { Suspense } from "react"
 
 
 export const CarouselPlugin = () => {
-    
+   
+  useEffect(()=>{
+
+  },[swipe])
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
@@ -29,23 +33,27 @@ export const CarouselPlugin = () => {
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
-        {swipe.map((data, index) => (
+        {swipe.map((data, index) => {
+          const colordata = data.color;
+          const check  = colordata === data.color;
+          const active = check && `bg-${data.color}`;
+
+          return(
           <CarouselItem key={index}>
-            <div className="">
+            <div >
             {/* <h1 className="font-bold"> Updates</h1> */}
-              <Card className={`bg-${data.color} `}>
-             
+              <Card className={active}>             
                 <CardContent className="flex items-center justify-center p-10">
                   <Suspense fallback={<h1> loading</h1>}>
                   {/* <span className="text-4xl font-semibold">{index + 1}</span> */}
-                  <Image src={data.image} alt="image" width={100} height={100}  />
+                  <Image className="w-[100px] h-100[px]" src={data.image} alt="image"  width={100} height={100}  />
                   </Suspense>
                 </CardContent>
-                <div>{data.name}</div>
+                <div className="">{data.name}</div>
               </Card>
             </div>
           </CarouselItem>
-        ))}
+        )})}
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
