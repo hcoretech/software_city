@@ -72,10 +72,10 @@ export default function Create ()  {
    const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setLoading(true);
-
+      const filepath = fileSend();
+      
       try{
-          const filepath =await  fileSend();
-             console.log(filepath)                  
+  console.log(filepath)                  
              setLoading(false)   
         }  
       catch(error){
