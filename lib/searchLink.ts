@@ -57,6 +57,10 @@ export const searchLinks = [
         title:"Trading",
         url:""
      },
+     {
+      title:"search",
+      url:""
+     }
    
 
 

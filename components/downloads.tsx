@@ -68,12 +68,12 @@ export default function GetDownload () {
     }
 
   return(
-        <section className="items-center gap-5 flex-col flex  py-14 ">
+        <section className=" gap-5 flex-col flex  py-14 ">
             {/* <div className="flex-center flex  shadow-md bg-light-300 shadow-gray-300  w-full">
               <h1 className="text-md font-semibold  font-sans">search</h1>
               </div> */}
 
-             <div className="flex flex-row items-center pt-4 justify-between">            
+             <div className="flex flex-row items-center pt-4 justify-center">            
                  {/* <div className="  rounded-md">
                     <CiMenuKebab  className=" w-[23px] h-[23px]  text-black"/>
                  </div> */}
@@ -201,6 +201,11 @@ export default function GetDownload () {
             </p>
            )
          }
+         <div>
+          <div>
+            <h1 className="pl-5 font-bold">Similar Apps</h1>
+          </div>
+         </div>
         
         </section>
     )
