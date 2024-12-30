@@ -72,7 +72,7 @@ export default function Create ()  {
    const fileInput = useRef<HTMLInputElement>(null);
    
    const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
-      // event.preventDefault();
+      event.preventDefault();
       setLoading(true);
       const filepath = await fileSend();
 
