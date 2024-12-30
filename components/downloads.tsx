@@ -12,6 +12,7 @@ import { MdStarHalf } from "react-icons/md";
 import { MdVerified } from "react-icons/md";
 import { searchLinks } from "../lib/searchLink";
 import Link from "next/link";
+import { imageLib } from "../lib/imageLibrary";
 
 
 
@@ -106,6 +107,7 @@ export default function GetDownload () {
                 </form>
                </div>
            
+           
             <div className="flex gap-5 flex-wrap p-5 " > 
                {
                 searchLinks.map((data,index)=>{
@@ -128,6 +130,8 @@ export default function GetDownload () {
             <div>
                 
             </div>
+
+           
             
              <div className="w-full">
               {
@@ -194,7 +198,20 @@ export default function GetDownload () {
              
            </div>    
         </div>
-     
+        <div className="flex flex-row flex-wrap gap-2   ">
+              {
+                imageLib.map((data,index)=>{
+
+                  return(
+                    <div key={index} className=" border p-6 mx-2 shadow-md rounded-[5px]   " >
+                       <Image src={data.src} className="w-[40px] h-[40px]" width={40} height={40} alt="image"/>
+                       <p className="text-gray-900 text-center"> {data.name}</p>
+                    </div>
+                    
+                  )
+                })
+              }
+            </div>
           { error &&(
             <p>
               {error?.message}
@@ -205,6 +222,20 @@ export default function GetDownload () {
           <div>
             <h1 className="pl-5 font-bold">Similar Apps</h1>
           </div>
+          <div className="flex flex-row flex-wrap gap-2   ">
+              {
+                imageLib.map((data,index)=>{
+
+                  return(
+                    <div key={index} className=" border p-6 mx-2 shadow-md rounded-[5px]  " >
+                       <Image src={data.src} className="w-[40px] h-[40px]" width={40} height={40} alt="image"/>
+                       <p className="text-gray-900 text-center"> {data.name}</p>
+                    </div>
+                    
+                  )
+                })
+              }
+            </div>
          </div>
         
         </section>
