@@ -28,7 +28,7 @@ export const CarouselPlugin = () => {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className=" justify-center w-screen"
+      className="justify-center w-screen"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -37,6 +37,7 @@ export const CarouselPlugin = () => {
           const colordata = data.color;
           const check  = colordata === data.color;
           const active = check && `bg-gray-900`;
+          
 
           return(
           <CarouselItem key={index}>

@@ -198,14 +198,14 @@ export default function GetDownload () {
              
            </div>    
         </div>
-        <div className="flex flex-row flex-wrap gap-2 px-2   ">
+        <div className="flex flex-row flex-wrap gap-5 px-2   ">
               {
                 imageLib.map((data,index)=>{
 
                   return(
-                    <div key={index} className=" border p-4 mx-2 shadow-md rounded-[5px]   " >
-                       <Image src={data.src} className="w-[50px] h-[50px]" width={50} height={50} alt="image"/>
-                       <p className="text-gray-900 text-center"> {data.name}</p>
+                    <div key={index} className=" mx-2  rounded-[5px] gap-4 flex flex-col items-center    " >
+                       <Image src={data.src} className="shadow-md shadow-gray-900 rounded-full w-[60px] h-[60px] image-center" width={50} height={50} alt="image"/>
+                       <p className="rounded-sm shadow-md bg-gray-900 w-[60px] text-white text-center"> {data.name}</p>
                     </div>
                     
                   )
@@ -222,15 +222,15 @@ export default function GetDownload () {
           <div>
             <h1 className="pl-5 font-bold">Similar Apps</h1>
           </div>
-          <div className="flex flex-row flex-wrap gap-2 px-2   ">
-              {
+          <div className="flex flex-row flex-wrap gap-5 px-2    ">
+          {
                 imageLib.map((data,index)=>{
 
                   return(
-                    <div key={index} className=" border p-6 mx-2 shadow-md rounded-[5px]  " >
-                       <Image src={data.src} className="w-[50px] h-[50px]" width={40} height={40} alt="image"/>
-                       <p className="text-gray-900 text-center"> {data.name}</p>
-                    </div>
+                    <Link href="" key={index} className=" mx-2  rounded-[5px] gap-4 flex flex-col items-center    " >
+                       <Image src={data.src} className="shadow-md shadow-gray-900  rounded-full w-[60px] h-[60px] image-center" width={50} height={50} alt="image"/>
+                       <p className="rounded-sm shadow-md bg-gray-900 w-[60px] text-white text-center"> {data.name}</p>
+                    </Link>
                     
                   )
                 })
