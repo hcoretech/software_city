@@ -1,6 +1,6 @@
 'use client'
 
-import {useRef, useState} from "react";
+import {createElement, useRef, useState} from "react";
 import { Button } from "./ui/button";
 import { useRouter } from 'next/navigation';
 import { FormEvent } from "react";
@@ -18,13 +18,13 @@ export default function Create ()  {
     const[loading,setLoading] = useState<boolean>(false);
     const [title,setTitle] = useState<string>("");
     const [type,setType] = useState<string>("");
-    const [file,setFile] = useState <File | null>(null);
+    const [file,setFile] = useState (null);
     const [imageLink,setImageLink] = useState<string>('');
     const [description,setDescription] = useState<string>('');
     const [error,setError]= useState(null);
     const [progress,setProgress] = useState<number>(0);
 
-
+    console.log(file)
    const abortController = new AbortController();
     
    const fileSend = async()=>{
@@ -94,7 +94,30 @@ export default function Create ()  {
              <div className=" ">
                 <div  className=" flex justify-around  my-10 border bg-gray-200 py-4">
 
-                    <Button className= "hover:text-white  transition delay-300 duration-300 ease-in-out bg-white text-gray-400 p-20 shadow-md font-bold  ">
+                    <Button onClick={
+                        
+                        ()=>{
+                           let input = document.createElement("input");
+                           // document.querySelector(`input"[type:"file"]`)
+                           input.type ="file";
+                            input.name = "file";
+                           input.files
+                           //  input.onchange =((event) => setFile(event))
+                            const click = input.click() 
+                            input.addEventListener("change",()=>{
+                              const fileList = this.files;
+                                setFile(fileList)
+                            })
+                            
+                            const fileList = this.files
+                     
+                           
+
+                        }
+                    }
+                 
+               
+                    className= "hover:text-white  transition delay-300 duration-300 ease-in-out bg-white text-gray-400 p-20 shadow-md font-bold  ">
                      <span className="flex flex-col  items-center">
                      <span className=" text-[30px]">
                        +

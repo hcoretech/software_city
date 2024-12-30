@@ -4,7 +4,7 @@ export const navLink = [
     {
         label:"upload",
         route:"/Home",
-        icon1: "/cloud1.svg",
+        icon1: "/cloud11.svg",
         icon2: "/cloud2.svg",
         heading:"software upload"
         
@@ -13,7 +13,7 @@ export const navLink = [
     {
         label:"Discover",
         route:"/discover",
-        icon1:"/hardrive1.svg",
+        icon1:"/hardrive11.svg",
         icon2:"/hardrive2.svg",
         heading:"Home"
     },
@@ -34,7 +34,7 @@ export const navLink = [
     {
         label:"Community",
         route:"/community",
-        icon1:"/community1.svg",
+        icon1:"/community11.svg",
         icon2:"/community2.svg",
         heading:"community"
 

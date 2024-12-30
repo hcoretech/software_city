@@ -115,7 +115,7 @@ export default function GetDownload () {
                   const round = active ? ("p-1 text-[#fff] shadow-sm shadow-[#29C665] bg-[#29C665] items-center"):(" items-center rounded-[5px] p-2 border border-[#29c665] ");
                   return(
                       //  <ul className="flex flex-row">
-                        <li className={`${round} flex flex-row`} key={index}>
+                        <li className={`${round} flex flex-row text-sm`} key={index}>
                            <Link href="">
                              {data.title}                          
                            </Link>
