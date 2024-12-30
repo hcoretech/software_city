@@ -257,7 +257,7 @@ export default function Create ()  {
                      
                   </div> 
                  
-                  <div className="flex flex-row gap-5 mt-5 mb-5 justify-space-between ">   
+                  <div className="flex flex-row gap-5 mt-5 mb-5 items-center justify-center ">   
                     <Button type='submit'
                        className="bg-gray-900 hover:bg-blue-200"
                        disabled={loading}>
@@ -278,7 +278,7 @@ export default function Create ()  {
 
                  { 
                  loading &&(
-               <div className="border-b-4 border-l-4 border-l-[#29c665]  border-t-[#29C665] border-t-4 p-1 w-[40px] h-[40px]  rounded-full">
+               <div className="border-b-4 border-l-4 border-l-[#29c665]  border-t-[#29C665] border-t-4 p-2 w-[40px] h-[40px]  rounded-full">
                   <p className="text-center animate-pulse">
                       {progress}
                   </p>
