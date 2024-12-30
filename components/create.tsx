@@ -244,7 +244,7 @@ export default function Create ()  {
                     </div>
                    
                   </div>
-                  <div className="flex flex-row px-14 gap-2 ">
+                  <div className="flex flex-row px-10 gap-2 ">
                     <div>
                      <input type="checkbox" />
                      </div>
@@ -278,7 +278,7 @@ export default function Create ()  {
 
                  { 
                  loading &&(
-               <div className="border-b-4 border-l-4 border-l-[#29c665]  border-t-[#29C665] border-t-4 p-2 w-[40px] h-[40px]  rounded-full">
+               <div className="border-b-4 border-l-4 border-l-[#29c665]  border-t-[#29C665] border-t-4 p-2 w-[40px] h-[40px] item-center  rounded-full">
                   <p className="text-center animate-pulse">
                       {progress}
                   </p>
