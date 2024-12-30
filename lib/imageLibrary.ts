@@ -4,8 +4,9 @@
 
 export const imageLib =[
     {
-        name:"adb",
-        src : "/adb.jiff"
+        name:"vlc",
+        src:"/vlc.svg"
+
     },
     {
         name:"vlc",
