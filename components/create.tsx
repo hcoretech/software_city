@@ -259,9 +259,9 @@ export default function Create ()  {
                  
                   <div className="flex flex-row gap-5 mt-5 mb-5 items-center justify-center ">   
                     <Button type='submit'
-                       className="bg-gray-900 hover:bg-blue-200"
+                       className="bg-white  border-[#29C665]  shadow-sm border hover:border-none   text-gray-900 shadow-gray-900 hover:bg-gray-900 hover:text-white"
                        disabled={loading}>
-                        {loading ? <LuLoader2  className="animate-spin text-white w-[25px] h-[25px]"/>:'submit'}
+                        {loading ? <LuLoader2  className="animate-spin w-[25px] h-[25px]"/>:'submit'}
                     </Button>
                    {
                     loading &&
