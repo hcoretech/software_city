@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { FormEvent } from "react";
 // import { CommonUploadOptions } from "@vercel/blob/client";
 import { upload } from "@vercel/blob/client";
-
+import Image from "next/image";
 
 import { LuLoader2 } from "react-icons/lu";
 export const runtime = 'edge'
@@ -19,6 +19,7 @@ export default function Create ()  {
     const [title,setTitle] = useState<string>("");
     const [type,setType] = useState<string>("");
     const [file,setFile] = useState<File|null> (null);
+    const [blob,setBlob]= useState<string|null>(null)
     const [imageLink,setImageLink] = useState<string>('');
     const [description,setDescription] = useState<string>('');
     const [error,setError]= useState(null);
@@ -26,25 +27,24 @@ export default function Create ()  {
 
    
    const abortController = new AbortController();
-    
+   console.log(file)
    const fileSend = async()=>{
       try {
-         
 
-       
             if(file === null){
             throw ( "no file selected");
         
            }
+        
          
-    
+           
          const fileSet = {
                type,
                title,
                imageLink,
                 description
               }
-              console.log(fileSet)
+           
               console.log(file)
         const uploadFile = await upload(file.name,file,{
       
@@ -68,6 +68,7 @@ export default function Create ()  {
     }
 
    const fileInput = useRef<HTMLInputElement>(null);
+   
    const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setLoading(true);
@@ -94,39 +95,55 @@ export default function Create ()  {
              </div>
              <div className=" ">
                 <div  className=" flex justify-around  my-10 border bg-gray-200 py-4">
-
+                  {
+                   
+                   blob?(
+                     <div>
+                     <Image className="w-[80px] h-[80px] " width={60} height={60}  src="/file.png" alt="logo"/>
+                     <p> {file.name}</p>
+                     </div>
+                 ):(
                     <Button onClick={
-                        
-                        ()=>{
-
-                            
-                           let input = document.getElementById("inputs");
-                           input.click()
-                           
-
-                        }
+                    ()=>{
+                   
+                       let input = document.getElementById("inputs");
+                       input.click();
                     }
+                }  
+                className= "hover:text-white  transition delay-300 duration-300 ease-in-out bg-white text-gray-400 p-20 shadow-md font-bold  ">
+                 <span className="flex flex-col  items-center">
+                 <span className=" text-[30px]">
+                   +
+                 </span>
+                 <span>
+                    select from device
+                 </span>
                  
-               
-                    className= "hover:text-white  transition delay-300 duration-300 ease-in-out bg-white text-gray-400 p-20 shadow-md font-bold  ">
-                     <span className="flex flex-col  items-center">
-                     <span className=" text-[30px]">
-                       +
-                     </span>
-                     <span>
-                        select from device
-                     </span>
-                     
-                     </span>
-                     
-                    </Button>
+                 </span>                     
+                </Button>
+                 )
+                
+                   }
+                    
+                    
+
                   </div>  
                   {
                      <input  id="inputs"  className=""
                      name="file"
                      type='file'
                      ref={fileInput}
-                     onChange={(event)=> setFile(event.currentTarget.files[0])} 
+                     onChange={(event)=> 
+                        {
+                           setFile(event.currentTarget.files[0])
+                                                        
+                           const url = URL.createObjectURL(event.currentTarget.files[0]);
+                              setBlob(url)
+                              console.log(blob)
+                          
+                          
+                        }
+                        } 
                      placeholder="select file"
                      hidden
                    
