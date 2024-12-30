@@ -44,10 +44,10 @@ export const CarouselPlugin = () => {
             {/* <h1 className="font-bold"> Updates</h1> */}
               <Card className={active}>             
                 <CardContent className="flex items-center justify-center p-10">
-                  <Suspense fallback={<h1> loading</h1>}>
+                  {/* <Suspense fallback={<h1> loading</h1>}> */}
                   {/* <span className="text-4xl font-semibold">{index + 1}</span> */}
                   <Image className="w-[100px] h-100[px]" src={data.image} alt="image"  width={100} height={100}  />
-                  </Suspense>
+                  {/* </Suspense> */}
                 </CardContent>
                 <div className="">{data.name}</div>
               </Card>

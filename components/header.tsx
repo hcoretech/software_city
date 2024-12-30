@@ -82,7 +82,7 @@ import { resolve } from "node:path";
 
      return(
      
-         <header className=" justify-between  max-h-screen left-0  top-0 right-0  flex items-center bg-gray-900  p-2 shadow-md  fixed ">
+         <header className=" justify-between  max-h-screen left-0  top-0 right-0  flex items-center bg-gray-900  p-2 shadow-md  fixed z-10 ">
           <div className="gap-2 flex items-center">
 
           <div className="p-2 bg-[#05140C] rounded-full"> 
