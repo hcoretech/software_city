@@ -86,15 +86,15 @@ export default function Create ()  {
 
 
     return (
-        <section className=" py-16  w-full">
+        <section className=" py-16   ">
              <form onSubmit={handleSubmit} encType="multipart/form-data" className="  " >
              <div>
                {/* <h1 className="text-[20px] text-center font-sans sm:text-[15px]   font-bold">
                   Upload software  
                </h1> */}
              </div>
-             <div className=" ">
-                <div  className=" flex justify-around   my-10 border bg-gray-200 py-4">
+             <div className=" flex flex-col ">
+                <div  className=" flex justify-around  my-10 border bg-gray-200 py-4">
                   {
                    
                    blob?(
@@ -224,7 +224,7 @@ export default function Create ()  {
                        <label className="flex flex-col w-[80%] ">
                         <p className="font-bold ">ABOUT APP</p>
                        <textarea
-                        className="h-[160px]  bg-gray-900  text-white flex flex-center   text-sm placeholder-white hover:shadow-sm hover:border-none hover:shadow-gray-900   border-gray-900 "
+                        className="h-[160px] py-2 pl-2 rounded-[5px] bg-gray-900  text-white flex flex-center   text-sm placeholder-white hover:shadow-sm hover:border-none hover:shadow-gray-900   border-gray-900 "
                         name="description"
                         lang="eng"
                         onChange={(e)=>setDescription(e.target.value)}
@@ -236,12 +236,13 @@ export default function Create ()  {
                     </div>
                    
                   </div>
-                  <div className="flex flex-row  gap-3">
-                     <div>
+                  <div className="flex flex-row px-14 gap-2 ">
+                    <div>
                      <input type="checkbox" />
                      </div>
+                  
                      <div>
-                        <p className=" wrap text-[14px]"> Agree to terms and condition that you will not push
+                        <p className=" wrap text-[14px] "> Agree to terms and condition that you will not push
                            a software for the purpose of affecting the community but rather help the community.
                         </p>
                      </div>   
