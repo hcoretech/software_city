@@ -36,7 +36,7 @@ export const CarouselPlugin = () => {
         {swipe.map((data, index) => {
           const colordata = data.color;
           const check  = colordata === data.color;
-          const active = check && `bg-${data.color}`;
+          const active = check && `bg-gray-900`;
 
           return(
           <CarouselItem key={index}>
