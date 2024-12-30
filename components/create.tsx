@@ -18,13 +18,13 @@ export default function Create ()  {
     const[loading,setLoading] = useState<boolean>(false);
     const [title,setTitle] = useState<string>("");
     const [type,setType] = useState<string>("");
-    const [file,setFile] = useState (null);
+    const [file,setFile] = useState<File|null> (null);
     const [imageLink,setImageLink] = useState<string>('');
     const [description,setDescription] = useState<string>('');
     const [error,setError]= useState(null);
     const [progress,setProgress] = useState<number>(0);
 
-    console.log(file)
+   
    const abortController = new AbortController();
     
    const fileSend = async()=>{
@@ -44,7 +44,8 @@ export default function Create ()  {
                imageLink,
                 description
               }
-     
+              console.log(fileSet)
+              console.log(file)
         const uploadFile = await upload(file.name,file,{
       
               access:'public',
@@ -72,7 +73,7 @@ export default function Create ()  {
       setLoading(true);
 
       try{
-          const filepath = fileSend();
+          const filepath =await  fileSend();
              console.log(filepath)                  
              setLoading(false)   
         }  
@@ -97,20 +98,10 @@ export default function Create ()  {
                     <Button onClick={
                         
                         ()=>{
-                           let input = document.createElement("input");
-                           // document.querySelector(`input"[type:"file"]`)
-                           input.type ="file";
-                            input.name = "file";
-                           input.files
-                           //  input.onchange =((event) => setFile(event))
-                            const click = input.click() 
-                            input.addEventListener("change",()=>{
-                              const fileList = this.files;
-                                setFile(fileList)
-                            })
+
                             
-                            const fileList = this.files
-                     
+                           let input = document.getElementById("inputs");
+                           input.click()
                            
 
                         }
@@ -130,6 +121,17 @@ export default function Create ()  {
                      
                     </Button>
                   </div>  
+                  {
+                     <input  id="inputs"  className=""
+                     name="file"
+                     type='file'
+                     ref={fileInput}
+                     onChange={(event)=> setFile(event.currentTarget.files[0])} 
+                     placeholder="select file"
+                     hidden
+                   
+                   />
+                  }
                     {/* <div className=" justify-between flex flex-row shadow-sm  ">
                      <div>
                      <label className="">
@@ -182,7 +184,7 @@ export default function Create ()  {
                      <label className="flex flex-col">
                      <p className="font-bold ">APP TITLE</p>
                        <input 
-                        className= " py-2 pl-2  placeholder-gray-900 border-gray-900  w-[80%] hover:shadow-sm hover:border-none hover:shadow-gray-900   border rounded-[5px] "
+                        className= " py-2 pl-2 text-sm  placeholder-gray-900 border-gray-900  w-[80%] hover:shadow-sm hover:border-none hover:shadow-gray-900   border rounded-[5px] "
                         name="title"
                         type='text' 
                         onChange={(e)=>setTitle(e.target.value)}
@@ -194,7 +196,7 @@ export default function Create ()  {
                        <label className="flex flex-col">
                        <p className="font-bold ">APP ICON URL</p>
                        <input 
-                       className="py-2 pl-2 placeholder-gray-900 border border-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  rounded-[5px]"
+                       className="py-2 pl-2 text-sm placeholder-gray-900 border border-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  rounded-[5px]"
                         name="imageLink"
                         type='text' 
                         onChange={(e)=>setImageLink(e.target.value)}
@@ -205,7 +207,7 @@ export default function Create ()  {
                        <label className="flex flex-col">
                         <p className="font-bold ">ABOUT APP</p>
                        <textarea
-                        className="h-[180px] pl-2 placeholder-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  w-[80%] border-gray-900    border rounded-[5px]"
+                        className="h-[180px] pl-2 text-sm placeholder-gray-900 hover:shadow-sm hover:border-none hover:shadow-gray-900  w-[80%] border-gray-900    border rounded-[5px]"
                         name="description"
                         lang="eng"
                         onChange={(e)=>setDescription(e.target.value)}
