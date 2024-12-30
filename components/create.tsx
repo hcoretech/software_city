@@ -60,7 +60,8 @@ export default function Create ()  {
               }
            )
 
-             return uploadFile;
+             const data = await uploadFile;
+             return data
 
      }catch (error) {
 
@@ -75,12 +76,18 @@ export default function Create ()  {
       event.preventDefault();
       setLoading(true);
       try{
-         const filepath =  fileSend();
-  console.log(filepath)                  
-             setLoading(false)   
+
+         const filepath = await fileSend();
+           console.log(filepath)  
+           return filepath
+
+            
         }  
       catch(error){
         setError(error);
+      }
+      finally{
+         setLoading(false)
       }
    
  }
