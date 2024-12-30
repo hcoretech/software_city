@@ -14,7 +14,7 @@ export const Discovers = () => {
 
         <div className="">
             <h1 className=" text-[15px] text-gray-900 ">All software</h1>
-            <div className="flex flex-wrap gap-2  justify-center " >
+            <div className="flex flex-wrap gap-2  px-2 " >
                    {
                                   imageLib.map((data,index)=>{
                   
