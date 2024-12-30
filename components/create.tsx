@@ -28,7 +28,8 @@ export default function Create ()  {
    
    const abortController = new AbortController();
    console.log(file)
-   const fileSend = async()=>{
+
+   const fileSend = async() => {
       try {
 
             if(file === null){
@@ -45,7 +46,7 @@ export default function Create ()  {
                 description
               }
            
-              console.log(file)
+          
         const uploadFile = await upload(file.name,file,{
       
               access:'public',
@@ -58,10 +59,11 @@ export default function Create ()  {
 
               }
            )
-        
 
-        return uploadFile
+             return uploadFile;
+
      }catch (error) {
+
           setError(error)
      }
 
@@ -70,10 +72,10 @@ export default function Create ()  {
    const fileInput = useRef<HTMLInputElement>(null);
    
    const handleSubmit = async(event:FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
+      // event.preventDefault();
       setLoading(true);
-      const filepath = fileSend();
-      
+      const filepath = await fileSend();
+
       try{
   console.log(filepath)                  
              setLoading(false)   
@@ -86,7 +88,7 @@ export default function Create ()  {
 
 
     return (
-        <section className=" py-16   ">
+        <section className=" py-16 ">
              <form onSubmit={handleSubmit} encType="multipart/form-data" className="  " >
              <div>
                {/* <h1 className="text-[20px] text-center font-sans sm:text-[15px]   font-bold">
