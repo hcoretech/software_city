@@ -51,7 +51,7 @@ export async function POST(request:NextRequest):Promise<NextResponse>{
                     allowedContentTypes:[
                         'text/plain','text/csv','text/html',
                         'image/png','image/svg',
-                        'application/zip','application/x-msdos-program',
+                        'application/zip','application/x-msdos-program ', 'application/x-msdownload',
                         'image/jpeg','image/gif','image/svg+xml','image/webp',
                         'video/mp4','video/mkv','video/avi',
                         'audio/mp3','audio/mpeg','audio/wav','audio/ogg'],
