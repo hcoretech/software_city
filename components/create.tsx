@@ -110,7 +110,7 @@ export default function Create ()  {
                      <Image className="w-[80px] h-[80px] " width={60} height={60}  src="/file.png" alt="logo"/>
                      <p> {file.name}</p>
                      </div>
-                 ):(
+                   ):(
                     <Button onClick={
                     ()=>{
                    
@@ -188,7 +188,7 @@ export default function Create ()  {
                      <div>
                      <label className="flex flex-row justify-around items-center ">
                        <h1 className="font-bold text-[14px]"> SELECT APP TYPE:</h1>
-                     <select className=" py-2  border   text-gray-900" onChange={(e)=>{
+                     <select className=" py-2  border  text-gray-900" name="softype" onChange={(e)=>{
                         setType(e.target.value)
                      }}>
                         <option value='browser'>
@@ -289,7 +289,7 @@ export default function Create ()  {
 
           </form>
           {
-            error&&
+            error &&
             <p className="text-center font-bold text-red-400">{error}</p>
           }
 

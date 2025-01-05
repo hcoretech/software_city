@@ -108,7 +108,7 @@ import { resolve } from "node:path";
             </div>
           <div className="flex items-center">
             <div>
-              <select value={change} className="bg-gray-900 text-white" onChange={handleChange} >
+              <select value={change} name="device" className="bg-gray-900 text-white" onChange={handleChange} >
               <option className="bg-gray-900 " value="android" >
                      android
                 </option>
