@@ -9,13 +9,13 @@ export default function Welcome(){
         <div>
         <div id="section" className=" items-center flex flex-col relative mx-w-5xl mx-auto pt-20 phone:pt-20 bg-gray-900 ">
                  <div className="">
-                    <h1 className="text-white font-sans font-extrabold text-6xl  text-center tracking-tight ">
+                    <h1 className="text-white font-sans font-extrabold text-4xl  text-center tracking-tight ">
                    Software city
                     </h1>
                  </div>
                  <div className="">
-                 <p className="text-white my-6 text-2xl font-sans font-bold text-center  mx-auto max-w-3xl">Software-city a community  that  provide your softwares need  with Installation guide rangings from latest software update </p>
-                 <p className="text-white my-6  text-2xl font-bold   text-center ">All Sofwares are scan properly for any virus before been posted to the software-city </p>
+                 <p className="text-white my-6 text-md  font-bold text-center  mx-auto max-w-3xl">Software-city a community  that  provide your softwares need  with Installation guide rangings from latest software update </p>
+                 <p className="text-white my-6  text-md    text-center ">All Sofwares are scan properly for any virus before been posted to the software-city </p>
                  </div>
 
                  <div className="p-3">
@@ -41,7 +41,7 @@ export default function Welcome(){
                 }
                
             </div>
-            <div className="bg-gradient-to-r from-[#874DFB] [#874DFB]  to-[#000F0C] via-[#000] flex flex-row h-[230px] justify-between  items-center ">
+            <div className="bg-gradient-to-b from-[#874DFB] [#874DFB]  to-[#000F0C] via-[#000] flex flex-row h-[230px] justify-between  items-center ">
                 <div className=" ml-4">
                 <h1 className="font-bold px-5 text-white text-[18px] text-center  ">
                     windows 11 lunching the latest version 25.1
@@ -58,13 +58,13 @@ export default function Welcome(){
                 </div>
                 <div className="">
                     {/* <p className="text-white"> */}
-                     <Image src="/windows11.jpg" alt="news" width={300} height={2300} className="w-[1400px] h-[230px] opacity-80 "/>
+                     <Image src="/windows11.jpg" alt="news" width={300} height={2300} className="w-[1400px] h-[230px]  "/>
                      
                     {/* </p> */}
                 </div>
             </div>
             <div className="p-4" >
-            <Link className=" p-2 border border-gray-900" href =''>
+            <Link className=" p-2 border border-gray-900 " href =''>
                  Get iso 
                  </Link>
             </div>
