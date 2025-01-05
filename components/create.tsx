@@ -188,7 +188,7 @@ export default function Create ()  {
                      <div>
                      <label className="flex flex-row justify-around items-center ">
                        <h1 className="font-bold text-[14px]"> SELECT APP TYPE:</h1>
-                     <select className=" py-2  border   text-gray-900"    onChange={(e)=>{
+                     <select className=" py-2  border   text-gray-900" onChange={(e)=>{
                         setType(e.target.value)
                      }}>
                         <option value='browser'>
@@ -288,6 +288,10 @@ export default function Create ()  {
              </div> 
 
           </form>
+          {
+            error&&
+            <p className="text-center font-bold text-red-400">{error}</p>
+          }
 
        </section>
     )

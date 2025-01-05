@@ -67,16 +67,39 @@ export const searchLinks = [
   
 ]
 
+"/apple.svg"
+"/android.png"
+"/apple.svg"
+
+export const iconDisplay = [
+   {  
+      name:"window",
+      src:"/windows.svg",
+      alt:"window"
 
 
-class serchLink {
-    title:string
-    constructor(title:string){
-        this.title = title ;
+   },
+   {  
+      name:"apple",
+      src:"/apple.svg",
+      alt:"apple"
 
-        async function byName(titles:string){
-              this.title = titles;
+   },
+   {
+      name:"android",
+      src:"/android.png",
+      alt:"android"
+   }
+]
+
+// class serchLink {
+//     title:string
+//     constructor(title:string){
+//         this.title = title ;
+
+//         async function byName(titles:string){
+//               this.title = titles;
              
-        }
-    }
-}
+//         }
+//     }
+// }

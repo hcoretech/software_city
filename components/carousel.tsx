@@ -36,14 +36,14 @@ export const CarouselPlugin = () => {
         {swipe.map((data, index) => {
           const colordata = data.color;
           const check  = colordata === data.color;
-          const active = check && `bg-gray-900`;
+          const active = check && `bg-${data.color}`;
           
 
           return(
           <CarouselItem key={index}>
-            <div >
+            <div className={active} >
             {/* <h1 className="font-bold"> Updates</h1> */}
-              <Card className={active}>             
+              <Card className="">             
                 <CardContent className="flex items-center justify-center p-10">
                   {/* <Suspense fallback={<h1> loading</h1>}> */}
                   {/* <span className="text-4xl font-semibold">{index + 1}</span> */}

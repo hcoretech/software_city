@@ -227,9 +227,9 @@ export default function GetDownload () {
                 imageLib.map((data,index)=>{
 
                   return(
-                    <Link href="" key={index} className=" mx-2  rounded-[5px] gap-4 flex flex-col items-center    " >
-                       <Image src={data.src} className="shadow-md shadow-gray-900  rounded-full w-[60px] h-[60px] image-center" width={50} height={50} alt="image"/>
-                       <p className="rounded-sm shadow-md bg-gray-900 w-[60px] text-white text-center"> {data.name}</p>
+                    <Link href='' key={index} className=" mx-2 rounded-[5px] gap-4 flex flex-col items-center" >
+                       <Image src={data.src} className="shadow-md shadow-gray-900 rounded-full w-[60px] h-[60px] image-center" width={50} height={50} alt="image"/>
+                       <p className="rounded-sm   w-[60px] text-gray-900 text-center"> {data.name}</p>
                     </Link>
                     
                   )
