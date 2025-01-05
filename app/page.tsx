@@ -7,7 +7,7 @@ export default function Welcome(){
     return(
     <section>
         <div>
-        <div id="section" className=" items-center flex flex-col relative mx-w-5xl mx-auto pt-20 phone:pt-20 bg-gray-900 ">
+        <div id="section" className=" items-center flex flex-col relative  pt-20 phone:pt-20 bg-gray-900 ">
                  <div className="">
                     <h1 className="text-white font-sans font-extrabold text-4xl  text-center tracking-tight ">
                    Software city
