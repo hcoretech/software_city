@@ -31,7 +31,7 @@ export default function Welcome(){
                              const active =data.alt === data.name
                              const access = active ? "" :"hidden"
                         return(
-                            <div className={`p-3 my-12 hover:animate-pulse  `} key={index}>
+                            <div className={`p-3 my-12 hover:animate-pulse `} key={index}>
                             <Image src={data.src} width={50} height={50} className="w-[50px] h-[50px]   hover:transition-delay-150 duration-5  " alt={data.alt}/>
                             <p className=" hover:rtfghbn  text-sm font-semibold">{data.name}</p>
                           </div>
@@ -47,27 +47,27 @@ export default function Welcome(){
                     windows 11 lunching the latest version 25.1
                 </h1>
                 <p className="text-white text-sm">
-                    the new version of the window 11 fixes issues 
-                    dot.net 4.9 netframework,
-                    improvise windows security ,
-                    mirror your android device
-                    with your computer bug fixed....<span> click for more</span> 
+                    the new version of the window 11 fixes issues with 
+                    dot.net 4.9 netframework,improvise windows security,
+                    mirror your android device with your computer bug 
+                    fixed....<span> click for more</span> 
                     
                 </p>
                 
                 </div>
                 <div className="">
                     {/* <p className="text-white"> */}
-                     <Image src="/windows11.jpg" alt="news" width={300} height={2300} className="w-[1400px] h-[230px]  "/>
+                     <Image src="/windows11.jpg" alt="news" width={1400} height={230} className="w-[1400px] h-[230px]"/>
                      
                     {/* </p> */}
                 </div>
             </div>
             <div className="p-4" >
-            <Link className=" p-2 border border-gray-900 " href =''>
-                 Get iso 
+                <Link className=" p-2 border border-gray-900 " href =''>
+                   Get iso 
                  </Link>
             </div>
+                 
             
             {/* <div>
                 <h1 className="p-2">
