@@ -41,7 +41,7 @@ export default function Welcome(){
                 }
                
             </div>
-            <div className="bg-gradient-to-b from-[#874DFB] [#874DFB]  to-[#000F0C] via-[#000] flex flex-row h-[230px] justify-between  items-center ">
+            <div className="bg-windows bg-right bg-contain flex flex-row h-[230px] justify-between  items-center ">
                 <div className=" ml-4">
                 <h1 className="font-bold px-5 text-white text-[18px] text-center  ">
                     windows 11 lunching the latest version 25.1
