@@ -60,7 +60,7 @@ export default function Welcome(){
 //    useEffect(()=>{
 //     animate()
 //     renderer.setAnimationLoop( animate );
-    const id = document.getElementById('section');
+    // const id = document.getElementById('section');
     // id.appendChild(renderer.domElement)
     // const body = document.body.appendChild(renderer.domElement)
     // document.body.appendChild( renderer.domElement );
