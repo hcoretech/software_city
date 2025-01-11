@@ -9,62 +9,62 @@ import { useEffect } from "react";
 
 export default function Welcome(){
 
-    const scene = new THREE.Scene();
-    const materialMesh = new THREE.MeshBasicMaterial({
-        color:"#000",
+    // const scene = new THREE.Scene();
+    // const materialMesh = new THREE.MeshBasicMaterial({
+    //     color:"#000",
 
-    })
-    const cube = new THREE.BoxGeometry(1,1,1);
-    const mesh = new THREE.Mesh(cube,materialMesh);
-    const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
-    const points = [];
-    points.push( new THREE.Vector3( - 10, 0, 0 ) );
-    points.push( new THREE.Vector3( 0, 10, 0 ) );
-    points.push( new THREE.Vector3( 10, 0, 0 ) );
+    // })
+    // const cube = new THREE.BoxGeometry(1,1,1);
+    // const mesh = new THREE.Mesh(cube,materialMesh);
+    // const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+    // const points = [];
+    // points.push( new THREE.Vector3( - 10, 0, 0 ) );
+    // points.push( new THREE.Vector3( 0, 10, 0 ) );
+    // points.push( new THREE.Vector3( 10, 0, 0 ) );
 
  
 
-    const geometry = new THREE.BufferGeometry().setFromPoints( points );
-    const line = new THREE.Line( geometry, material );
-    // cube.scale(80,80,80)
-    const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1000);
-    camera.position.set( 0, 0, 100 );
-    camera.lookAt( 0, 0, 0 );
-    // const scale = new THREE.Vector3(2,2,2)
-    camera.position.z = 2 
+    // const geometry = new THREE.BufferGeometry().setFromPoints( points );
+    // const line = new THREE.Line( geometry, material );
+    // // cube.scale(80,80,80)
+    // const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1000);
+    // camera.position.set( 0, 0, 100 );
+    // camera.lookAt( 0, 0, 0 );
+    // // const scale = new THREE.Vector3(2,2,2)
+    // camera.position.z = 2 
    
-    scene.add(camera);
-    scene.add(mesh);
-    scene.add(line)
-    const  color = new THREE.Color("#fff");
-    scene.background=color
+    // scene.add(camera);
+    // scene.add(mesh);
+    // scene.add(line)
+    // const  color = new THREE.Color("#fff");
+    // scene.background=color
     
     
-    const renderer = new THREE.WebGLRenderer()
-    renderer.setSize(200,100);
+    // const renderer = new THREE.WebGLRenderer()
+    // renderer.setSize(200,100);
 
-    function animate() {
-        mesh.rotation.x += 0.01;
+    // function animate() {
+    //     mesh.rotation.x += 0.01;
         // mesh.position.x +=0.01
         // mesh.position.y -=0.01
         // mesh.rotation.y += 0.01;
         // mesh.rotation.z += 0.1
-        renderer.render( scene, camera );
-    }
+    //     renderer.render( scene, camera );
+    // }
     // function createElementNS( name ) {
 
     //     return document.createElementNS( 'http://www.w3.org/1999/xhtml', name );
     //      }
    
 
-   useEffect(()=>{
-    animate()
-    renderer.setAnimationLoop( animate );
+//    useEffect(()=>{
+//     animate()
+//     renderer.setAnimationLoop( animate );
     const id = document.getElementById('section');
     // id.appendChild(renderer.domElement)
     // const body = document.body.appendChild(renderer.domElement)
     // document.body.appendChild( renderer.domElement );
-   },[]);
+//    },[]);
 
     return(
     <section>
