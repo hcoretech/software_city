@@ -106,7 +106,7 @@ export default function Welcome(){
                 }
                
             </div>
-            <div className="bg-windows bg-left bg-cover    bg-no-repeat flex flex-row h-[230px] justify-between  items-center ">
+            <div className="bg-windows  bg-left bg-cover bg-no-repeat flex flex-row h-[230px] w-auto justify-between  items-center ">
                 <div className=" ml-4">
                 <h1 className="font-bold px-5 text-white text-[18px] text-center  ">
                     windows 11 lunching the latest version 25.1

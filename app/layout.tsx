@@ -17,7 +17,7 @@ const inter = Inter({
 
  export const metadata :Metadata = {
     title:'software city',
-    description:'web developer' 
+    description:'get all softwares for all os' 
 }
 
 export default function RootLayout({
@@ -30,7 +30,8 @@ export default function RootLayout({
     return(
         <html lang="en" >
             <body  className={`${inter.variable} ${ibmPlexSerif.variable}`      
-        }>
+           }>
+            
                 {children}
             </body>
         </html>
