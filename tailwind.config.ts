@@ -23,6 +23,7 @@ module.exports = {
           'windows': "url('/windows11.jpg')",
           'box':"url('/box.svg')"
         },
+        
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
