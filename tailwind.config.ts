@@ -20,10 +20,10 @@ module.exports = {
     
 
         backgroundImage: {
-          'windows': "url('/windows11.jpg')",
-          'box':"url('/box.svg')"
+          'windows': "url('../public/windows11.jpg')",
+          'box':"url('../public/box.svg')"
         },
-        
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
