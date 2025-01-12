@@ -20,8 +20,8 @@ module.exports = {
     
 
         backgroundImage: {
-          'windows': "url('../public/windows11.jpg')",
-          'box':"url('../public/box.svg')"
+          'windows': "url('/windows11.jpg')",
+          'box':"url('/box.svg')"
         },
 
       colors: {
