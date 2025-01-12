@@ -76,11 +76,11 @@ const AuthForm =  ({type}:{type:string}) => {
                 const response = await Post.json();
                 
                 if(Post.status === 200){
-                  router.push('/sign-in',{scroll:false})
+                 return  router.push('/sign-in',{scroll:false})
                 }
 
                 if(Post.status === 400){
-                  setError(response.error)
+                 return  setError(response.error)
                 }
            
              }
@@ -100,12 +100,11 @@ const AuthForm =  ({type}:{type:string}) => {
                console.log(response)
                
                if (Post.status === 200) {
-
-                 router.push('/Home');
+                return router.push('/Home');
                }
 
                if(response.status === 400){
-                setError(response.res)
+                  return setError(response.res)
                }
                 // setMessage(Response.message);
           
